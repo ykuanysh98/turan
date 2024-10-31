@@ -1,0 +1,86 @@
+
+#All
+justify-content: center;
+align-items: center;
+transition: background-color 0.5s ease;
+background: linear-gradient(to right, red, yellow);
+box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+border-image: url('border.png') 30 stretch; /* кескінді рамка ретінде қолдану */
+filter: grayscale(100%); /* суретті қара-ақ етеді */
+clip-path: circle(50%); /* элементті дөңгелек пішінде көрсетеді */
+text-overflow: ellipsis; /* мәтінді қысқарту және ... қосу */
+  object-fit: cover; /* суретті контейнерге толтырады */
+  object-position: center; /* орталыққа орналастырады */
+  backdrop-filter: blur(5px); /* артқы фонды бұлыңғыр ету */
+  width: calc(100% - 50px); /* жалпы ені 50px азайтады */
+  pointer-events: none; /* курсор реакциясын жояды */
+  mix-blend-mode: multiply; /* текст пен артқы фон түсін араластырады */
+  background-blend-mode: screen; /*фондағы түстерді араластыруға мүмкіндік береді.*/
+  overflow-wrap: break-word; /* ұзын сөздерді жаңа жолға тасымалдайды */
+  writing-mode: vertical-rl; /* мәтінді тігінен оңнан солға қарай жазу */
+  writing-mode: vertical-rl; /* мәтінді тігінен жазу */
+  scroll-behavior: smooth; /* скрол тегіс етеді */
+  scroll-snap-align: start; /* элементті скрол кезінде бекітеді */
+  backdrop-clip: padding-box; /* фонды рамка ішінде шектеу */
+  filter: brightness(1.2) contrast(1.5); /* ашықтық пен контрастты арттырады */
+  shape-outside: circle(50%); /* мәтінді дөңгелек пішін айнала орналастырады */
+
+#Анимация
+@keyframes slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100px); }
+}
+
+.animated-box {
+  animation: slide 2s infinite alternate; /* элемент 100px оңға қарай қозғалатын анимацияны қайталайды */
+}
+
+#Медиа
+@media (min-width: 768px) {
+  /* ---- */
+}
+
+
+#Multiple Backgrounds — бірнеше фон қолдану
+background-image: url('layer1.png'), url('layer2.png');
+
+#Counters — санақ жүргізу
+ol {
+  counter-reset: section;
+}
+
+li::before {
+  counter-increment: section;
+  content: "Section " counter(section) ": ";
+}
+
+#Variables 
+:root {
+  --main-color: #3498db;
+  --large-viewport: 'max <= 768px';
+}
+.box {
+  background-color: var(--main-color); /* айнымалыны пайдалану */
+  @media (--large-viewport) {
+    /* арнайы медиа сұрау ішіндегі стильдер */
+  }
+}
+
+#Pseudo-class
+:is(h1, h2, h3) {
+  color: navy; /* барлық h1, h2, h3 тегтеріне бірдей стиль қолданады */
+}
+
+#Scrollbars 
+::-webkit-scrollbar {
+  width: 10px; /* ені */
+}
+
+::-webkit-scrollbar-track {
+  background: lightgrey; /* жол түсі */
+}
+
+::-webkit-scrollbar-thumb {
+  background: darkgrey; /* сырғытпа түсі */
+}
