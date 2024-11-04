@@ -7,10 +7,12 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "ts -fix": "npx tsc --noEmit"
   },
   "dependencies": {
-    "nuxt": "^3.13.2",
+    "@nuxt/types": "^2.18.1",
+    "nuxt": "^3.14.0",
     "vue": "latest",
     "vue-router": "latest"
   }
