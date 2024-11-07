@@ -9,13 +9,30 @@ export default defineNuxtConfig({
       apiBase: 'https://jsonplaceholder.typicode.com',
     },
   },
-  modules: [
-    // '@nuxtjs/tailwindcss',
+  css: [
+    '@/assets/styles/main.css',
   ],
+  modules: [
+    '@nuxtjs/tailwindcss', 
+    '@nuxtjs/google-fonts'
+  ],
+  build: {
+    transpile: ['vuetify']
+  },
   app: {
     head: {
       title: 'Менің Nuxt 3 жобам',
       meta: [{ name: 'description', content: 'Nuxt 3 жобасы үшін мысал конфигурация' }],
     },
+  },
+  googleFonts: {
+    families: {
+      Roboto: true,
+      'Open+Sans': [300, 400, 600],
+      'Rubik+Wet+Paint': [300, 400, 600, 900],
+    }
+  },
+  vite: {
+    // Vite конфигурациялары
   },
 })

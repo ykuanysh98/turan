@@ -3,17 +3,24 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
     "dev": "nuxt dev",
+    "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "ts -fix": "npx tsc --noEmit"
   },
   "dependencies": {
+    "@mdi/font": "^7.4.47",
     "@nuxt/types": "^2.18.1",
+    "@nuxtjs/google-fonts": "^3.2.0",
+    "@nuxtjs/vuetify": "^1.12.3",
     "nuxt": "^3.14.0",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "vuetify": "^3.7.3"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^6.12.2"
   }
 }

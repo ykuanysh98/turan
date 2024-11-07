@@ -8,6 +8,12 @@
 </template>
 
 <script setup lang="ts">
+const definePageMeta = (meta: { layout: string }) => meta
+
+definePageMeta({
+  layout: 'default', // 'default' макетін қолдану
+})
+
 import { useUser } from '../composables/useUser';
 
 const { data, fetchData } = useUser('https://jsonplaceholder.typicode.com/todos/1');

@@ -9,7 +9,7 @@
     "jsx": "preserve",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["@nuxt/types", "@types/node"],
+    "types": ["@nuxt/types", "@types/node", "@nuxtjs/google-fonts"],
     "paths": {
       "~/*": ["./*"],
       "@/*": ["./*"]
