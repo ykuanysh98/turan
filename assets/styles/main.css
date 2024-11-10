@@ -7,9 +7,7 @@
   --main-color: '#f7f7f7'
 }
 
-*,
-*::before,
-*::after {
+p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -33,6 +31,11 @@ body {
   align-items: center;
   justify-content: center;
 }
+.flex-between{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .mobile-only[class] {
   display: none;
@@ -43,6 +46,6 @@ body {
     display: block;
   }
   .mobile-not[class] {
-    display: none;
+    display: none !important;
   }
 }

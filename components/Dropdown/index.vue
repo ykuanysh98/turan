@@ -1,62 +1,122 @@
 <template>
-  <div class="relative">
-    <div @click="toggleDropdown">
-      <slot name="trigger">
-        <v-btn>
-          Select an option
-        </v-btn>
-      </slot>
+  <div class="dropdown relative">
+    <div class="dropdown-trigger flex-between gap-2" @click="open">
+      <slot></slot>
     </div>
-    <!-- Dropdown list -->
-    <div v-if="list.length > 0"
-      class="absolute left-0 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg z-10">
-      <ul>
-        <li v-for="(option, index) in list" :key="index" class="px-4 py-2 cursor-pointer hover:bg-gray-100"
-          @click="selectOption(option)">
-          {{ option ?? option.title }}
-        </li>
-      </ul>
-    </div>
-    <div v-else>
-      ничего нет
-    </div>
+
+    <v-sheet v-if="isOpen" class="dropdown-list" elevation="12" rounded="md" width="100%" max-width="600">
+      <v-list>
+        <div v-if="pending" class="flex-center">
+          <v-progress-circular class="mt-3" indeterminate></v-progress-circular>
+        </div>
+        <template v-else-if="list?.length">
+          <v-list-item v-for="(item, index) in list" :key="index" @click="selectOption(item)">
+            <NuxtLink :to="item.link">
+              <v-list-item-content>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+            </NuxtLink>
+          </v-list-item>
+        </template>
+        <v-list-item v-else-if="emptyText">
+          <v-list-item-title>{{ emptyText }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-sheet>
+
+    <div v-if="isOpen" class="close-overlays" @click="close"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, watch, computed, defineEmits } from 'vue';
 
-// Props for the options of the dropdown
+// Props for the items of the dropdown
 const props = defineProps({
-  options: {
+  items: {
     type: Array as () => string[],
     required: true,
   },
+  emptyText: {
+    type: String as () => '',
+  },
+  pending: {
+    type: Boolean as () => false,
+  },
+  autoOpen: {
+    type: Boolean as () => false,
+  },
 });
 
-const isOpen = ref(true);
+const isOpen = ref(false);
+watch(
+  () => props.pending,
+  () => {
+    if (props.autoOpen) {
+      isOpen.value = true;
+    }
+  }
+);
 
 const list = computed(() => {
   let list = ref<any>([]);
-  if (props.options.length > 0) {
-    list.value = props.options;
+  if (props.items?.length > 0) {
+    list.value = props.items;
+    if (props.autoOpen) {
+      isOpen.value = true;
+    }
   }
   return list.value;
 });
 
-// Toggle dropdown visibility
-const toggleDropdown = () => {
-  isOpen.value = !isOpen.value;
+const open = () => {
+  isOpen.value = true;
 };
 
+const close = () => {
+  isOpen.value = false;
+};
+
+
 // Set the selected option and close the dropdown
-const selectOption = (option: string) => {
-  const emit = defineEmits();
+interface EmitEvents {
+  (e: 'update:selected', payload: string): void;
+}
+const emit = defineEmits<EmitEvents>();
+const selectOption = (option: any) => {
   emit('update:selected', option);
   isOpen.value = false;
 };
 </script>
 
 <style scoped>
-/* Scoped styles can be omitted as we're using Tailwind CSS for styling */
+.dropdown {
+  min-height: 26px;
+}
+
+.dropdown-trigger {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.close-overlays {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: rgba(0, 0, 0, 0.281); */
+  z-index: 1;
+}
 </style>

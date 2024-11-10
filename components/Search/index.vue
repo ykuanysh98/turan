@@ -1,22 +1,10 @@
 <template>
   <div class="search-input">
-    <span class="search-icon">
+    <Dropdown :items="itemsSearch" empty-text="Ничего не найдено" :pending="pending" auto-open>
       <v-icon>mdi-magnify</v-icon>
-    </span>
-
-    <input type="text" v-model="inputValue" class="input-field" @input="onInputChange" :placeholder="placeholder" />
-
-    <Dropdown :options="dropdownOptions" @update:selected="handleSelect">
-      <template #trigger>
-        <button>
-          Choose your option
-        </button>
-      </template>
+      <input type="text" v-model="inputValue" class="input-field" @input="onInputChange" :placeholder="placeholder" />
+      <v-icon v-if="inputValue !== ''" @click="inputValue = ''; onInputChange()">mdi-close</v-icon>
     </Dropdown>
-
-    <div v-if="selectedOption" class="mt-4">
-      <p>Selected option: {{ selectedOption }}</p>
-    </div>
   </div>
 </template>
 
@@ -31,20 +19,20 @@ export default defineComponent({
     },
     placeholder: {
       type: String,
-      default: ''
+      default: 'Пойск'
     }
   },
   emits: ['update:modelValue'],
 
   setup(props, { emit }) {
     const inputValue = ref<string>(props.modelValue);
+    const pending = ref<boolean>(false);
+    const itemsSearch = ref<string[]>([]);
     let timeout: ReturnType<typeof setTimeout> | null = null;
-
-    const dropdownOptions = ref<string[]>([]);
-    const selectedOption = ref<string | null>(null);
 
     const onInputChange = () => {
       if (timeout) clearTimeout(timeout);
+      console.log(1);
 
       timeout = setTimeout(async () => {
         emit('update:modelValue', inputValue.value);
@@ -52,20 +40,19 @@ export default defineComponent({
       }, 400);
     };
 
-    const handleSelect = (option: string) => {
-      selectedOption.value = option;
-    };
-
     const fetchResults = async (query: string) => {
       if (query.trim() === '') {
-        dropdownOptions.value = [];
+        itemsSearch.value = [];
         return;
       }
+      pending.value = true;
       try {
         const results = await $fetch<string[]>('/api/search', { query: { q: query } });
-        dropdownOptions.value = results;
+        itemsSearch.value = results;
       } catch (error) {
         console.error('API сұранысы сәтсіз аяқталды:', error);
+      } finally {
+        pending.value = false;
       }
     };
 
@@ -75,10 +62,9 @@ export default defineComponent({
 
     return {
       inputValue,
-      dropdownOptions,
-      selectedOption,
+      itemsSearch,
+      pending,
       onInputChange,
-      handleSelect
     };
   }
 });
@@ -86,12 +72,13 @@ export default defineComponent({
 
 <style scoped>
 .search-input {
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
   border: 1px solid #ccc;
   border-radius: 4px;
-  padding: 4px 8px;
-  position: relative;
+  padding: 8px 12px;
+  /* position: relative; */
+  min-width: 200px;
 }
 
 .search-icon {
@@ -100,9 +87,10 @@ export default defineComponent({
 }
 
 .input-field {
-  flex: 1;
+  width: 100%;
   border: none;
   outline: none;
-  padding: 8px;
+  display: block;
+  /* padding: 8px; */
 }
 </style>
