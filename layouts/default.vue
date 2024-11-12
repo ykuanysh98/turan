@@ -2,9 +2,7 @@
   <div>
     <v-app>
       <Header />
-      <v-container>
         <NuxtPage />
-      </v-container>
       <Footer />
     </v-app>
   </div>
