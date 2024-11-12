@@ -26,6 +26,10 @@ body {
   padding: 20px;
 }
 
+.flex-start[class] {
+  display: flex;
+  align-items: flex-start;
+}
 .flex-center{
   display: flex;
   align-items: center;
@@ -35,6 +39,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.flex-column{
+  display: flex;
+  flex-direction: column;
+  grid-gap: 8px;
 }
 
 .mobile-only[class] {
