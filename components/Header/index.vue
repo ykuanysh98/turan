@@ -3,36 +3,16 @@
     <v-container>
       <v-toolbar>
         <v-row class="flex-center gap-3">
-          <img class="max-w-md" src="https://placehold.co/110x50/png" alt="logo" />
+          <NuxtLink to="/" class="nav-link">
+            <img class="max-w-md" src="https://placehold.co/110x50/png" alt="logo" />
+          </NuxtLink>
           <v-toolbar-title>Title</v-toolbar-title>
           <v-row class="flex-center gap-3 mobile-not">
             <NuxtLink to="/" class="nav-link">Басты бет</NuxtLink>
-            <NuxtLink to="/blog" class="nav-link">
-              Товарлар
-
-              <v-menu open-on-hover activator="parent" :open-on-focus="false">
-                <v-list>
-                  <v-list-item v-for="i in 2" :key="i" link>
-                    <v-list-item-title>Item {{ i }}</v-list-item-title>
-                    <template v-slot:append>
-                      <v-icon icon="mdi-menu-right" size="x-small"></v-icon>
-                    </template>
-
-                    <v-menu :open-on-focus="false" activator="parent" open-on-hover submenu>
-                      <v-list>
-                        <v-list-item v-for="j in 3" :key="j" link>
-                          <v-list-item-title>Item {{ i }} - {{ j }}</v-list-item-title>
-                          <template v-slot:append>
-                            <v-icon icon="mdi-menu-right" size="x-small"></v-icon>
-                          </template>
-                        </v-list-item>
-                      </v-list>
-                    </v-menu>
-                  </v-list-item>
-                </v-list>
-              </v-menu>
-            </NuxtLink>
-            <NuxtLink to="/about" class="nav-link">Біз туралы</NuxtLink>
+            <div class="nav-link">
+              <Menu :items="items">Товарлар </Menu>
+            </div>
+            <NuxtLink to="/blog/2" class="nav-link">Біз туралы</NuxtLink>
           </v-row>
         </v-row>
         <v-spacer></v-spacer>
@@ -49,13 +29,61 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
 const query = ref('')
+const items = ref<string[]>([
+  {
+    id: 1,
+    title: 'Категория 1',
+  },
+  {
+    id: 2,
+    title: 'Категория 2',
+    children: [
+      {
+        id: 21,
+        title: 'Категория 21',
+      },
+      {
+        id: 22,
+        title: 'Категория 22',
+      },
+    ]
+  },
+  {
+    id: 3,
+    title: 'Категория 3',
+    children: [
+      {
+        id: 31,
+        title: 'Категория 31',
+        children: [
+          {
+            id: 311,
+            title: 'Категория 331',
+          },
+          {
+            id: 312,
+            title: 'Категория 312',
+          },
+          {
+            id: 312,
+            title: 'Категория 312',
+          },
+        ]
+      },
+    ]
+  },
+])
 </script>
 
 <style>
+.nav-link {
+  position: relative;
+}
+
 .v-toolbar {
   background-color: transparent;
 }

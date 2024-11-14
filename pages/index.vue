@@ -1,7 +1,11 @@
 <template>
   <div>
     <Banner :items="itemsSearch" />
+
     <v-container>
+      <ButtonGroup />
+      <ProductList />
+
       <h1>Деректер</h1>
       <button @click="fetchData">Деректерді алу</button>
       <pre>{{ data }}</pre>

@@ -1,5 +1,5 @@
 <template>
   <div>
-    category
+    subCategory
   </div>
 </template>
