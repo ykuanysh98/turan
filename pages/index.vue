@@ -6,7 +6,9 @@
       <ButtonGroup />
       <ProductList />
 
-      <h1>Деректер</h1>
+      <HeaderAtomGroup />
+      <HeaderAtomGrid />
+
       <button @click="fetchData">Деректерді алу</button>
       <pre>{{ data }}</pre>
       <h1>{{ greeting }}</h1>

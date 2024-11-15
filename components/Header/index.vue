@@ -32,11 +32,19 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+type TreeNode = {
+  id: number;
+  title: string;
+  children?: TreeNode[];
+};
+
 const query = ref('')
-const items = ref<string[]>([
+
+const items: TreeNode[] = [
   {
     id: 1,
     title: 'Категория 1',
+    children: []
   },
   {
     id: 2,
@@ -45,10 +53,12 @@ const items = ref<string[]>([
       {
         id: 21,
         title: 'Категория 21',
+        children: []
       },
       {
         id: 22,
         title: 'Категория 22',
+        children: []
       },
     ]
   },
@@ -63,20 +73,24 @@ const items = ref<string[]>([
           {
             id: 311,
             title: 'Категория 331',
+            children: []
           },
           {
             id: 312,
             title: 'Категория 312',
+            children: []
           },
           {
             id: 312,
             title: 'Категория 312',
+            children: []
           },
         ]
       },
     ]
   },
-])
+]
+
 </script>
 
 <style>
