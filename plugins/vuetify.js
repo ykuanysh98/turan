@@ -9,9 +9,10 @@ export default defineNuxtPlugin((nuxtApp) => {
     components,
     directives,
     icons: {
-      iconfont: 'mdi', // 'mdi' немесе басқа кітапхана атауын көрсетіңіз
+      iconfont: 'mdi', // 'mdi' немесе басқа кітапхана. Мысалы: 'fa' (FontAwesome), 'mdiSvg' (SVG иконкалар);
     },
   })
 
   nuxtApp.vueApp.use(vuetify)
+  // nuxtApp.provide('api', api)
 })

@@ -1,51 +1,45 @@
 <template>
-  <div class="avatar-container">
-    <!-- Avatar image with dropdown menu -->
-    <v-menu v-model:activator="menu" offset-y>
-      <template v-slot:activator="{ on, props }">
-        <v-btn icon v-bind="props" v-on="on">
-          <v-avatar size="40">
-            <img src="https://placehold.co/80x80/png" alt="User Avatar" />
+  <v-menu min-width="200px" rounded>
+    <template v-slot:activator="{ props }">
+      <v-btn icon v-bind="props">
+        <v-avatar color="brown" size="large">
+          <span class="text-h5">{{ userData?.initials }}</span>
+        </v-avatar>
+      </v-btn>
+    </template>
+    <v-card>
+      <v-card-text>
+        <div class="mx-auto text-center">
+          <v-avatar color="brown">
+            <span class="text-h5">{{ userData?.initials }}</span>
           </v-avatar>
-        </v-btn>
-      </template>
-
-      <v-list>
-        <v-list-item v-for="(item, index) in menuItems" :key="index">
-          <NuxtLink :to="item.link">
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </NuxtLink>
-        </v-list-item>
-      </v-list>
-    </v-menu>
-  </div>
+          <h3>{{ userData?.name }}</h3>
+          <p class="text-caption mt-1">
+            {{ userData?.email }}
+          </p>
+          <v-divider class="my-3"></v-divider>
+          <v-btn variant="text" rounded>
+            Edit Account
+          </v-btn>
+          <v-divider class="my-3"></v-divider>
+          <v-btn variant="text" rounded>
+            Disconnect
+          </v-btn>
+        </div>
+      </v-card-text>
+    </v-card>
+  </v-menu>
 </template>
 
-<script setup>
-import { ref } from 'vue';
+<script setup lang="ts">
+const { users, fetchUsers } = useUser();
+import { onMounted, computed } from 'vue';
 
-// Avatar menu open state
-const menu = ref(false);
+const userData = computed(() => {
+  return users.value.data?.[0];
+});
 
-// Menu items for the dropdown
-const menuItems = [
-  { title: 'Profile', link: '/profile' },
-  { title: 'Settings', link: '/settings' },
-  { title: 'Logout', link: '/logout' }
-];
+onMounted(async () => {
+  await fetchUsers();
+});
 </script>
-
-<style scoped>
-.avatar-container {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.v-avatar img {
-  object-fit: cover;
-  border-radius: 50%;
-}
-</style>
