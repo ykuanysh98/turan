@@ -1,10 +1,17 @@
-import { defineNuxtRouteMiddleware } from 'nuxt/app';
+import { navigateTo, defineNuxtRouteMiddleware } from 'nuxt/app';
 
-export default defineNuxtRouteMiddleware((to, from) => {
-  const userAuthenticated = false; // Мұнда шынайы аутентификация логикасы болады
+export default defineNuxtRouteMiddleware(async (to, from) => {
+  console.log(`Кірген маршрут: ${to.path}`);
+  // const token = localStorage.getItem('authToken');
+  // const user = await fetchUserData();
+  // const isLoggedIn = user.isLoggedIn;
+  const isLoggedIn = false;
 
-  if (!userAuthenticated && to.path !== '/login') {
-    // Пайдаланушы аутентификацияланбаған болса, оны /login бетіне бағыттау
-    // return navigateTo('/login');
+  if (to.path === '/restricted') {
+    // return abortNavigation(); // Қозғалысты тоқтату үшін қолданылады. Қолданушы сол тұрған бетінде қалады.
+  }
+
+  if (!isLoggedIn && to.path !== '/') {
+    return navigateTo('/');
   }
 });

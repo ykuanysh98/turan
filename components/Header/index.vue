@@ -12,7 +12,7 @@
             <div class="nav-link">
               <Menu :items="items">Товарлар </Menu>
             </div>
-            <NuxtLink to="/blog/2" class="nav-link">Біз туралы</NuxtLink>
+            <NuxtLink to="/about" class="nav-link">Біз туралы</NuxtLink>
           </v-row>
         </v-row>
         <v-spacer></v-spacer>

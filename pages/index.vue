@@ -1,6 +1,9 @@
 <template>
   <div>
     <Banner :items="banners" />
+    <p>Count: {{ counterStore.count }}</p>
+    <p>Double Count: {{ counterStore.doubleCount }}</p>
+    <button @click="counterStore.increment">Increment</button>
     <v-container>
       <ButtonGroup />
       <ProductList :items="products.products" />
@@ -9,22 +12,20 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue';
+import { useCounterStore } from '../stores/counter';
+
+const counterStore = useCounterStore();
+
 const definePageMeta = (meta: { layout: string }) => meta
 definePageMeta({
   layout: 'default',
 })
-
 const { data: products, fetch: fetchProducts } = useFetch();
 const { data: banners, fetch: fetchBanners } = useFetch();
-
-import { onMounted } from 'vue';
 
 onMounted(async () => {
   await fetchProducts('/api/products?page=2&limit=10');
   await fetchBanners('/api/banners');
-  // throw createError({  
-  //   statusCode: 404,
-  //   statusMessage: 'Page Not Found',
-  // });
 });
 </script>

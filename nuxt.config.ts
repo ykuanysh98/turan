@@ -37,4 +37,7 @@ export default defineNuxtConfig({
   vite: {
     //
   },
+  typescript: {
+    strict: true
+  }
 })
