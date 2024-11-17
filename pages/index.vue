@@ -1,9 +1,6 @@
 <template>
   <div>
     <Banner :items="banners" />
-    <p>Count: {{ counterStore.count }}</p>
-    <p>Double Count: {{ counterStore.doubleCount }}</p>
-    <button @click="counterStore.increment">Increment</button>
     <v-container>
       <ButtonGroup />
       <ProductList :items="products.products" />

@@ -1,45 +1,45 @@
 <template>
   <v-menu min-width="200px" rounded>
+
     <template v-slot:activator="{ props }">
-      <v-btn icon v-bind="props">
+      <v-btn v-if="isAuthenticated" icon v-bind="props">
         <v-avatar color="brown" size="large">
-          <span class="text-h5">{{ userData?.initials }}</span>
+          <span class="text-h5">{{ user?.name?.slice(0, 1) }}</span>
         </v-avatar>
       </v-btn>
+
+      <AuthModal v-else>
+        <v-avatar color="brown" size="large">
+          <v-icon icon="mdi-account-circle"></v-icon>
+        </v-avatar>
+      </AuthModal>
     </template>
-    <v-card>
+
+    <v-card v-if="isAuthenticated">
       <v-card-text>
         <div class="mx-auto text-center">
           <v-avatar color="brown">
-            <span class="text-h5">{{ userData?.initials }}</span>
+            <span class="text-h5">{{ user?.name }}</span>
           </v-avatar>
-          <h3>{{ userData?.name }}</h3>
+          <h3>{{ user?.name }}</h3>
           <p class="text-caption mt-1">
-            {{ userData?.email }}
+            {{ user?.email }}
           </p>
           <v-divider class="my-3"></v-divider>
-          <v-btn variant="text" rounded>
-            Edit Account
-          </v-btn>
-          <v-divider class="my-3"></v-divider>
-          <v-btn variant="text" rounded>
-            Disconnect
+          <v-btn @click="handleLogout" variant="text" rounded>
+            Шығу
           </v-btn>
         </div>
       </v-card-text>
     </v-card>
+
   </v-menu>
 </template>
 
 <script setup lang="ts">
-const { users, fetchUsers } = useUser();
-import { onMounted, computed } from 'vue';
+const { logout, user, isAuthenticated } = useAuth()
 
-const userData = computed(() => {
-  return users.value.data?.[0];
-});
-
-onMounted(async () => {
-  await fetchUsers();
-});
+const handleLogout = () => {
+  logout()
+}
 </script>
