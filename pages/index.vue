@@ -11,8 +11,10 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { useCounterStore } from '../stores/counter';
+import { useProductsStore } from '../stores/products';
 
 const counterStore = useCounterStore();
+const productsStore = useProductsStore();
 
 const definePageMeta = (meta: { layout: string }) => meta
 definePageMeta({
