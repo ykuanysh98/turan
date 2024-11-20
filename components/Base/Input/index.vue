@@ -1,9 +1,8 @@
 <template>
-  <v-select :class="computedClass"></v-select>
+  <v-text-field :class="computedClass"></v-text-field>
 </template>
 
-
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed, defineProps } from 'vue';
 
 const props = defineProps({
@@ -14,14 +13,14 @@ const props = defineProps({
 });
 
 const computedClass = computed(() => {
-  let classList = ['select']
-  classList.push(`select--${props.variant}`)
+  let classList = ['input']
+  classList.push(`input--${props.variant}`)
   return classList
 });
 </script>
 
-<style lang="scss" scoped>
-.select {
+<style scoped lang="scss">
+.input {
   &:deep(.v-input__details) {
     display: none;
   }
@@ -42,5 +41,6 @@ const computedClass = computed(() => {
     border: 1px solid #d4d4d4;
     // background-color: aquamarine;
   }
+
 }
 </style>

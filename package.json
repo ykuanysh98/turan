@@ -19,6 +19,8 @@
     "cookie-universal": "^2.2.2",
     "nuxt": "^3.14.0",
     "pinia": "^2.2.6",
+    "sass": "^1.81.0",
+    "sass-loader": "^16.0.3",
     "vue": "latest",
     "vue-router": "latest",
     "vuetify": "^3.7.3"

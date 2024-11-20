@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useCounterStore } from '../stores/counter';
 import { useProductsStore } from '../stores/products';
 
@@ -27,4 +27,8 @@ onMounted(async () => {
   await fetchProducts('/api/products?page=2&limit=10');
   await fetchBanners('/api/banners');
 });
+
+const handleClick = () => {
+  console.log('Button clicked!');
+};
 </script>
