@@ -1,4 +1,5 @@
 <template>
+  <slot />
   <v-list-item :title="title" :subtitle="subtitle" :prepend-avatar="avatar">
   </v-list-item>
   <AtomDivider v-if="line" />

@@ -1,10 +1,20 @@
 <template>
   <div class="search-input">
-    <Dropdown :items="itemsSearch" empty-text="Ничего не найдено" :pending="pending" auto-open>
-      <v-icon>mdi-magnify</v-icon>
-      <input type="text" v-model="inputValue" class="input-field" @input="onInputChange" :placeholder="placeholder" />
-      <v-icon v-if="inputValue !== ''" @click="inputValue = ''; onInputChange()">mdi-close</v-icon>
-    </Dropdown>
+    <AtomDropdown ref="menu">
+      <template #trigger>
+        <BaseInput v-model="inputValue" append-icon="mdi-close" @input="onInputChange" :label="placeholder"
+          prepend-icon="mdi-magnify" @click:append="clearInput" />
+      </template>
+      <v-list>
+        <v-list-item v-for="item in itemsSearch" :key="item" link>
+          <v-list-item-title>{{ item }}</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item v-if="itemsSearch.length === 0">
+          <v-list-item-title>Ничего не найдено</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </AtomDropdown>
   </div>
 </template>
 
@@ -29,15 +39,24 @@ export default defineComponent({
     const pending = ref<boolean>(false);
     const itemsSearch = ref<string[]>([]);
     let timeout: ReturnType<typeof setTimeout> | null = null;
+    const menu = ref(null); // v-menu сілтемесі
 
     const onInputChange = () => {
+      if (menu.value) {
+        console.log('menu', menu.value);
+        // menu.value.isActive = true; 
+      }
       if (timeout) clearTimeout(timeout);
-      console.log(1);
 
       timeout = setTimeout(async () => {
         emit('update:modelValue', inputValue.value);
         await fetchResults(inputValue.value);
       }, 400);
+    };
+
+    const clearInput = () => {
+      inputValue.value = "";
+      onInputChange();
     };
 
     const fetchResults = async (query: string) => {
@@ -65,6 +84,7 @@ export default defineComponent({
       itemsSearch,
       pending,
       onInputChange,
+      clearInput,
     };
   }
 });
@@ -72,25 +92,6 @@ export default defineComponent({
 
 <style scoped>
 .search-input {
-  /* display: flex;
-  align-items: center; */
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 8px 12px;
-  /* position: relative; */
   min-width: 200px;
-}
-
-.search-icon {
-  color: #666;
-  margin-right: 8px;
-}
-
-.input-field {
-  width: 100%;
-  border: none;
-  outline: none;
-  display: block;
-  /* padding: 8px; */
 }
 </style>

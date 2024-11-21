@@ -40,6 +40,7 @@ const computedClass = computed(() => {
   &--primary {
     border: 1px solid #d4d4d4;
     // background-color: aquamarine;
+    padding: 0 12px;
   }
 
 }

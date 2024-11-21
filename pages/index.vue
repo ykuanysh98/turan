@@ -24,7 +24,7 @@ import { useFetch } from '~/composables/useFetch'
 const { data: products, fetch: fetchProducts } = useFetch();
 const { data: banners, fetch: fetchBanners } = useFetch();
 
-const InputDeviceInfo = ref('');
+const InputDeviceInfo = ref([]);
 onMounted(async () => {
   await fetchProducts('/api/products?page=2&limit=10');
   await fetchBanners('/api/banners');
