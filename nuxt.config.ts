@@ -2,7 +2,7 @@ import { defineNuxtConfig } from 'nuxt/config';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  ssr: true, // Server-Side Rendering режимін қосу
+  ssr: false, // Server-Side Rendering режимін қосу
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   components: true,
@@ -12,6 +12,9 @@ export default defineNuxtConfig({
       meta: [{ name: 'description', content: 'Nuxt 3 жобасы үшін мысал конфигурация' }],
     },
   },
+  // app: {
+  //   baseURL: '/',
+  // },
   modules: [
     '@nuxtjs/tailwindcss', 
     '@nuxtjs/google-fonts'
