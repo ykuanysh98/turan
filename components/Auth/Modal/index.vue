@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="isDialogOpen" max-width="400">
     <template v-slot:activator="{ on, props }">
-      <div v-bind="props" v-on="on" rounded>
+      <div v-bind="props" rounded>
         <slot />
       </div>
     </template>

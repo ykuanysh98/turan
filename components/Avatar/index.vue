@@ -37,6 +37,7 @@
 </template>
 
 <script setup lang="ts">
+import { useAuth } from '~/composables/useAuth'
 const { logout, user, isAuthenticated } = useAuth()
 
 const handleLogout = () => {

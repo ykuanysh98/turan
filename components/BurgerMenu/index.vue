@@ -11,9 +11,9 @@
 
       <v-list>
         <v-list-item v-for="(item, index) in items" :key="index" @click="">
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
+          <!-- <v-list-item-content> -->
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <!-- </v-list-item-content> -->
         </v-list-item>
       </v-list>
 
@@ -29,6 +29,7 @@
 </template>
 
 <script setup>
+// import { VListItemContent } from 'vuetify/components';
 
 const drawer = ref(false);
 const items = ref([

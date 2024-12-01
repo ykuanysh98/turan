@@ -35,6 +35,7 @@ import { ref } from 'vue'
 type TreeNode = {
   id: number;
   title: string;
+  path?: string;
   children?: TreeNode[];
 };
 
@@ -44,11 +45,13 @@ const items: TreeNode[] = [
   {
     id: 1,
     title: 'Категория 1',
+    path: '/qwwewe',
     children: []
   },
   {
     id: 2,
     title: 'Категория 2',
+    path: '/qwwewe2',
     children: [
       {
         id: 21,

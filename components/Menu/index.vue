@@ -6,7 +6,9 @@
       <v-menu activator="parent" open-on-hover>
         <v-list>
           <v-list-item v-for="item in items" :key="item.id" link>
-            <v-list-item-title>Item {{ item.title }}</v-list-item-title>
+            <NuxtLink :to="`/category${item?.path}`">
+              <v-list-item-title>Item {{ item.title }}</v-list-item-title>
+            </NuxtLink>
             <template v-slot:append v-if="item.children?.length">
               <v-icon icon="mdi-menu-right" size="x-small"></v-icon>
             </template>
@@ -36,14 +38,13 @@
   </div>
 </template>
 
-
-
 <script lang="ts" setup>
 import { defineProps } from 'vue';
 
 type TreeNode = {
   id: number;
   title: string;
+  path: string;
   children?: TreeNode[];
 };
 
