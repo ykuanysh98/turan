@@ -1,0 +1,1 @@
+import{c as a,a as t,o}from"./DVUzdulO.js";const s={__name:"about",setup(l){return(n,e)=>(o(),a("div",null,e[0]||(e[0]=[t("h1",null,"Біз туралы",-1),t("p",null,"Бұл бет біздің жоба туралы ақпарат береді.",-1)])))}};export{s as default};
