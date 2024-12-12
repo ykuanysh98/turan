@@ -1,30 +1,24 @@
 <template>
-  <div class="bg-gray-100">
-    <v-container>
-      <v-toolbar>
-        <v-row class="flex-center gap-3">
-          <NuxtLink to="/" class="nav-link">
-            <img class="max-w-md" src="https://placehold.co/110x50/png" alt="logo" />
-          </NuxtLink>
-          <v-toolbar-title>Title</v-toolbar-title>
-          <v-row class="flex-center gap-3 mobile-not">
-            <NuxtLink to="/" class="nav-link">Басты бет</NuxtLink>
-            <div class="nav-link">
-              <Menu :items="items">Товарлар </Menu>
-            </div>
-            <NuxtLink to="/about" class="nav-link">Біз туралы</NuxtLink>
-          </v-row>
-        </v-row>
-        <v-spacer></v-spacer>
-        <Search v-model="query" placeholder="Іздеңіз..." class="mobile-not" />
-        <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn flat>Sugn Up</v-btn>
-          <v-btn flat>Sign In</v-btn>
-        </v-toolbar-items>
-        <BurgerMenu class="mobile-only" />
-        <Avatar class="mobile-not" />
-      </v-toolbar>
+  <div class="sticky top-0 z-50 bg-white shadow-lg h-[80px]">
+    <v-container class="flex-between gap-10 h-full">
 
+      <NuxtLink to="/">
+        <img class="max-w-md" src="/images/Logo.svg" alt="logo" />
+      </NuxtLink>
+
+      <div class="flex-between gap-8 mobile-not">
+        <NuxtLink to="/" class="nav-link">Конструктор</NuxtLink>
+        <NuxtLink to="/" class="nav-link">Каталог</NuxtLink>
+        <NuxtLink to="/" class="nav-link">Оставить заявку</NuxtLink>
+      </div>
+
+      <MoleculeSearch v-model="query" class="w-full max-w-[400px] mobile-not" />
+
+      <div class="flex-between gap-4 mobile-not">
+        <v-icon>mdi-cart-outline</v-icon>
+        <BaseButton>Войти</BaseButton>
+      </div>
+      <BurgerMenu class="mobile-only" />
     </v-container>
   </div>
 </template>
@@ -96,16 +90,11 @@ const items: TreeNode[] = [
 
 </script>
 
-<style>
+<style lang="scss" scoped>
 .nav-link {
-  position: relative;
-}
-
-.v-toolbar {
-  background-color: transparent;
-}
-
-.v-toolbar__content {
-  overflow: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #535862;
 }
 </style>

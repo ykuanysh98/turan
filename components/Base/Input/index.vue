@@ -1,47 +1,148 @@
 <template>
-  <v-text-field :class="computedClass"></v-text-field>
+  <div :class="wrapClass">
+    <label :for="id" class="base-input__label">{{ label }}</label>
+
+    <div class="base-input__inner">
+      <v-icon v-if="prependIcon" color="#717680">{{ prependIcon }}</v-icon>
+
+      <input v-if="maska" v-mask="maska" :type="type" :value="modelValue" :id="id" :placeholder="placeholder"
+        @input="updateValue($event.target.value)" />
+
+      <input v-else :type="type" :value="modelValue" :id="id" :placeholder="placeholder"
+        @input="updateValue($event.target.value)" />
+
+      <v-icon v-if="modelValue.length > 0" color="#717680" @click="updateValue('')">{{ 'mdi-close' }}</v-icon>
+    </div>
+
+    <span v-if="error" class="base-input__error">{{ error }}</span>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
+import { computed, defineProps, defineEmits } from 'vue';
 
 const props = defineProps({
+  id: {
+    type: String,
+    default: '',
+  },
+  modelValue: {
+    type: [String, Number],
+    default: '',
+  },
+  type: {
+    type: String,
+    default: 'text',
+  },
+  label: {
+    type: String,
+    default: '',
+  },
   variant: {
     type: String,
-    default: 'primary', // Мысалы: 'primary', 'secondary', 'danger', 'success'
+    default: 'primary',
+  },
+  size: {
+    type: String,
+    default: 'md',
+  },
+  placeholder: {
+    type: String,
+    default: '',
+  },
+  prependIcon: {
+    type: String,
+    default: '',
+  },
+  maska: {
+    type: String,
+    default: '',
+  },
+  error: {
+    type: String,
+    default: '',
   },
 });
 
-const computedClass = computed(() => {
-  let classList = ['input']
-  classList.push(`input--${props.variant}`)
+const emit = defineEmits(['update:modelValue']);
+
+const wrapClass = computed(() => {
+  let classList = ['base-input']
+  if (props.variant) {
+    classList.push(`base-input__variant--${props.variant}`)
+  }
+  if (props.size) {
+    classList.push(`base-input__size--${props.size}`)
+  }
+
   return classList
 });
+
+const updateValue = (value: string) => {
+  emit('update:modelValue', value);
+};
 </script>
 
 <style scoped lang="scss">
-.input {
-  &:deep(.v-input__details) {
-    display: none;
+.base-input {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 6px;
+
+  input {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #181D27;
+
+    &::placeholder {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      color: #717680;
+    }
   }
 
-  &:deep(.v-field__outline) {
-    display: none;
+  &__label,
+  &__error {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #414651;
   }
 
-  &:deep(.v-field__input) {
-    padding: 0;
+  &__inner {
+    display: flex;
+    grid-gap: 8px;
   }
 
-  &:deep(.v-field-label--floating) {
-    opacity: 0;
+  &__error {
+    color: red;
   }
 
-  &--primary {
-    border: 1px solid #d4d4d4;
-    // background-color: aquamarine;
-    padding: 0 12px;
+  &__variant {
+    &--primary {
+      .base-input__inner {
+        border-radius: 8px;
+        border: 1px solid #D5D7DA;
+      }
+    }
   }
 
+  &__size {
+    &--md {
+      .base-input__inner {
+        height: 48px;
+        padding: 12px 16px;
+      }
+    }
+
+    &--xs {
+      .base-input__inner {
+        height: 44px;
+        padding: 10px 16px;
+      }
+    }
+  }
 }
 </style>

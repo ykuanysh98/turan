@@ -1,7 +1,7 @@
 <template>
-  <v-btn :class="computedClass">
+  <button :class="computedClass">
     <slot />
-  </v-btn>
+  </button>
 </template>
 
 <script lang="ts" setup>
@@ -10,54 +10,113 @@ import { computed, defineProps } from 'vue';
 const props = defineProps({
   variant: {
     type: String,
-    default: 'primary', // Мысалы: 'primary', 'secondary', 'danger', 'success'
+    default: 'primary',
+  },
+  size: {
+    type: String,
+    default: 'md',
+  },
+  block: {
+    type: Boolean,
+    default: false,
   },
 });
 
-// Динамикалық класс есептеу
 const computedClass = computed(() => {
   let classList = ['btn']
-  classList.push(`btn--${props.variant}`)
+  if (props.variant) {
+    classList.push(`btn__variant--${props.variant}`)
+  }
+  if (props.size) {
+    classList.push(`btn__size--${props.size}`)
+  }
+  if (props.block) {
+    classList.push(`btn__block`)
+  }
   return classList
 });
+
 </script>
 
 <style lang="scss" scoped>
 .btn {
-  &--primary {
-    background-color: #1976d2;
-    color: white;
+  border-radius: 8px;
 
-    &:hover {
-      background-color: #1565c0;
+  &:disabled {
+    background-color: transparent;
+    opacity: .3;
+  }
+
+  &__block {
+    width: 100%;
+  }
+
+  &__variant {
+    &--primary {
+      background-color: #7F56D9;
+      color: white;
+    }
+
+    &--secondary {
+      background-color: #fff;
+      color: #414651;
+      border: 1px solid #D5D7DA;
     }
   }
 
-  &--secondary {
-    background-color: #424242;
-    color: white;
+  &__size {
+    &--xl {
+      height: 60px;
+      padding: 16px 28px;
 
-    &:hover {
-      background-color: #333333;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 28px;
+    }
+
+    &--lg {
+      height: 48px;
+      padding: 12px 24px;
+
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+
+    }
+
+    &--md {
+      height: 44px;
+      padding: 10px 18px;
+
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+    }
+
+    &--xs {
+      height: 40px;
+      padding: 10px 16px;
+
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+
+    &--sm {
+      height: 36px;
+      padding: 8px 14px;
+
+      //styleName: Text sm/Semibold;
+      font-family: Inter;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+      text-align: left;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+
     }
   }
 
-  &--success {
-    background-color: #2e7d32;
-    color: white;
-
-    &:hover {
-      background-color: #1b5e20;
-    }
-  }
-
-  &--danger {
-    background-color: #d32f2f;
-    color: white;
-
-    &:hover {
-      background-color: #c62828;
-    }
-  }
 }
 </style>

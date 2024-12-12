@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-app>
-      <Header />
-        <NuxtPage />
-      <Footer />
+    <v-app style="background-color: #FAFAFA;">
+      <OrganismHeader />
+      <NuxtPage />
+      <OrganismFooter />
     </v-app>
   </div>
 </template>

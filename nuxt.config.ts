@@ -14,7 +14,7 @@ export default defineNuxtConfig({
   },
   modules: [
     '@nuxtjs/tailwindcss', 
-    '@nuxtjs/google-fonts'
+    '@nuxtjs/google-fonts',
   ],
   css: [
     '@/assets/styles/main.css',
@@ -29,15 +29,17 @@ export default defineNuxtConfig({
   },
   googleFonts: {
     families: {
-      Roboto: true,
-      'Open+Sans': [300, 400, 600],
-      'Rubik+Wet+Paint': [300, 400, 600, 900],
-    }
+      // Roboto: true,
+      // 'Open+Sans': [300, 400, 600],
+      // 'Rubik+Wet+Paint': [300, 400, 600, 900],
+      'Inter': [300, 400, 600, 900],
+    },
+    display: 'swap',
   },
   vite: {
     //
   },
   typescript: {
     strict: true
-  }
+  },
 })

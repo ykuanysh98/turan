@@ -1,28 +1,25 @@
 <template>
-  <v-card :class="computedClass">
+  <div :class="computedClass">
+    <div v-if="$slots.top" class="card__top">
+      <slot name="top"></slot>
+    </div>
 
-    <slot name="top"></slot>
-
-    <v-card-item v-if="title || subtitle">
-      <v-card-title>
-        {{ title }}
-      </v-card-title>
-
-      <v-card-subtitle>
-        {{ subtitle }}
-      </v-card-subtitle>
-    </v-card-item>
-
-    <v-card-text>
+    <div>
       <slot></slot>
-    </v-card-text>
 
-    <AtomDivider v-if="$slots.bottom"></AtomDivider>
+      <p v-if="link" class="card__link">
+        {{ link }} <del v-if="discount">{{ discount }}</del>
+      </p>
 
-    <v-card-actions v-if="$slots.bottom">
+      <p v-if="text" class="card__text">
+        {{ text }}
+      </p>
+    </div>
+
+    <v-card-actions v-if="$slots.bottom" class="cart-action">
       <slot name="bottom"></slot>
     </v-card-actions>
-  </v-card>
+  </div>
 </template>
 
 
@@ -32,7 +29,7 @@ import { computed, defineProps } from 'vue';
 const props = defineProps({
   variant: {
     type: String,
-    default: 'primary', // Мысалы: 'primary', 'secondary', 'danger', 'success'
+    default: 'primary',
   },
   title: {
     type: String,
@@ -42,21 +39,129 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  text: {
+    type: String,
+    default: '',
+  },
+  link: {
+    type: String,
+    default: '',
+  },
+  discount: {
+    type: String,
+    default: '',
+  },
+  size: {
+    type: String,
+    default: 'md',
+  },
+  bg: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // Динамикалық класс есептеу
 const computedClass = computed(() => {
-  let classList = ['card']
-  classList.push(`card--${props.variant}`)
-  return classList
+  let list = ['card']
+  if (props.variant) {
+    list.push(`card__variant--${props.variant}`)
+  }
+  if (props.size) {
+    list.push(`card__size--${props.size}`)
+  }
+  if (props.bg) {
+    list.push(`card__bg`)
+  }
+  return list
 });
 </script>
 
 
 <style lang="scss" scoped>
-.btn {
-  &--primary {}
+.card {
+  border: 1px solid red;
 
-  &--secondary {}
+  &__link {
+    color: #6941C6;
+    display: flex;
+    grid-gap: 16px;
+
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 28px;
+
+    del {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 28px;
+      text-decoration-skip-ink: none;
+      color: #717680;
+    }
+  }
+
+  &__text {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    color: #535862;
+  }
+
+  &__variant {
+    &--primary {
+      .card__top {
+        margin: 0 0 24px 0;
+      }
+
+      .card__link {
+        margin: 4px 0 0 0;
+      }
+
+      .card__text {
+        margin: 16px 0 0 0;
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+
+    &--secondary {
+      .card__top {
+        margin: 0 0 20px 0;
+      }
+    }
+
+    &--social {
+      .card__top {
+        margin: 0 0 16px 0;
+      }
+
+      .card__link {
+        margin: 16px 0 0 0;
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+
+    &--col {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      .card__text {
+        margin: 8px 0 0 0;
+      }
+    }
+
+  }
+
+  &__bg {
+    background: #FAFAFA;
+    padding: 32px;
+    border-radius: 16px;
+
+  }
+
+  &__size {}
+
 }
 </style>

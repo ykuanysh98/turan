@@ -2,8 +2,10 @@
   <div class="search-input">
     <AtomDropdown ref="menu">
       <template #trigger>
-        <BaseInput v-model="inputValue" append-icon="mdi-close" @input="onInputChange" :label="placeholder"
-          prepend-icon="mdi-magnify" @click:append="clearInput" />
+        <BaseInput v-model="inputValue" @input="onInputChange" :placeholder="placeholder" prepend-icon="mdi-magnify"
+          @click:append="clearInput" size="xs">
+
+        </BaseInput>
       </template>
       <v-list>
         <v-list-item v-for="item in itemsSearch" :key="item" link>
