@@ -49,11 +49,12 @@ export const getToken = () => cookies.get('auth-token')
 // Аутентификация күйін тексеру
 export const checkAuth = () => {
   const token = getToken()
-  isAuthenticated.value = !!token
+  // isAuthenticated.value = !!token
   if (token) {
-    getUser()
+    // getUser()
+    isAuthenticated.value = true
   }
-  return isAuthenticated.value
+  // return isAuthenticated.value
 }
 
 // Reactive мәндерді экспорттау

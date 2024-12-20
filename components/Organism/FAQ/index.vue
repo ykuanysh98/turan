@@ -3,7 +3,7 @@
     <v-container class="pt-0">
       <AtomTitle title="Вопросы и ответы">
       </AtomTitle>
-      <div class="py-[64px] grid grid-cols-3 gap-y-[64px]  gap-x-[32px]">
+      <div class="pt-[64px] md:py-[64px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-[64px]  gap-x-[32px]">
         <AtomCard variant="secondary" v-for="(item, i) in 6" :key="i">
           <template #top>
             <v-icon icon="mdi-email"></v-icon>
@@ -16,12 +16,12 @@
         </AtomCard>
       </div>
 
-      <AtomCard variant="col" text="Свяжитесь с нашим менеджером, если вы не нашли свой вопрос" bg>
+      <AtomCard class="mobile-not" variant="col" text="Свяжитесь с нашим менеджером, если вы не нашли свой вопрос" bg>
         <template #bottom>
           <BaseButton>Связаться</BaseButton>
         </template>
 
-        <AtomTitle title="Остались вопросы?" size="xs">
+        <AtomTitle title="Остались вопросы?" size="sm">
         </AtomTitle>
       </AtomCard>
     </v-container>

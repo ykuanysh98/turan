@@ -16,7 +16,10 @@
 
       <div class="flex-between gap-4 mobile-not">
         <v-icon>mdi-cart-outline</v-icon>
-        <BaseButton>Войти</BaseButton>
+        <v-avatar v-if="isAuthenticated" @click="$router.push('/profile')">
+          <v-icon icon="mdi-account-circle" size="30"></v-icon>
+        </v-avatar>
+        <BaseButton v-else @click="$router.push('/auth')">Войти</BaseButton>
       </div>
       <BurgerMenu class="mobile-only" />
     </v-container>
@@ -24,7 +27,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useAuth } from '~/composables/useAuth'
+const { isAuthenticated, checkAuth } = useAuth()
+
+import { ref, onMounted } from 'vue'
 
 type TreeNode = {
   id: number;
@@ -88,6 +94,9 @@ const items: TreeNode[] = [
   },
 ]
 
+onMounted(async () => {
+  checkAuth();
+});
 </script>
 
 <style lang="scss" scoped>

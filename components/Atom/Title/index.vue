@@ -4,8 +4,10 @@
       {{ title }}
     </h1>
 
-    <h2 v-else>
+    <h2 v-else-if="title">
       {{ title }}
+
+      <span class="atom-title__discount" v-if="discount">{{ discount }}</span>
     </h2>
 
     <h3 v-if="subtitle">
@@ -42,6 +44,10 @@ const props = defineProps({
     type: String,
     default: 'md',
   },
+  block: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const wrapClass = computed(() => {
@@ -51,6 +57,9 @@ const wrapClass = computed(() => {
   }
   if (props.size) {
     list.push(`atom-title__size--${props.size}`)
+  }
+  if (props.block) {
+    list.push(`atom-title__block`)
   }
   return list;
 })
@@ -109,6 +118,31 @@ const wrapClass = computed(() => {
     &--xs {
       grid-gap: 8px;
 
+      h1 {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 32px;
+        color: #181D27;
+      }
+
+      h2 {
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 38px;
+        color: #181D27;
+      }
+
+      h3 {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #535862;
+      }
+    }
+
+    &--sm {
+      grid-gap: 8px;
+
       h1,
       h2 {
         font-size: 20px;
@@ -126,6 +160,51 @@ const wrapClass = computed(() => {
 
       }
     }
+  }
+
+  &__variant {
+    &--secondary {
+
+      h1,
+      h2,
+      h3 {
+        color: #FFF;
+        box-shadow: 0px 1px 2px 0px #0A0D120D;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        -webkit-line-clamp: 6;
+      }
+    }
+
+    &--different {
+      grid-gap: 4px;
+
+      h2 {
+        display: flex;
+        align-items: flex-end;
+        grid-gap: 8px;
+      }
+
+      h3 {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+      }
+
+      .atom-title__discount {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        color: #535862;
+
+        text-decoration: line-through;
+      }
+    }
+  }
+
+  &__block {
+    width: 100%;
   }
 }
 </style>

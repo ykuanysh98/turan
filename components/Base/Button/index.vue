@@ -20,6 +20,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const computedClass = computed(() => {
@@ -33,6 +37,9 @@ const computedClass = computed(() => {
   if (props.block) {
     classList.push(`btn__block`)
   }
+  if (props.disabled) {
+    classList.push(`btn__disabled`)
+  }
   return classList
 });
 
@@ -41,11 +48,6 @@ const computedClass = computed(() => {
 <style lang="scss" scoped>
 .btn {
   border-radius: 8px;
-
-  &:disabled {
-    background-color: transparent;
-    opacity: .3;
-  }
 
   &__block {
     width: 100%;
@@ -118,5 +120,10 @@ const computedClass = computed(() => {
     }
   }
 
+  &__disabled {
+    // background-color: transparent;
+    opacity: .3;
+    // background-color: #E9D7FE;
+  }
 }
 </style>

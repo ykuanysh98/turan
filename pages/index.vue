@@ -4,13 +4,13 @@
       <OrganismBanner title="Создайте мебель своей мечты"
         subtitle="Выбирайте из готовых решений в каталоге или создавайте уникальные модели для дома и офиса"
         :items="banners" variant="secondary" />
-      <!-- <OrganismProductList :games="products.products" /> -->
+      <OrganismProductList :games="products.products" />
     </v-container>
-    <!-- <OrganismReservation class="py-[96px]" />
+    <OrganismReservation class="py-[96px]" />
     <v-container class="pt-0">
       <OrganismSteps />
     </v-container>
-    <OrganismFAQ /> -->
+    <OrganismFAQ />
   </div>
 </template>
 

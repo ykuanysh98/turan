@@ -3,7 +3,7 @@
     <v-slide-group show-arrows>
       <v-slide-group-item v-for="item in items" :key="item">
         <MoleculeProduct class="ma-2" title="Өнім атауы">
-          <AtomTitle title="Өнім атауы" size="xs" />
+          <AtomTitle title="Өнім атауы" size="sm" />
         </MoleculeProduct>
       </v-slide-group-item>
     </v-slide-group>

@@ -2,13 +2,16 @@
   <div :class="wrapClass">
     <label :for="id" class="base-input__label">{{ label }}</label>
 
-    <div class="base-input__inner flex-start ">
-      <v-icon v-if="prependIcon" color="#717680">{{ prependIcon }}</v-icon>
+    <div v-if="maska" class="flex-start">
+      <span class="base-input__mask">+7</span>
 
-      <input :type="type" :value="modelValue" :id="id" :placeholder="placeholder"
-        @input="updateValue($event.target.value)" />
+      <div class="base-input__mask--input flex-start">
+        <input v-mask="maska" :type="type" :value="modelValue" :id="id" @input="updateValue($event.target.value)" />
 
-      <v-icon v-if="modelValue.length > 0" color="#717680" @click="updateValue('')">{{ 'mdi-close' }}</v-icon>
+        <v-icon v-if="error" color="red">
+          {{ 'mdi-alert-circle-outline' }}
+        </v-icon>
+      </div>
     </div>
 
     <span v-if="error" class="base-input__error">{{ error }}</span>
@@ -124,6 +127,7 @@ const updateValue = (value: string) => {
     color: #717680;
 
     &--input {
+      width: 100%;
       height: 100%;
       padding: 10px 14px;
       border-radius: 0 8px 8px 0;

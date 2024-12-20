@@ -1,41 +1,100 @@
 <template>
-  <form class="grid grid-cols-2 gap-4">
-    <BaseInput v-model="form.name" label="Имя" class="col-span-1" placeholder="Как вас зовут?" />
-    <BaseInput v-model="form.city" label="Город" class="col-span-1" placeholder="Откуда вы?" />
-    <BaseInput maska="+7 (###) ### ## ##" v-model="form.phone" label="Номер телефона" class="col-span-2"
-      placeholder="+7 (###) ### ## ##" />
-    <BaseTextarea v-model="form.description" label="Чем мы можем вам помочь?" class="col-span-2" placeholder="" />
+  <form :class="computedClass" @submit.prevent="handleSubmit">
+    <div class="molecule-form__wrap">
+      <slot />
+    </div>
 
-    <BaseButton class="h-[48px] col-span-2" size="lg">Получить консультацию</BaseButton>
+    <AtomDivider v-if="$slots.bottom" class="col-span-2" />
+
+    <div v-if="$slots.bottom" class="molecule-form__bottom">
+      <slot name="bottom" />
+    </div>
   </form>
 </template>
 
-<script setup lang="ts">
-import { ref, defineProps } from 'vue';
+<script lang="ts" setup>
+import { computed, defineProps } from 'vue';
 
 const props = defineProps({
-  name: {
-    type: Number,
-    default: ''
+  variant: {
+    type: String,
+    default: 'primary',
   },
-})
-
-const form = ref<any>({
-  name: '',
-  city: '',
-  phone: '',
-  description: '',
+  size: {
+    type: String,
+    default: 'md',
+  },
 });
 
+const computedClass = computed(() => {
+  let classList = ['molecule-form']
+  if (props.variant) {
+    classList.push(`molecule-form__variant`)
+    classList.push(`molecule-form__variant--${props.variant}`)
+  }
+  if (props.size) {
+    classList.push(`molecule-form__size`)
+    classList.push(`molecule-form__size--${props.size}`)
+  }
+  return classList
+});
+
+
+const handleSubmit = () => {
+  return
+  // console.log('Form submitted:');
+};
 
 </script>
 
 
 <style lang="scss" scoped>
-form {
-  border-radius: 16px;
-  padding: 40px 32px 40px 32px;
-  background: #FAFAFA;
+.molecule-form {
+  &__wrap {
+    display: grid;
+    grid-gap: 16px;
+  }
 
+  &__variant {
+    &--primary {
+      background-color: #FAFAFA;
+      border-radius: 16px;
+
+      .molecule-form__wrap {}
+
+      .molecule-form__bottom {
+        display: none;
+      }
+    }
+
+    &--secondary {
+      background-color: #FFF;
+      border-radius: 16px;
+
+      .molecule-form__wrap {}
+
+      .molecule-form__bottom {
+        display: block;
+      }
+    }
+  }
+
+  &__size {
+    &--md {
+      .molecule-form__wrap {
+        padding: 40px 32px 40px 32px;
+      }
+    }
+
+    &--xs {
+      .molecule-form__wrap {
+        padding: 24px;
+      }
+
+      .molecule-form__bottom {
+        padding: 16px;
+      }
+    }
+  }
 }
 </style>

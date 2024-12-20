@@ -1,5 +1,5 @@
 <template>
-  auth2
+  AtomAuthIndex
 </template>
 
 <script setup>

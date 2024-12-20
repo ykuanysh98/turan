@@ -13,9 +13,7 @@
       </div>
       <AtomDivider />
       <div class="footer__bottom flex-between gap-4 mt-8 mb-[48px]">
-        <div>
-          {{ new Date().getFullYear() }} — <label>Turan</label>
-        </div>
+        <AtomCopyright />
         <div class="flex-between gap-2">
           <p>Документ</p>
           <p>Документ</p>

@@ -17,10 +17,10 @@
 
     <v-data-iterator :items="games" :items-per-page="6">
       <template v-slot:default="{ items }">
-        <div class="grid grid-cols-3 gap-y-[64px]  gap-x-[92px]">
-          <NuxtLink v-for="(product, index) in items" :key="index" :to="`/blog/${index}`" class="nav-link">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-[64px]  gap-x-[92px]">
+          <NuxtLink v-for="(product, index) in items" :key="index" :to="`/product/${index}`" class="nav-link">
             <MoleculeProduct text="Қысқаша сипаттамасы" link="10,000 ₸">
-              <AtomTitle title="Өнім атауы" size="xs" />
+              <AtomTitle title="Өнім атауы" size="sm" />
             </MoleculeProduct>
           </NuxtLink>
         </div>

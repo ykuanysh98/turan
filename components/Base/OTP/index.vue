@@ -1,22 +1,16 @@
 <template>
   <div :class="wrapClass">
-    <label :for="id" class="base-input__label">{{ label }}</label>
+    <label :for="id" class="base-input__label">{{ label }} </label>
 
-    <div class="base-input__inner flex-start ">
-      <v-icon v-if="prependIcon" color="#717680">{{ prependIcon }}</v-icon>
+    <v-otp-input v-model="code" class="base-input__otp" :length="4" :placeholder="placeholder"></v-otp-input>
 
-      <input :type="type" :value="modelValue" :id="id" :placeholder="placeholder"
-        @input="updateValue($event.target.value)" />
-
-      <v-icon v-if="modelValue.length > 0" color="#717680" @click="updateValue('')">{{ 'mdi-close' }}</v-icon>
-    </div>
-
+    <span v-if="text" class="base-input__label">{{ text }}</span>
     <span v-if="error" class="base-input__error">{{ error }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, defineEmits } from 'vue';
+import { ref, watch, computed, defineProps, defineEmits } from 'vue';
 
 const props = defineProps({
   id: {
@@ -55,11 +49,17 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  text: {
+    type: String,
+    default: '',
+  },
   error: {
     type: String,
     default: '',
   },
 });
+
+const code = ref<string>('')
 
 const emit = defineEmits(['update:modelValue']);
 
@@ -75,9 +75,10 @@ const wrapClass = computed(() => {
   return classList
 });
 
-const updateValue = (value: string) => {
-  emit('update:modelValue', value);
-};
+watch(code, (newValue, oldValue) => {
+  emit('update:modelValue', newValue);
+});
+
 </script>
 
 <style scoped lang="scss">
@@ -86,17 +87,34 @@ const updateValue = (value: string) => {
   flex-direction: column;
   grid-gap: 6px;
 
-  input {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-    color: #181D27;
+  &__otp {
+    padding: 0;
+    justify-content: flex-start;
 
-    &::placeholder {
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 24px;
-      color: #717680;
+    &:deep(input) {
+      font-size: 48px;
+      font-weight: 500;
+      line-height: 60px;
+      color: #7F56D9;
+
+      &::placeholder {
+        color: #D5D7DA;
+      }
+
+      &:focus {
+        box-shadow: 0px 1px 2px 0px #0A0D120D;
+        border: none;
+      }
+    }
+
+    &:deep(.v-otp-input__content) {
+      padding: 0;
+      height: 80px;
+    }
+
+    &:deep(.v-field__outline) {
+      border-radius: 8px;
+      border: 1px solid #D6BBFB;
     }
   }
 
@@ -109,26 +127,8 @@ const updateValue = (value: string) => {
   }
 
   &__inner {
+    display: flex;
     grid-gap: 8px;
-  }
-
-  &__mask {
-    padding: 10px 12px 10px 14px;
-    border-radius: 8px 0 0 8px;
-    border: 1px solid #D5D7DA;
-    border-right: none;
-
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-    color: #717680;
-
-    &--input {
-      height: 100%;
-      padding: 10px 14px;
-      border-radius: 0 8px 8px 0;
-      border: 1px solid #D5D7DA;
-    }
   }
 
   &__error {
@@ -147,15 +147,15 @@ const updateValue = (value: string) => {
   &__size {
     &--md {
       .base-input__inner {
-        height: 48px;
-        padding: 12px 16px;
+        // height: 48px;
+        // padding: 12px 16px;
       }
     }
 
     &--xs {
       .base-input__inner {
-        height: 44px;
-        padding: 10px 16px;
+        // height: 44px;
+        // padding: 10px 16px;
       }
     }
   }

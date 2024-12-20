@@ -8,11 +8,11 @@
         </v-avatar>
       </v-btn>
 
-      <AuthModal v-else>
+      <AtomAuthModal v-else>
         <v-avatar color="brown" size="large">
           <v-icon icon="mdi-account-circle"></v-icon>
         </v-avatar>
-      </AuthModal>
+      </AtomAuthModal>
     </template>
 
     <v-card v-if="isAuthenticated">

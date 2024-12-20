@@ -7,7 +7,6 @@
 
 <script setup>
 definePageMeta({
-  middleware: 'auth', // auth middleware-ін локально қосу
   title: 'Біз туралы - Менің жобам',
   meta: [
     { name: 'description', content: 'Біз туралы бетінде жоба туралы мәліметтер бар.' },
