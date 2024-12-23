@@ -13,6 +13,9 @@
             </template>
 
             <AtomTitle :title="item.title" :subtitle="item.subtitle" size="sm" />
+            <AtomText class="mt-4" variant="link">
+              {{ item.link }}
+            </AtomText>
           </AtomCard>
 
         </div>

@@ -3,6 +3,7 @@
     <label :for="id" class="base-input__label">{{ label }}</label>
     <textarea :type="type" :value="modelValue" v-bind="inputProps" :id="id" :placeholder="placeholder"
       @input="updateValue($event.target.value)"></textarea>
+    <span v-if="text" class="base-input__text">{{ text }}</span>
     <span v-if="error" class="base-input__span">{{ error }}</span>
   </div>
 </template>
@@ -28,6 +29,10 @@ const props = defineProps({
     default: 'text',
   },
   error: {
+    type: String,
+    default: '',
+  },
+  text: {
     type: String,
     default: '',
   },
@@ -74,6 +79,13 @@ const updateValue = (value: string) => {
     color: #414651;
   }
 
+  &__text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #535862;
+  }
+
   &__input {
     outline: none;
     resize: none;
@@ -97,6 +109,12 @@ const updateValue = (value: string) => {
     border-radius: 8px 0 0 8px;
     border: 1px solid #D5D7DA;
     border-right: none;
+  }
+
+  &--secondary {
+    textarea {
+      background-color: #fff;
+    }
   }
 }
 </style>

@@ -1,8 +1,14 @@
 <template>
   <div class="booking">
     <AtomTitle title="Шкаф 3-дверный, белый ЛДСП, 180см-260см-60см" main size="xs" />
-    <AtomTitle title="132 000 ₸" subtitle="Доставляем от 4 до 7 дней по всему Казахстану" discount="150 000 ₸"
-      variant="different" size="xs" />
+    <div class="booking__price">
+      <AtomText label="150 000 ₸" variant="different" size="xll">
+        132 000 ₸
+      </AtomText>
+      <AtomText size="xs">
+        Доставляем от 4 до 7 дней по всему Казахстану
+      </AtomText>
+    </div>
 
     <AtomChip class="h-[30px]" color="deep-purple-accent-4">
       Вы можете настроить под себя этот товар
@@ -12,8 +18,8 @@
     </AtomChip>
 
     <MoleculeButtonGroup>
-      <BaseButton>Добавить в корзину</BaseButton>
-      <BaseButton size="lg">Добавить в корзину</BaseButton>
+      <AtomCounter />
+      <BaseButton size="lg" @click="$router.push('/basket')">Добавить в корзину</BaseButton>
     </MoleculeButtonGroup>
   </div>
 </template>
@@ -24,5 +30,11 @@
   flex-direction: column;
   align-items: flex-start;
   grid-gap: 24px;
+
+  &__price {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 4px;
+  }
 }
 </style>

@@ -1,14 +1,28 @@
 <template>
-  <AtomCard :text="text" :link="link" discount="35000" size="xs">
+  <AtomCard :class="computedClass" :text="text" :link="link" discount="35000" size="xs" :variant="variant">
     <template #top>
       <v-img src="https://placehold.co/200x600" alt="Өнім атауы" height="200px" class="product-image" cover></v-img>
     </template>
-    <slot />
+
+    <AtomTitle title="Өнім атауы" size="sm" />
+
+    <AtomText class="mt-1" label="300 000 ₸" variant="link" size="lg">
+      265 000 ₸
+    </AtomText>
+
+    <AtomText class="mt-4">
+      Небольшое описание про товар или категория
+    </AtomText>
+
+    <div v-if="$slots.default" class="product__action">
+      <slot />
+    </div>
+
   </AtomCard>
 </template>
 
 <script lang="ts" setup>
-import { defineProps } from 'vue'
+import { defineProps, computed } from 'vue'
 
 const props = defineProps({
   text: {
@@ -19,24 +33,34 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  variant: {
+    type: String,
+    default: '',
+  },
 })
+
+const computedClass = computed(() => {
+  let classList = ['product']
+  if (props.variant) {
+    classList.push(`product__variant--${props.variant}`)
+  }
+  return classList
+});
 </script>
 
-<style scoped>
-.product-card {
-  max-width: 350px;
-  position: relative;
-}
+<style lang="scss" scoped>
+.product {
+  &__action {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+  }
 
-.product-image {
-  border-radius: 10px 10px 0 0;
-}
-
-.price {
-  color: #ff5722;
-}
-
-.description {
-  color: #555;
+  &__variant {
+    &--col {
+      height: 240px;
+    }
+  }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="flex-column gap-[80px]">
     <div class="product">
       <div class="product__left">
         <AtomSlider :items="[1, 2, 3, 4, 5]">
@@ -10,7 +10,8 @@
         <MoleculeBooking />
       </div>
     </div>
-    <OrganismProductList />
+    <OrganismProductSimilar title="Рекомендуем вам" />
+    <OrganismProductSimilar title="Вместе с этим покупают" />
   </v-container>
 </template>
 

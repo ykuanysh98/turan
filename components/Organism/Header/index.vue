@@ -15,7 +15,7 @@
       <MoleculeSearch v-model="query" class="w-full max-w-[400px] mobile-not" />
 
       <div class="flex-between gap-4 mobile-not">
-        <v-icon>mdi-cart-outline</v-icon>
+        <v-icon @click="$router.push('/basket')">mdi-cart-outline</v-icon>
         <v-avatar v-if="isAuthenticated" @click="$router.push('/profile')">
           <v-icon icon="mdi-account-circle" size="30"></v-icon>
         </v-avatar>

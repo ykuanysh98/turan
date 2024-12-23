@@ -2,7 +2,7 @@
   <div :class="wrapClass">
     <label :for="id" class="base-input__label">{{ label }}</label>
 
-    <div v-if="maska" class="flex-start">
+    <div v-if="maska" class="base-input__mask-inner flex-start">
       <span class="base-input__mask">+7</span>
 
       <div class="base-input__mask--input flex-start">
@@ -144,6 +144,12 @@ const updateValue = (value: string) => {
       .base-input__inner {
         border-radius: 8px;
         border: 1px solid #D5D7DA;
+      }
+    }
+
+    &--secondary {
+      .base-input__mask-inner {
+        background-color: #fff;
       }
     }
   }

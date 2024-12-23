@@ -142,6 +142,14 @@ const updateValue = (value: string) => {
         border: 1px solid #D5D7DA;
       }
     }
+
+    &--secondary {
+      .base-input__inner {
+        border-radius: 8px;
+        border: 1px solid #D5D7DA;
+        background-color: #fff
+      }
+    }
   }
 
   &__size {

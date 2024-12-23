@@ -64,6 +64,13 @@ const computedClass = computed(() => {
       color: #414651;
       border: 1px solid #D5D7DA;
     }
+
+    &--outline {
+      color: #6941C6;
+      border: 1px solid #F9F5FF;
+      background-color: #F9F5FF;
+      box-shadow: 0px 1px 2px 0px #0A0D120D;
+    }
   }
 
   &__size {

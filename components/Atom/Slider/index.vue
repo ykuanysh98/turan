@@ -1,9 +1,8 @@
 <template>
-  <v-sheet class="slider mx-auto bg-transparent" max-width="600">
+  <v-sheet class="slider mx-auto bg-transparent" width="100%">
     <v-slide-group show-arrows>
       <v-slide-group-item v-for="item in items" :key="item">
-        <MoleculeProduct class="ma-2" title="Өнім атауы">
-          <AtomTitle title="Өнім атауы" size="sm" />
+        <MoleculeProduct class="ma-2 w-[240px]">
         </MoleculeProduct>
       </v-slide-group-item>
     </v-slide-group>

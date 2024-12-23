@@ -6,24 +6,26 @@
       <div class="pt-[64px] md:py-[64px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-[64px]  gap-x-[32px]">
         <AtomCard variant="secondary" v-for="(item, i) in 6" :key="i">
           <template #top>
-            <v-icon icon="mdi-email"></v-icon>
+            <AtomCircle>
+              <v-icon icon="mdi-email-outline" size="20"></v-icon>
+            </AtomCircle>
           </template>
 
           <AtomTitle title="Сколько времени займет изготовление мебели?"
             subtitle="Сроки зависят от сложности заказа и выбранных материалов. Обычно изготовление занимает от 7 до 14 рабочих дней"
-            size="xs">
+            size="sm">
           </AtomTitle>
         </AtomCard>
       </div>
 
-      <AtomCard class="mobile-not" variant="col" text="Свяжитесь с нашим менеджером, если вы не нашли свой вопрос" bg>
-        <template #bottom>
-          <BaseButton>Связаться</BaseButton>
-        </template>
-
-        <AtomTitle title="Остались вопросы?" size="sm">
+      <div class="w-full pa-8 bg-[#FAFAFA] flex-between items-start gap-6 mobile-not">
+        <AtomTitle title="Остались вопросы?" subtitle="Свяжитесь с нашим менеджером, если вы не нашли свой вопрос"
+          size="sm">
         </AtomTitle>
-      </AtomCard>
+
+        <BaseButton>Связаться</BaseButton>
+
+      </div>
     </v-container>
   </div>
 </template>

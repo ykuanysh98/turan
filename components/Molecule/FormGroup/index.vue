@@ -80,6 +80,12 @@ const handleSubmit = () => {
   }
 
   &__size {
+    &--lg {
+      .molecule-form__wrap {
+        padding: 0;
+      }
+    }
+
     &--md {
       .molecule-form__wrap {
         padding: 40px 32px 40px 32px;

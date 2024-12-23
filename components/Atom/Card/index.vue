@@ -4,21 +4,13 @@
       <slot name="top"></slot>
     </div>
 
-    <div>
+    <div class="card__body">
       <slot></slot>
-
-      <p v-if="link" class="card__link">
-        {{ link }} <del v-if="discount">{{ discount }}</del>
-      </p>
-
-      <p v-if="text" class="card__text">
-        {{ text }}
-      </p>
     </div>
 
-    <v-card-actions v-if="$slots.bottom" class="cart-action">
+    <div v-if="$slots.bottom" class="card__bottom">
       <slot name="bottom"></slot>
-    </v-card-actions>
+    </div>
   </div>
 </template>
 
@@ -31,33 +23,9 @@ const props = defineProps({
     type: String,
     default: 'primary',
   },
-  title: {
-    type: String,
-    default: '',
-  },
-  subtitle: {
-    type: String,
-    default: '',
-  },
-  text: {
-    type: String,
-    default: '',
-  },
-  link: {
-    type: String,
-    default: '',
-  },
-  discount: {
-    type: String,
-    default: '',
-  },
   size: {
     type: String,
     default: 'md',
-  },
-  bg: {
-    type: Boolean,
-    default: false,
   },
 });
 
@@ -70,9 +38,6 @@ const computedClass = computed(() => {
   if (props.size) {
     list.push(`card__size--${props.size}`)
   }
-  if (props.bg) {
-    list.push(`card__bg`)
-  }
   return list
 });
 </script>
@@ -82,45 +47,10 @@ const computedClass = computed(() => {
 .card {
   border: 1px solid red;
 
-  &__link {
-    color: #6941C6;
-    display: flex;
-    grid-gap: 16px;
-
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 28px;
-
-    del {
-      font-size: 18px;
-      font-weight: 400;
-      line-height: 28px;
-      text-decoration-skip-ink: none;
-      color: #717680;
-    }
-  }
-
-  &__text {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 28px;
-    color: #535862;
-  }
-
   &__variant {
     &--primary {
       .card__top {
         margin: 0 0 24px 0;
-      }
-
-      .card__link {
-        margin: 4px 0 0 0;
-      }
-
-      .card__text {
-        margin: 16px 0 0 0;
-        font-size: 16px;
-        line-height: 24px;
       }
     }
 
@@ -134,34 +64,29 @@ const computedClass = computed(() => {
       .card__top {
         margin: 0 0 16px 0;
       }
-
-      .card__link {
-        margin: 16px 0 0 0;
-        font-size: 16px;
-        line-height: 24px;
-      }
     }
 
     &--col {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
+      grid-gap: 24px;
 
-      .card__text {
-        margin: 8px 0 0 0;
+      .card__top {
+        min-width: 240px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background-color: #eeeeee
+      }
+
+      .card__body {
+        width: 100%;
       }
     }
 
   }
-
-  &__bg {
-    background: #FAFAFA;
-    padding: 32px;
-    border-radius: 16px;
-
-  }
-
-  &__size {}
-
 }
 </style>

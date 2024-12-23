@@ -47,6 +47,10 @@ button {
   align-items: center;
   justify-content: center;
 }
+.flex-items{
+  display: flex;
+  align-items: center;
+}
 .flex-between{
   display: flex;
   align-items: center;

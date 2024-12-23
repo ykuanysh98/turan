@@ -1,21 +1,18 @@
 <template>
   <div class="search-input">
-    <AtomDropdown ref="menu">
+    <AtomDropdown ref="menu" block>
       <template #trigger>
         <BaseInput v-model="inputValue" @input="onInputChange" :placeholder="placeholder" prepend-icon="mdi-magnify"
           @click:append="clearInput" size="xs">
 
         </BaseInput>
       </template>
-      <v-list>
-        <v-list-item v-for="item in itemsSearch" :key="item" link>
-          <v-list-item-title>{{ item }}</v-list-item-title>
-        </v-list-item>
 
-        <v-list-item v-if="itemsSearch.length === 0">
-          <v-list-item-title>Ничего не найдено</v-list-item-title>
-        </v-list-item>
-      </v-list>
+      <MoleculeList :items="itemsSearch">
+        <template #prepend>
+          <v-icon size="16" icon="mdi-magnify"></v-icon>
+        </template>
+      </MoleculeList>
     </AtomDropdown>
   </div>
 </template>
@@ -92,8 +89,12 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .search-input {
   min-width: 200px;
+
+  &:deep(.v-overlay__content) {
+    top: 73px;
+  }
 }
 </style>

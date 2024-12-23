@@ -9,7 +9,7 @@
       <div class="flex-column gap-2">
         <div class="flex-start gap-4" v-for="(item, i) in 4" :key="i">
           <div class="flex-column flex-center">
-            <div class="steps__circle flex-center">{{ item }}</div>
+            <AtomCircle>{{ item }}</AtomCircle>
             <span v-if="item !== 4" class="steps__line flex-center"></span>
           </div>
           <AtomTitle class="pt-[10px]" title="Выберите базовую модель"
@@ -30,20 +30,6 @@
       flex-direction: column;
     }
   }
-}
-
-.steps__circle {
-  width: 48px;
-  height: 48px;
-  padding: 9px 0px 9px 0px;
-  border-radius: 28px;
-  background: #F4EBFF;
-  border: 8px solid #F9F5FF;
-
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 30px;
-  color: #6941C6;
 }
 
 .steps__line {

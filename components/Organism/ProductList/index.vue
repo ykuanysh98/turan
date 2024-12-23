@@ -1,27 +1,14 @@
 <template>
   <div class="flex-column gap-6">
-    <AtomTitle title="Каталог" />
+    <AtomTitle :title="title" :subtitle="subtitle" />
 
-    <MoleculeButtonGroup>
-      <BaseButton variant="secondary" size="xs">
-        Категория
-      </BaseButton>
-      <BaseButton variant="secondary" size="xs">
-        Цена
-      </BaseButton>
-      <BaseButton variant="secondary" size="xs">
-        Сортировать
-        <v-icon icon="mdi-sort" end> </v-icon>
-      </BaseButton>
-    </MoleculeButtonGroup>
+    <OrganismFilter />
 
     <v-data-iterator :items="games" :items-per-page="6">
       <template v-slot:default="{ items }">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-[64px]  gap-x-[92px]">
           <NuxtLink v-for="(product, index) in items" :key="index" :to="`/product/${index}`" class="nav-link">
-            <MoleculeProduct text="Қысқаша сипаттамасы" link="10,000 ₸">
-              <AtomTitle title="Өнім атауы" size="sm" />
-            </MoleculeProduct>
+            <MoleculeProduct />
           </NuxtLink>
         </div>
       </template>
@@ -40,6 +27,14 @@ import { ref, defineProps } from 'vue'
 const props = defineProps({
   games: {
     type: Array,
+  },
+  title: {
+    type: String,
+    default: ''
+  },
+  subtitle: {
+    type: String,
+    default: ''
   },
 });
 

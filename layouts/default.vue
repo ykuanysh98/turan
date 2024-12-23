@@ -3,7 +3,7 @@
     <v-app style="background-color: #FAFAFA;">
       <OrganismHeader />
       <NuxtPage />
-      <OrganismFooter />
+      <OrganismFooter v-if="$route.path === '/'" />
     </v-app>
   </div>
 </template>

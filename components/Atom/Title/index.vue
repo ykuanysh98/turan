@@ -6,8 +6,6 @@
 
     <h2 v-else-if="title">
       {{ title }}
-
-      <span class="atom-title__discount" v-if="discount">{{ discount }}</span>
     </h2>
 
     <h3 v-if="subtitle">
@@ -174,31 +172,6 @@ const wrapClass = computed(() => {
         -webkit-box-orient: vertical;
         overflow: hidden;
         -webkit-line-clamp: 6;
-      }
-    }
-
-    &--different {
-      grid-gap: 4px;
-
-      h2 {
-        display: flex;
-        align-items: flex-end;
-        grid-gap: 8px;
-      }
-
-      h3 {
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-      }
-
-      .atom-title__discount {
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-        color: #535862;
-
-        text-decoration: line-through;
       }
     }
   }
