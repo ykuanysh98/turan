@@ -37,7 +37,15 @@ export default defineNuxtConfig({
     display: 'swap',
   },
   vite: {
-    //
+    // server: {
+    //   proxy: {
+    //     '/api': {
+    //       target: 'http://turan-back.neppe.kz:8080', // Сервер URL-і
+    //       changeOrigin: true, // Бастапқы доменді ауыстыру
+    //       rewrite: (path) => path.replace(/^\/api/, ''), // '/api' бөлімін алып тастау
+    //     },
+    //   },
+    // },
   },
   typescript: {
     strict: true

@@ -7,47 +7,50 @@
       <BaseMask maska="### ### ## ##" v-model="form.phone" label="Номер телефона" placeholder="+7 (###) ### ## ##"
         size="xs" :error="errorText" />
 
-      <BaseButton :disabled="!form.phone" @click="submit">
-        Создать аккаунт
+      <BaseButton :disabled="!form.phone" @click="submit" :loading="auth.pending">
+        Вход
       </BaseButton>
     </MoleculeFormGroup>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, reactive, defineEmits } from 'vue'
 
 interface Form {
   phone: string;
 }
 
+import { computed, reactive, defineEmits } from 'vue'
+import { useAuthStore } from '~/stores/auth';
+import { phone } from '~/composables/useVerify'
+
+const { error, touch } = phone();
+const auth = useAuthStore();
 const form = reactive<Form>({
   phone: '',
 });
-
 const emit = defineEmits<{
   (event: 'click'): void;
 }>()
 
 const errorText = computed(() => {
-  let text = '';
-  if (form.phone) {
-    let start = form.phone.slice(0, 1);
-    if (start !== '7') {
-      text = 'Номер телефона введен некорректно. Убедитесь, что номер телефона введен в формате: +7 (XXX) XXX-XX-XX.'
-    }
-  } else {
-    text = 'Это поле должно быть заполнено'
-  }
-  return text;
-})
+  return error(form.phone);
+});
 
-const submit = function () {
-  if (!form.phone) {
+const submit = async function () {
+  touch();
+
+  if (!form.phone || errorText.value) {
     return;
   }
 
-  emit('click');
+  const phone = form.phone.split(' ').join('');
+  await auth.otp({ phone: `7${phone}` });
+
+  if (auth.data.success) {
+    emit('click');
+    alert(auth.data.data);
+  }
 }
 </script>
 

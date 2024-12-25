@@ -17,12 +17,18 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, defineEmits, computed } from 'vue'
 
 interface Form {
   name: string;
   phone: string;
 }
+
+import { reactive, defineEmits, computed } from 'vue'
+import { useAuthStore } from '~/stores/auth';
+import { phone } from '~/composables/useVerify'
+
+const { error, touch } = phone();
+const auth = useAuthStore();
 
 const form = reactive<Form>({
   name: '',
@@ -33,26 +39,25 @@ const emit = defineEmits<{
   (event: 'click'): void;
 }>()
 
-const submit = function () {
-  if (!form.name || !form.phone) {
+const errorText = computed(() => {
+  return error(form.phone);
+})
+
+const submit = async function () {
+  touch();
+
+  if (!form.phone || errorText.value) {
     return;
   }
 
-  emit('click');
-}
+  const phone = form.phone.split(' ').join('');
+  await auth.otp({ phone: `7${phone}` });
 
-const errorText = computed(() => {
-  let text = '';
-  if (form.phone) {
-    let start = form.phone.slice(0, 1);
-    if (start !== '7') {
-      text = 'Номер телефона введен некорректно. Убедитесь, что номер телефона введен в формате: +7 (XXX) XXX-XX-XX.'
-    }
-  } else {
-    text = 'Это поле должно быть заполнено'
+  if (auth.data.success) {
+    emit('click');
+    alert(auth.data.data);
   }
-  return text;
-})
+}
 
 </script>
 

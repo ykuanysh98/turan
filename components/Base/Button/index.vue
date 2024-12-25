@@ -1,6 +1,7 @@
 <template>
   <button :class="computedClass">
-    <slot />
+    <v-progress-circular v-if="loading" indeterminate :size="25"></v-progress-circular>
+    <slot v-else />
   </button>
 </template>
 
@@ -21,6 +22,10 @@ const props = defineProps({
     default: false,
   },
   disabled: {
+    type: Boolean,
+    default: false,
+  },
+  loading: {
     type: Boolean,
     default: false,
   },

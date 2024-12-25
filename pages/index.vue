@@ -15,6 +15,8 @@
 </template>
 
 <script setup lang="ts">
+const { $axios } = useNuxtApp();
+
 import { ref, onMounted } from 'vue';
 import { useCounterStore } from '../stores/counter';
 import { useProductsStore } from '../stores/products';
@@ -32,8 +34,11 @@ const { data: banners, fetch: fetchBanners } = useFetch();
 
 const InputDeviceInfo = ref([]);
 onMounted(async () => {
-  await fetchProducts('/api/products?page=2&limit=10');
-  await fetchBanners('/api/banners');
+  // await fetchProducts('/api/products?page=2&limit=10');
+  // await fetchBanners('/api/banners');
+
+  const response = await $axios.get('/city');
+  console.error('Қате орын алды:', response);
 });
 
 const handleClick = () => {
