@@ -8,7 +8,7 @@
 
       <div class="flex-between gap-8 mobile-not">
         <NuxtLink to="/" class="nav-link">Конструктор</NuxtLink>
-        <NuxtLink to="/" class="nav-link">Каталог</NuxtLink>
+        <NuxtLink to="/catalog" class="nav-link">Каталог</NuxtLink>
         <NuxtLink to="/" class="nav-link">Оставить заявку</NuxtLink>
       </div>
 
@@ -16,7 +16,7 @@
 
       <div class="flex-between gap-4 mobile-not">
         <v-icon @click="$router.push('/basket')">mdi-cart-outline</v-icon>
-        <v-avatar v-if="isAuthenticated" @click="$router.push('/profile')">
+        <v-avatar v-if="isAuth" @click="$router.push('/profile')">
           <v-icon icon="mdi-account-circle" size="30"></v-icon>
         </v-avatar>
         <BaseButton v-else @click="$router.push('/auth')">Войти</BaseButton>
@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import { useAuth } from '~/composables/useAuth'
-const { isAuthenticated, checkAuth } = useAuth()
+const { isAuth, getAuth } = useAuth();
 
 import { ref, onMounted } from 'vue'
 
@@ -95,7 +95,7 @@ const items: TreeNode[] = [
 ]
 
 onMounted(async () => {
-  checkAuth();
+  await getAuth();
 });
 </script>
 

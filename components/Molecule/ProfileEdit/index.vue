@@ -8,15 +8,16 @@
       <BaseInput v-model="form.surname" label="Фамилия" class="col-span-2 md:col-span-1"
         placeholder="Как вас фамилия?" />
       <BaseMask maska="+7 (###) ### ## ##" v-model="form.phone" label="Номер телефона" class="col-span-2" />
-      <BaseInput v-model="form.city" label="Город" class="col-span-2 md:col-span-1" placeholder="Откуда вы?" />
-      <BaseInput v-model="form.city" label="Адрес" class="col-span-2 md:col-span-1" placeholder="Ваш адрес" />
+      <BaseSelect v-model="form.city" :items="cities" label="Город" class="col-span-2 md:col-span-1"
+        placeholder="Откуда вы?" />
+      <BaseInput v-model="form.address" label="Адрес" class="col-span-2 md:col-span-1" placeholder="Ваш адрес" />
 
       <template #bottom>
         <MoleculeButtonGroup class="col-span-2 justify-end">
-          <BaseButton size="xs" variant="secondary">
+          <BaseButton size="xs" variant="secondary" @click="$router.go(-1)">
             Отмена
           </BaseButton>
-          <BaseButton size="xs">
+          <BaseButton size="xs" :loading="user.pending" @click="update">
             Сохранить
           </BaseButton>
         </MoleculeButtonGroup>
@@ -27,15 +28,65 @@
 
 
 <script setup lang="ts">
-import { ref } from 'vue';
 
-const form = ref<any>({
+interface User {
+  name: string;
+  surname: string,
+  city: string,
+  phone: string,
+  address: string,
+}
+
+import { reactive, computed, onMounted } from 'vue';
+import { useUserStore } from '~/stores/user';
+import { useCityStore } from '~/stores/city';
+const user = useUserStore();
+const city = useCityStore();
+
+const form = reactive<User>({
   name: '',
   surname: '',
   city: '',
   phone: '',
-  description: '',
+  address: '',
 });
+
+const cities = computed(() => {
+  let list: any = [];
+  if (city.cityList) {
+    list = city.cityList.data.map((e: any) => ({
+      id: e.id,
+      title: e.name,
+    }));
+  }
+  return list;
+})
+
+onMounted(async () => {
+  await user.show();
+  await city.fetch();
+
+  form.name = user.userData.data.FirstName;
+  form.surname = user.userData.data.LastName;
+  form.city = user.userData.data.CityId.Int64;
+  form.phone = user.userData.data.Phone;
+  form.address = user.userData.data.Address.String;
+
+});
+
+const update = function () {
+  user.update({
+    first_name: form.name,
+    last_name: form.surname,
+    city_id: form.city,
+    address: form.address,
+    phone: formatPhoneNumber(form.phone)
+  })
+}
+
+const formatPhoneNumber = function (tel: string) {
+  return tel.replace(/[^\d]/g, '');
+}
 </script>
 
 <style lang="scss" scoped>

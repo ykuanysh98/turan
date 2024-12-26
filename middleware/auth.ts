@@ -5,17 +5,14 @@ import Cookie from 'cookie-universal'
 const cookies = Cookie() // Cookie объектісін инициализациялау
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  console.log(`Кірген маршрут: ${to.path}`);
-  const token = cookies.get('auth-token');
+  const token = cookies.get('turan-token');
   // const token = localStorage.getItem('auth-token');
   // const user = await fetchUserData();
   // const isLoggedIn = user.isLoggedIn;
   let isLoggedIn = false;
-  console.log('token', token);
 
   if(token){
     isLoggedIn = true;
-    console.log('isLoggedIn', isLoggedIn);
   } 
 
   if (to.path === '/restricted') {

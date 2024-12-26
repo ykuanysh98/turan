@@ -21,8 +21,20 @@
   </div>
 </template>
 
-<script setup>
-import { ref, defineProps } from 'vue'
+<script lang="ts" setup>
+interface Filter {
+  page: number,
+  limit: number,
+  search: string,
+  sort: string,
+  price_min: number,
+  price_max: number,
+  categories: any,
+}
+
+import { reactive, onMounted, defineProps } from 'vue'
+import { useProductsStore } from '~/stores/products';
+const products = useProductsStore();
 
 const props = defineProps({
   games: {
@@ -38,6 +50,22 @@ const props = defineProps({
   },
 });
 
+const filter = reactive<Filter>({
+  page: 1,
+  limit: 20,
+  search: "",
+  sort: "id desc",
+  price_min: 0,
+  price_max: 0,
+  categories: [],
+});
+
+onMounted(async () => {
+  console.log('filter', filter);
+  await products.fetch(filter);
+
+  // console.log('products', `${products.items}`);
+});
 </script>
 
 <style scoped></style>

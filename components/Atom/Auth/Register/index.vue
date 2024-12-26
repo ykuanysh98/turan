@@ -9,7 +9,7 @@
       <BaseMask maska="### ### ## ##" v-model="form.phone" label="Номер телефона" placeholder="+7 (###) ### ## ##"
         size="xs" :error="errorText" />
 
-      <BaseButton :disabled="!form.name || !form.phone" @click="submit">
+      <BaseButton :disabled="!form.name || !form.phone" :loading="auth.pending" @click="submit">
         Создать аккаунт
       </BaseButton>
     </MoleculeFormGroup>
@@ -51,11 +51,11 @@ const submit = async function () {
   }
 
   const phone = form.phone.split(' ').join('');
-  await auth.otp({ phone: `7${phone}` });
+  await auth.otp({ phone: `7${phone}`, name: form.name });
 
-  if (auth.data.success) {
+  if (auth.otpData.success) {
     emit('click');
-    alert(auth.data.data);
+    alert(auth.otpData.data);
   }
 }
 

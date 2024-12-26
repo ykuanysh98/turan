@@ -4,7 +4,11 @@
 
     <v-otp-input v-model="code" class="base-input__otp" :length="4" :placeholder="placeholder"></v-otp-input>
 
-    <span v-if="text" class="base-input__label">{{ text }}</span>
+    <span v-if="text" class="base-input__label">
+      {{ text }}
+      <slot />
+    </span>
+
     <span v-if="error" class="base-input__error">{{ error }}</span>
   </div>
 </template>

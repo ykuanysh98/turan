@@ -1,26 +1,20 @@
 import { defineStore } from 'pinia';
 import { useApi } from '~/composables/useApi';
 
-export const useProductsStore = defineStore('products', {
+export const useCategoryStore = defineStore('category', {
   state: () => ({
-    items:  [] as string[] | any,
+    categoryList: null as any, // Немесе нақты типті көрсетіңіз
     pending: false,
     error: null as string | null,
   }),
-  getters: {
-    isLoggait: (state) => state.items,
-  },
   actions: {
-    increment() {
-      this.items.push({id: 1, name: "New"});
-    },
-    async fetch(params?: Record<string, any>) {
+    async fetch() {
       const { get } = useApi();
       this.pending = true;
       this.error = null;
       try {
-        const response = await get('/product', params);
-        this.items = response;
+        const response = await get('/category');
+        this.categoryList = response;
       } catch (error: any) {
         this.error = error.message;
         console.error('Failed to create data:', error);
@@ -28,5 +22,5 @@ export const useProductsStore = defineStore('products', {
         this.pending = false;
       }
     },
-  }
-})
+  },
+});

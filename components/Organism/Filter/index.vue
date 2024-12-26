@@ -3,12 +3,11 @@
     <AtomDropdown>
       <template #trigger>
         <BaseButton variant="secondary" size="xs">
-          Категория - {{ catalogId }}
-
+          Категория
         </BaseButton>
       </template>
 
-      <MoleculeList v-model="catalogId" :items="itemsCatalog" :checkbox="true" />
+      <MoleculeList v-model="catalogId" :items="categories" :checkbox="true" />
     </AtomDropdown>
 
 
@@ -25,7 +24,7 @@
     <AtomDropdown>
       <template #trigger>
         <BaseButton variant="secondary" size="xs">
-          Сортировать--{{ sortId }}
+          Сортировать
           <v-icon icon="mdi-sort" end> </v-icon>
         </BaseButton>
       </template>
@@ -36,10 +35,23 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useCategoryStore } from '~/stores/category';
+const category = useCategoryStore();
 
 const catalogId = ref(null);
 const sortId = ref(null);
+
+const categories = computed(() => {
+  let list: any = [];
+  if (category.categoryList) {
+    list = category.categoryList.data.map((e: any) => ({
+      id: e.id,
+      title: e.name,
+    }));
+  }
+  return list;
+})
 
 const itemsCatalog = [
   {
@@ -59,4 +71,9 @@ const itemsCatalog = [
     name: 'qwer4'
   },
 ]
+
+onMounted(async () => {
+  await category.fetch();
+
+});
 </script>

@@ -47,9 +47,9 @@ const submit = async function () {
   const phone = form.phone.split(' ').join('');
   await auth.otp({ phone: `7${phone}` });
 
-  if (auth.data.success) {
+  if (auth.otpData.success) {
     emit('click');
-    alert(auth.data.data);
+    alert(auth.otpData.data);
   }
 }
 </script>

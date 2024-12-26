@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { useAuth } from '~/composables/useAuth'
-const { logout, user } = useAuth()
+const { logout } = useAuth()
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 

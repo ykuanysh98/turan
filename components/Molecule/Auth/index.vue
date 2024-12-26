@@ -1,7 +1,7 @@
 <template>
   <div class="molecule-auth">
-    <AtomAuthRegister v-if="step === 1" @click="step = 3" />
-    <AtomAuthLogin v-else-if="step === 2" @click="step = 3" />
+    <AtomAuthLogin v-if="step === 1" @click="step = 3" />
+    <AtomAuthRegister v-else-if="step === 2" @click="step = 3" />
     <AtomAuthCode v-else-if="step === 3" @click="$router.push('/')" />
 
     <div v-if="step === 1" class="molecule-auth__control">

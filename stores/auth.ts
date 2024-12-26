@@ -1,21 +1,31 @@
 import { defineStore } from 'pinia';
 import { useApi } from '~/composables/useApi';
+import { useAuth } from '~/composables/useAuth'
+const { setToken } = useAuth()
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    data: null as any, // Немесе нақты типті көрсетіңіз
+    otpData: null as any, // Немесе нақты типті көрсетіңіз
+    loginData: null as any, // Немесе нақты типті көрсетіңіз
+    phone: null as string | null,
+    name: null as string | null,
+
     pending: false,
     error: null as string | null,
   }),
   actions: {
-    async otp(payload: Record<string, any>) { 
+    async otp(payload: Record<string, any>) {
       const { post } = useApi();
       this.pending = true;
       this.error = null;
       try {
         const response = await post('/user/verification', payload);
         
-        this.data = response; // Қажет болса, response өңдеу логикасын қосыңыз
+        this.otpData = response;
+        this.phone = payload.phone;
+        if(payload.name){
+          this.name = payload.name;
+        }
       } catch (error: any) {
         this.error = error.message;
         console.error('Failed to create data:', error);
@@ -23,14 +33,32 @@ export const useAuthStore = defineStore('auth', {
         this.pending = false;
       }
     },
-    async register(payload: Record<string, any>) { 
+    async login(payload: Record<string, any>) {
       const { post } = useApi();
       this.pending = true;
       this.error = null;
+   
+      const formData = new FormData();
+
+      // if(this.phone) {
+      //   formData.append('phone', this.phone)
+      //   formData.append('code', payload.code)
+      // } 
+
+      // const data = [ {
+      //   phone : this.phone,
+      //   code : payload.code,
+      // }];
+      
       try {
-        const response = await post('/user/verification', payload);
+        const response = await post('/user/login',  {
+          phone : this.phone,
+          code : payload.code,
+        });
         
-        this.data = response; // Қажет болса, response өңдеу логикасын қосыңыз
+        this.loginData = response;
+        setToken(this.loginData.data.token, this.loginData.data.user)
+        
       } catch (error: any) {
         this.error = error.message;
         console.error('Failed to create data:', error);

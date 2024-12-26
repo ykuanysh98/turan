@@ -4,7 +4,7 @@
       <AtomTitle :title="title" :subtitle="subtitle" size="lg" main />
 
       <MoleculeButtonGroup class="gap-3">
-        <BaseButton size="xl" variant="secondary">Смотреть каталог</BaseButton>
+        <BaseButton size="xl" variant="secondary" @click="$router.push('/catalog')">Смотреть каталог</BaseButton>
         <BaseButton size="xl">Собрать мебель</BaseButton>
       </MoleculeButtonGroup>
     </div>
@@ -17,7 +17,6 @@
     <AtomSlider v-if="variant === 'secondary'" class="w-[640px]" :items="[1, 2, 3, 4, 5, 6, 7, 8]">
     </AtomSlider>
   </div>
-
 </template>
 
 <script setup lang="ts">

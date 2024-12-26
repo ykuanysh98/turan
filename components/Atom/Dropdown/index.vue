@@ -2,7 +2,7 @@
   <div :class="computedClass">
     <slot name="trigger" />
 
-    <v-menu activator="parent" :open-on-focus="false" :close-on-content-click="false">
+    <v-menu activator="parent" :open-on-focus="false" :close-on-content-click="closeClick">
       <div class="dropdown__list">
         <slot />
       </div>
@@ -16,6 +16,10 @@
 import { computed, defineProps } from 'vue';
 
 const props = defineProps({
+  closeClick: {
+    type: Boolean,
+    default: false,
+  },
   block: {
     type: Boolean,
     default: false,

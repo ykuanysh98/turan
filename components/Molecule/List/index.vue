@@ -1,25 +1,25 @@
 <template>
   <div class="atom-list">
-    <div v-if="items.length" class="atom-list__item" v-for="item in items" :key="item.id">
+    <div v-if="items.length" class="atom-list__item" v-for="item in items" :key="item.id" @click="selectItem(item)">
 
       <div v-if="checkbox">
-        <AtomCheckbox v-model="selected" :id="item.id" :value="item.id" :label="item.name" />
+        <AtomCheckbox v-model="selected" :id="item.id" :value="item.id" :label="item.title" />
       </div>
 
       <div v-else-if="radio">
-        <AtomRadiobox v-model="selected" :id="item.id" :value="item.id" :label="item.name" />
+        <AtomRadiobox v-model="selected" :id="item.id" :value="item.id" :label="item.title" />
       </div>
 
       <div v-else class="flex-items gap-3">
         <slot name="prepend"></slot>
 
         <AtomText v-if="!checkbox && !radio" variant="different" size="xs" block>
-          {{ item }}
+          {{ item.title }}
         </AtomText>
       </div>
 
-      <AtomText variant="different" size="sm">
-        12
+      <AtomText v-if="item.count" variant="different" size="sm">
+        {{ item.count }}
       </AtomText>
     </div>
 
@@ -37,6 +37,7 @@ type TreeNode = {
   title: string;
   link: string;
   name: string;
+  count: string;
 };
 
 // Props типі
@@ -50,6 +51,10 @@ const props = defineProps<{
     type: Boolean,
     default: false
   },
+  valueKey: {
+    type: String,
+    default: 'id',
+  },
 }>();
 
 const emit = defineEmits(['update:modelValue']);
@@ -59,6 +64,14 @@ const selected = ref<string[]>([]);
 watch(selected, (newValue) => {
   emit('update:modelValue', newValue);
 })
+
+const selectItem = function (item: any) {
+  if (props.checkbox || props.radio) {
+    return
+  }
+  const key: any = props.valueKey
+  selected.value = item[key];
+}
 </script>
 
 <style lang="scss" scoped>
