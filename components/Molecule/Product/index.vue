@@ -4,14 +4,14 @@
       <v-img src="https://placehold.co/200x600" alt="Өнім атауы" height="200px" class="product-image" cover></v-img>
     </template>
 
-    <AtomTitle title="Өнім атауы" size="sm" />
+    <AtomTitle v-if="item?.title" :title="item?.title" size="sm" block />
 
-    <AtomText class="mt-1" label="300 000 ₸" variant="link" size="lg">
-      265 000 ₸
+    <AtomText v-if="item?.price" class="mt-1" label="300 000 ₸" variant="link" size="lg">
+      {{ item.price }}
     </AtomText>
 
-    <AtomText class="mt-4">
-      Небольшое описание про товар или категория
+    <AtomText v-if="item?.text" class="mt-4">
+      {{ item.text }}
     </AtomText>
 
     <div v-if="$slots.default" class="product__action">
@@ -22,12 +22,24 @@
 </template>
 
 <script lang="ts" setup>
+interface Item {
+  id: number,
+  title: string,
+  price: string,
+  text: string,
+}
+
 import { defineProps, computed } from 'vue'
+import type { PropType } from 'vue';
 
 const props = defineProps({
   text: {
     type: String,
     default: '',
+  },
+  item: {
+    type: [Array, Object] as PropType<Item>,
+    default: () => { },
   },
   link: {
     type: String,
@@ -50,6 +62,9 @@ const computedClass = computed(() => {
 
 <style lang="scss" scoped>
 .product {
+  width: 100%;
+  text-align: left;
+
   &__action {
     margin-top: 24px;
     display: flex;

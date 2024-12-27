@@ -12,10 +12,7 @@ export default defineNuxtConfig({
       meta: [{ name: 'description', content: 'Nuxt 3 жобасы үшін мысал конфигурация' }],
     },
   },
-  modules: [
-    '@nuxtjs/tailwindcss', 
-    '@nuxtjs/google-fonts',
-  ],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', 'vue3-carousel-nuxt'],
   css: [
     '@/assets/styles/main.css',
   ],

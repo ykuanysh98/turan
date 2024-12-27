@@ -1,16 +1,49 @@
 <template>
-  <v-sheet class="slider mx-auto bg-transparent" width="100%">
-    <v-slide-group show-arrows>
-      <v-slide-group-item v-for="item in items" :key="item">
-        <MoleculeProduct class="ma-2 w-[240px]">
-        </MoleculeProduct>
-      </v-slide-group-item>
-    </v-slide-group>
-  </v-sheet>
+  <div class="carousel">
+
+    <Carousel v-bind="carouselConfig">
+      <Slide v-for="slide in items" :key="slide">
+        <MoleculeProduct :item="slide" />
+      </Slide>
+
+      <template #addons>
+        <CarouselNavigation>
+          <template #prev>
+            <span>
+              <v-icon icon="mdi-chevron-left" size="25"></v-icon>
+            </span>
+          </template>
+          <template #next>
+            <span>
+              <v-icon icon="mdi-chevron-right" size="25"></v-icon>
+            </span>
+          </template>
+        </CarouselNavigation>
+      </template>
+    </Carousel>
+    <div class="carousel__curtain">
+
+    </div>
+  </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
+
+import 'vue3-carousel/carousel.css'
+import { Carousel, Slide, Navigation as CarouselNavigation } from 'vue3-carousel'
+
 import { defineProps } from 'vue'
+
+const carouselConfig = {
+  itemsToShow: 1.5,
+  wrapAround: true,
+  snapAlign: 'start',
+  gap: 32,
+  breakpoints: {
+    768: { itemsToShow: 2 },
+    1024: { itemsToShow: 2.5 },
+  }
+}
 
 const props = defineProps({
   items: {
@@ -20,11 +53,46 @@ const props = defineProps({
 })
 </script>
 
-<style lang="scss" scoped>
-.slider {
-  @media (max-width: 768px) {
-    width: 100%;
+<style scoped>
+.carousel {
+  border: 1px solid red;
+
+  &__curtain {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    background-color: aqua;
+    background: linear-gradient(90deg, rgba(250, 250, 250, 0) 0%, #FAFAFA 100%);
   }
 
+  &:deep(.carousel__prev) {
+    left: -25px;
+    z-index: 1;
+  }
+
+  &:deep(.carousel__next) {
+    right: -25px;
+    z-index: 1;
+  }
+
+  span {
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: #fff;
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.carousel-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 </style>

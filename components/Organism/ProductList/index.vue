@@ -3,12 +3,11 @@
     <AtomTitle :title="title" :subtitle="subtitle" />
 
     <OrganismFilter />
-
-    <v-data-iterator :items="games" :items-per-page="6">
+    <v-data-iterator :items="productList" :items-per-page="6">
       <template v-slot:default="{ items }">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-[64px]  gap-x-[92px]">
           <NuxtLink v-for="(product, index) in items" :key="index" :to="`/product/${index}`" class="nav-link">
-            <MoleculeProduct />
+            <MoleculeProduct :item="product.raw" />
           </NuxtLink>
         </div>
       </template>
@@ -32,14 +31,11 @@ interface Filter {
   categories: any,
 }
 
-import { reactive, onMounted, defineProps } from 'vue'
+import { reactive, computed, onMounted, defineProps } from 'vue'
 import { useProductsStore } from '~/stores/products';
 const products = useProductsStore();
 
 const props = defineProps({
-  games: {
-    type: Array,
-  },
   title: {
     type: String,
     default: ''
@@ -48,6 +44,21 @@ const props = defineProps({
     type: String,
     default: ''
   },
+});
+
+const productList = computed(() => {
+  let list = [];
+  for (let i = 1; i < 12; i++) {
+    list.push(
+      {
+        id: i,
+        title: 'Өнім атауы',
+        price: '20 000 т',
+        text: 'Небольшое описание про товар или категория',
+      }
+    )
+  }
+  return list
 });
 
 const filter = reactive<Filter>({

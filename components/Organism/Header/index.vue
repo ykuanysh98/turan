@@ -12,14 +12,14 @@
         <NuxtLink to="/" class="nav-link">Оставить заявку</NuxtLink>
       </div>
 
-      <MoleculeSearch v-model="query" class="w-full max-w-[400px] mobile-not" />
+      <MoleculeSearch v-model="query" class="w-full max-w-[400px]" />
 
-      <div class="flex-between gap-4 mobile-not">
+      <div class="flex-between gap-4">
         <v-icon @click="$router.push('/basket')">mdi-cart-outline</v-icon>
-        <v-avatar v-if="isAuth" @click="$router.push('/profile')">
+        <v-avatar class=" mobile-not" v-if="isAuth" @click="$router.push('/profile')">
           <v-icon icon="mdi-account-circle" size="30"></v-icon>
         </v-avatar>
-        <BaseButton v-else @click="$router.push('/auth')">Войти</BaseButton>
+        <BaseButton class="mobile-not" v-else @click="$router.push('/auth')">Войти</BaseButton>
       </div>
       <BurgerMenu class="mobile-only" />
     </v-container>

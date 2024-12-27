@@ -2,10 +2,11 @@
   <div class="search-input">
     <AtomDropdown ref="menu" block>
       <template #trigger>
-        <BaseInput v-model="inputValue" @input="onInputChange" :placeholder="placeholder" prepend-icon="mdi-magnify"
-          @click:append="clearInput" size="xs">
+        <BaseInput class="mobile-not" v-model="inputValue" @input="onInputChange" :placeholder="placeholder"
+          prepend-icon="mdi-magnify" @click:append="clearInput" size="xs">
 
         </BaseInput>
+        <v-icon class="mobile" icon="mdi-magnify"></v-icon>
       </template>
 
       <MoleculeList :items="itemsSearch">

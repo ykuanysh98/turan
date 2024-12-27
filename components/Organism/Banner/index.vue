@@ -14,7 +14,7 @@
       </v-carousel-item>
     </v-carousel>
 
-    <AtomSlider v-if="variant === 'secondary'" class="w-[640px]" :items="[1, 2, 3, 4, 5, 6, 7, 8]">
+    <AtomSlider v-if="variant === 'secondary'" class="w-full md:w-[640px]" :items="bannerList">
     </AtomSlider>
   </div>
 </template>
@@ -51,6 +51,29 @@ const computedClass = computed(() => {
   let classList = ['banner']
   classList.push(`banner--variant--${props.variant}`)
   return classList
+});
+
+const bannerList = computed(() => {
+  let list = [];
+  list.push(
+    {
+      id: 1,
+      title: 'Өнім атауы'
+    },
+    {
+      id: 2,
+      title: 'Өнім атауы'
+    },
+    {
+      id: 3,
+      title: 'Өнім атауы'
+    },
+    {
+      id: 4,
+      title: 'Өнім атауы'
+    }
+  )
+  return list
 });
 </script>
 
