@@ -12,7 +12,8 @@
         <NuxtLink to="/" class="nav-link">Оставить заявку</NuxtLink>
       </div>
 
-      <MoleculeSearch v-model="query" class="w-full max-w-[400px]" />
+      <MoleculeSearch v-model="query" class="mobile-not w-full max-w-[400px]" />
+      <MoleculeSearchMobile v-model="query" class="mobile-only" />
 
       <div class="flex-between gap-4">
         <v-icon @click="$router.push('/basket')">mdi-cart-outline</v-icon>

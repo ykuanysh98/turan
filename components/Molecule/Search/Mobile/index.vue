@@ -1,19 +1,24 @@
 <template>
-  <div class="search-input">
-    <AtomDropdown ref="menu" block>
+  <div>
+    <AtomModal variant="top">
       <template #trigger>
-        <BaseInput v-model="inputValue" @input="onInputChange" :placeholder="placeholder" prepend-icon="mdi-magnify"
-          @click:append="clearInput" size="xs">
-
-        </BaseInput>
+        <v-icon class="mobile" icon="mdi-magnify"></v-icon>
       </template>
+      <v-container>
+        <div class="search-top">
+          <BaseInput v-model="inputValue" @input="onInputChange" prepend-icon="mdi-magnify" @click:append="clearInput"
+            size="xs" variant="shadow">
+          </BaseInput>
+        </div>
 
-      <MoleculeList :items="itemsSearch">
-        <template #prepend>
-          <v-icon size="16" icon="mdi-magnify"></v-icon>
-        </template>
-      </MoleculeList>
-    </AtomDropdown>
+        <MoleculeList :items="itemsSearch">
+          <template #prepend>
+            <v-icon size="16" icon="mdi-magnify"></v-icon>
+          </template>
+        </MoleculeList>
+      </v-container>
+
+    </AtomModal>
   </div>
 </template>
 
@@ -90,11 +95,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.search-input {
-  min-width: 200px;
-
-  &:deep(.v-overlay__content) {
-    top: 73px;
-  }
+.search-top {
+  width: calc(100% - 40px);
+  height: 72px;
+  padding: 14px 0;
 }
 </style>
