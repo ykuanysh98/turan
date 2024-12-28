@@ -156,7 +156,6 @@ const updateValue = (value: string) => {
         border-radius: 8px;
         border: 1px solid #D5D7DA;
         box-shadow: 0px 0px 0px 4px #F4EBFF;
-        box-shadow: 0px 1px 2px 0px #0A0D120D;
       }
     }
   }

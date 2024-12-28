@@ -1,7 +1,6 @@
 <template>
   <div class="sticky top-0 z-50 bg-white shadow-lg h-[80px]">
     <v-container class="flex-between gap-10 h-full">
-
       <NuxtLink to="/">
         <img class="max-w-md" src="/images/Logo.svg" alt="logo" />
       </NuxtLink>
@@ -13,25 +12,34 @@
       </div>
 
       <MoleculeSearch v-model="query" class="mobile-not w-full max-w-[400px]" />
-      <MoleculeSearchMobile v-model="query" class="mobile-only" />
 
       <div class="flex-between gap-4">
+        <MoleculeSearchMobile v-model="query" class="mobile-only" />
         <v-icon @click="$router.push('/basket')">mdi-cart-outline</v-icon>
-        <v-avatar class=" mobile-not" v-if="isAuth" @click="$router.push('/profile')">
+        <v-avatar
+          class="mobile-not"
+          v-if="isAuth"
+          @click="$router.push('/profile')"
+        >
           <v-icon icon="mdi-account-circle" size="30"></v-icon>
         </v-avatar>
-        <BaseButton class="mobile-not" v-else @click="$router.push('/auth')">Войти</BaseButton>
+        <BaseButton
+          class="mobile-not"
+          v-else
+          @click="$router.push('/auth/login')"
+          >Войти</BaseButton
+        >
+        <OrganismBurgerMenu class="mobile-only" />
       </div>
-      <BurgerMenu class="mobile-only" />
     </v-container>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useAuth } from '~/composables/useAuth'
+import { useAuth } from "~/composables/useAuth";
 const { isAuth, getAuth } = useAuth();
 
-import { ref, onMounted } from 'vue'
+import { ref, onMounted } from "vue";
 
 type TreeNode = {
   id: number;
@@ -40,60 +48,60 @@ type TreeNode = {
   children?: TreeNode[];
 };
 
-const query = ref('')
+const query = ref("");
 
 const items: TreeNode[] = [
   {
     id: 1,
-    title: 'Категория 1',
-    path: '/qwwewe',
-    children: []
+    title: "Категория 1",
+    path: "/qwwewe",
+    children: [],
   },
   {
     id: 2,
-    title: 'Категория 2',
-    path: '/qwwewe2',
+    title: "Категория 2",
+    path: "/qwwewe2",
     children: [
       {
         id: 21,
-        title: 'Категория 21',
-        children: []
+        title: "Категория 21",
+        children: [],
       },
       {
         id: 22,
-        title: 'Категория 22',
-        children: []
+        title: "Категория 22",
+        children: [],
       },
-    ]
+    ],
   },
   {
     id: 3,
-    title: 'Категория 3',
+    title: "Категория 3",
     children: [
       {
         id: 31,
-        title: 'Категория 31',
+        title: "Категория 31",
         children: [
           {
             id: 311,
-            title: 'Категория 331',
-            children: []
+            title: "Категория 331",
+            children: [],
           },
           {
             id: 312,
-            title: 'Категория 312',
-            children: []
+            title: "Категория 312",
+            children: [],
           },
           {
             id: 312,
-            title: 'Категория 312',
-            children: []
+            title: "Категория 312",
+            children: [],
           },
-        ]
+        ],
       },
-    ]
+    ],
   },
-]
+];
 
 onMounted(async () => {
   await getAuth();

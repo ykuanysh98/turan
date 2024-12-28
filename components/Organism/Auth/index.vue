@@ -1,9 +1,12 @@
 <template>
   <div class="organism-auth">
-    <div class="organism-auth__form" :class="{ 'organism-auth__form--all': step === 3 }">
+    <div
+      class="organism-auth__form"
+      :class="{ 'organism-auth__form--all': step === 3 }"
+    >
       <AtomLogo class="w-full" />
 
-      <MoleculeAuth @change="step = $event" />
+      <MoleculeAuth @change="step = $event" :steper="steper" />
 
       <AtomCopyright />
     </div>
@@ -12,10 +15,16 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, defineProps } from "vue";
 
 const step = ref<any>(1);
 
+const props = defineProps({
+  steper: {
+    type: String,
+    default: 1,
+  },
+});
 </script>
 
 <style lang="scss" scoped>
