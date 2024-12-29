@@ -6,10 +6,16 @@
       <span class="base-input__mask">+7</span>
 
       <div class="base-input__mask--input flex-start">
-        <input v-mask="maska" :type="type" :value="modelValue" :id="id" @input="updateValue($event.target.value)" />
+        <input
+          v-mask="maska"
+          :type="type"
+          :value="modelValue"
+          :id="id"
+          @input="updateValue($event.target.value)"
+        />
 
         <v-icon v-if="error" color="red">
-          {{ 'mdi-alert-circle-outline' }}
+          {{ "mdi-alert-circle-outline" }}
         </v-icon>
       </div>
     </div>
@@ -19,67 +25,70 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, defineEmits } from 'vue';
+import { computed, defineProps, defineEmits } from "vue";
 
+import { nanoid } from "nanoid";
 const props = defineProps({
   id: {
     type: String,
-    default: '',
+    default: "",
   },
   modelValue: {
     type: [String, Number],
-    default: '',
+    default: "",
   },
   type: {
     type: String,
-    default: 'text',
+    default: "text",
   },
   label: {
     type: String,
-    default: '',
+    default: "",
   },
   variant: {
     type: String,
-    default: 'primary',
+    default: "primary",
   },
   size: {
     type: String,
-    default: 'md',
+    default: "md",
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   prependIcon: {
     type: String,
-    default: '',
+    default: "",
   },
   maska: {
     type: String,
-    default: '',
+    default: "",
   },
   error: {
     type: String,
-    default: '',
+    default: "",
   },
 });
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(["update:modelValue"]);
+
+const id = computed(() => props.id || nanoid());
 
 const wrapClass = computed(() => {
-  let classList = ['base-input']
+  let classList = ["base-input"];
   if (props.variant) {
-    classList.push(`base-input__variant--${props.variant}`)
+    classList.push(`base-input__variant--${props.variant}`);
   }
   if (props.size) {
-    classList.push(`base-input__size--${props.size}`)
+    classList.push(`base-input__size--${props.size}`);
   }
 
-  return classList
+  return classList;
 });
 
 const updateValue = (value: string) => {
-  emit('update:modelValue', value);
+  emit("update:modelValue", value);
 };
 </script>
 
@@ -93,7 +102,7 @@ const updateValue = (value: string) => {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
-    color: #181D27;
+    color: #181d27;
 
     &::placeholder {
       font-size: 16px;
@@ -118,7 +127,7 @@ const updateValue = (value: string) => {
   &__mask {
     padding: 10px 12px 10px 14px;
     border-radius: 8px 0 0 8px;
-    border: 1px solid #D5D7DA;
+    border: 1px solid #d5d7da;
     border-right: none;
 
     font-size: 16px;
@@ -131,7 +140,7 @@ const updateValue = (value: string) => {
       height: 100%;
       padding: 10px 14px;
       border-radius: 0 8px 8px 0;
-      border: 1px solid #D5D7DA;
+      border: 1px solid #d5d7da;
     }
   }
 
@@ -143,7 +152,7 @@ const updateValue = (value: string) => {
     &--primary {
       .base-input__inner {
         border-radius: 8px;
-        border: 1px solid #D5D7DA;
+        border: 1px solid #d5d7da;
       }
     }
 

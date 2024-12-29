@@ -18,7 +18,7 @@
         {{ item.text }}
       </AtomText>
 
-      <div class="product__actions">
+      <div v-if="$slots.default" class="product__actions">
         <slot />
       </div>
     </div>

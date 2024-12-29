@@ -2,17 +2,20 @@
   <div>
     <AtomModal variant="top">
       <template #trigger>
-        <v-icon class="mobile" icon="mdi-magnify"></v-icon>
+        <label for="search">
+          <v-icon class="mobile" icon="mdi-magnify"></v-icon>
+        </label>
       </template>
       <v-container>
         <div class="search-top">
           <BaseInput
+            id="search"
             v-model="inputValue"
             @input="onInputChange"
-            prepend-icon="mdi-magnify"
+            prepend-icon="search"
             @click:append="clearInput"
             size="xs"
-            variant="shadow"
+            variant="shadow-auto"
           >
           </BaseInput>
         </div>

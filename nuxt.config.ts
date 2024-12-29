@@ -1,23 +1,30 @@
-import { defineNuxtConfig } from 'nuxt/config';
+import { defineNuxtConfig } from "nuxt/config";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false, // Server-Side Rendering режимін қосу
-  compatibilityDate: '2024-04-03',
+  compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
   components: true,
   app: {
     head: {
-      title: 'Менің Nuxt 3 жобам',
-      meta: [{ name: 'description', content: 'Nuxt 3 жобасы үшін мысал конфигурация' }],
+      title: "Менің Nuxt 3 жобам",
+      meta: [
+        {
+          name: "description",
+          content: "Nuxt 3 жобасы үшін мысал конфигурация",
+        },
+      ],
     },
   },
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', 'vue3-carousel-nuxt'],
-  css: [
-    '@/assets/styles/main.css',
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@nuxtjs/google-fonts",
+    "vue3-carousel-nuxt",
   ],
+  css: ["@/assets/styles/main.css"],
   build: {
-    transpile: ['vuetify'],
+    transpile: ["vuetify"],
   },
   runtimeConfig: {
     public: {
@@ -29,9 +36,9 @@ export default defineNuxtConfig({
       // Roboto: true,
       // 'Open+Sans': [300, 400, 600],
       // 'Rubik+Wet+Paint': [300, 400, 600, 900],
-      'Inter': [300, 400, 600, 900],
+      Inter: [300, 400, 600, 900],
     },
-    display: 'swap',
+    display: "swap",
   },
   vite: {
     // server: {
@@ -45,6 +52,6 @@ export default defineNuxtConfig({
     // },
   },
   typescript: {
-    strict: true
+    strict: true,
   },
-})
+});

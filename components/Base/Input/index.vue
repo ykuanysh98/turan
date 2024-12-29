@@ -2,13 +2,22 @@
   <div :class="wrapClass">
     <label :for="id" class="base-input__label">{{ label }}</label>
 
-    <div class="base-input__inner flex-start ">
-      <v-icon v-if="prependIcon" color="#717680">{{ prependIcon }}</v-icon>
+    <div class="base-input__inner flex-start">
+      <AtomIcon v-if="prependIcon" :icon="prependIcon" />
+      <input
+        :type="type"
+        :value="modelValue"
+        :id="id"
+        :placeholder="placeholder"
+        @input="updateValue($event.target.value)"
+      />
 
-      <input :type="type" :value="modelValue" :id="id" :placeholder="placeholder"
-        @input="updateValue($event.target.value)" />
-
-      <v-icon v-if="modelValue.length > 0" color="#717680" @click="updateValue('')">{{ 'mdi-close' }}</v-icon>
+      <v-icon
+        v-if="modelValue.length > 0"
+        color="#717680"
+        @click="updateValue('')"
+        >{{ "mdi-close" }}</v-icon
+      >
     </div>
 
     <span v-if="error" class="base-input__error">{{ error }}</span>
@@ -16,68 +25,85 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, defineEmits } from 'vue';
-
+import { computed, onMounted, defineProps, defineEmits } from "vue";
+import { nanoid } from "nanoid";
 const props = defineProps({
   id: {
     type: String,
-    default: '',
+    default: "",
   },
   modelValue: {
     type: [String, Number],
-    default: '',
+    default: "",
   },
   type: {
     type: String,
-    default: 'text',
+    default: "text",
   },
   label: {
     type: String,
-    default: '',
+    default: "",
   },
   variant: {
     type: String,
-    default: 'primary',
+    default: "primary",
   },
   size: {
     type: String,
-    default: 'md',
+    default: "md",
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   prependIcon: {
     type: String,
-    default: '',
+    default: "",
   },
   maska: {
     type: String,
-    default: '',
+    default: "",
   },
   error: {
     type: String,
-    default: '',
+    default: "",
   },
 });
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(["update:modelValue"]);
+
+const id = computed(() => props.id || nanoid());
 
 const wrapClass = computed(() => {
-  let classList = ['base-input']
+  let classList = ["base-input"];
   if (props.variant) {
-    classList.push(`base-input__variant--${props.variant}`)
+    classList.push(`base-input__variant--${props.variant}`);
   }
   if (props.size) {
-    classList.push(`base-input__size--${props.size}`)
+    classList.push(`base-input__size--${props.size}`);
   }
 
-  return classList
+  return classList;
 });
 
 const updateValue = (value: string) => {
-  emit('update:modelValue', value);
+  emit("update:modelValue", value);
 };
+
+onMounted(() => {
+  const input: any = document.querySelector("input");
+  const base: any = document.querySelector(".base-input__inner");
+  console.log("focused");
+
+  input.addEventListener("focus", () => {
+    base.classList.add("focused");
+    console.log(1);
+  });
+  input.addEventListener("blur", () => {
+    base.classList.remove("focused");
+    console.log(2);
+  });
+});
 </script>
 
 <style scoped lang="scss">
@@ -90,7 +116,7 @@ const updateValue = (value: string) => {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
-    color: #181D27;
+    color: #181d27;
 
     &::placeholder {
       font-size: 16px;
@@ -112,25 +138,6 @@ const updateValue = (value: string) => {
     grid-gap: 8px;
   }
 
-  &__mask {
-    padding: 10px 12px 10px 14px;
-    border-radius: 8px 0 0 8px;
-    border: 1px solid #D5D7DA;
-    border-right: none;
-
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-    color: #717680;
-
-    &--input {
-      height: 100%;
-      padding: 10px 14px;
-      border-radius: 0 8px 8px 0;
-      border: 1px solid #D5D7DA;
-    }
-  }
-
   &__error {
     color: red;
   }
@@ -139,23 +146,34 @@ const updateValue = (value: string) => {
     &--primary {
       .base-input__inner {
         border-radius: 8px;
-        border: 1px solid #D5D7DA;
+        border: 1px solid #d5d7da;
+        box-shadow: 0px 1px 2px 0px #0a0d120d;
       }
     }
 
     &--secondary {
       .base-input__inner {
         border-radius: 8px;
-        border: 1px solid #D5D7DA;
-        background-color: #fff
+        border: 1px solid #d5d7da;
+        background-color: #fff;
       }
     }
 
     &--shadow {
       .base-input__inner {
         border-radius: 8px;
-        border: 1px solid #D5D7DA;
-        box-shadow: 0px 0px 0px 4px #F4EBFF;
+        border: 1px solid #d5d7da;
+        &.focused {
+          border: 1px solid #d6bbfb;
+          box-shadow: 0px 0px 0px 4px #f4ebff;
+        }
+      }
+    }
+    &--shadow-auto {
+      .base-input__inner {
+        border-radius: 8px;
+        border: 1px solid #d6bbfb;
+        box-shadow: 0px 0px 0px 4px #f4ebff;
       }
     }
   }
@@ -171,7 +189,7 @@ const updateValue = (value: string) => {
     &--xs {
       .base-input__inner {
         height: 44px;
-        padding: 10px 16px;
+        padding: 10px 14px;
       }
     }
   }

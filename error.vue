@@ -40,6 +40,7 @@
       img="warning"
       title="Технические сбои"
       text="Временные проблемы на сайте. Пожалуйста попробуйте позже"
+      :label="error.message"
       class="justify-center"
     >
       <BaseButton @click="refreshPage" block> Повторить </BaseButton>

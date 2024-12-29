@@ -15,20 +15,25 @@
 
       <div class="flex-between gap-4">
         <MoleculeSearchMobile v-model="query" class="mobile-only" />
-        <v-icon @click="$router.push('/basket')">mdi-cart-outline</v-icon>
-        <v-avatar
-          class="mobile-not"
+        <AtomIcon
+          icon="basket"
+          :variant="route.path === '/basket' ? 'primary' : 'secondary'"
+          @click="$router.push('/basket')"
+        />
+        <AtomIcon
           v-if="getAuth()"
+          class="mobile-not"
+          icon="user"
+          :variant="route.path === '/profile' ? 'primary' : 'secondary'"
           @click="$router.push('/profile')"
-        >
-          <v-icon icon="mdi-account-circle" size="30"></v-icon>
-        </v-avatar>
+        />
         <BaseButton
           class="mobile-not"
           v-else
           @click="$router.push('/auth/login')"
-          >Войти</BaseButton
         >
+          Войти
+        </BaseButton>
         <OrganismBurgerMenu class="mobile-only" />
       </div>
     </v-container>
@@ -38,6 +43,9 @@
 <script setup lang="ts">
 import { useAuth } from "~/composables/useAuth";
 const { getAuth } = useAuth();
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 import { ref } from "vue";
 
