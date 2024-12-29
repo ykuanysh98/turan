@@ -21,8 +21,11 @@ const props = defineProps({
 });
 
 const path = computed(() => {
-  if (props.variant === "primary") {
-    return new URL(`./assets/${props.icon}-primary.svg`, import.meta.url).href;
+  if (props.variant !== "secondary") {
+    return new URL(
+      `./assets/${props.icon}-${props.variant}.svg`,
+      import.meta.url
+    ).href;
   }
   return new URL(`./assets/${props.icon}.svg`, import.meta.url).href;
 });
@@ -46,6 +49,13 @@ const computedClass = computed(() => {
     &--primary {
     }
     &--secondary {
+    }
+  }
+  &__size {
+    &--md {
+    }
+    &--xs {
+      width: 16px;
     }
   }
 }

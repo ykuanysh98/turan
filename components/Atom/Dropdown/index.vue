@@ -62,8 +62,10 @@ const computedClass = computed(() => {
   &__list {
     // width: 100%;
     margin-top: 8px;
+    border-radius: 8px;
     box-shadow: 0px 4px 6px -2px #0a0d1208;
     box-shadow: 0px 12px 16px -4px #0a0d1214;
+    background: #ffffff;
   }
 
   &__variant {

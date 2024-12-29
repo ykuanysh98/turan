@@ -7,22 +7,21 @@
   </p>
 </template>
 
-
 <script lang="ts" setup>
-import { computed, defineProps } from 'vue';
+import { computed, defineProps } from "vue";
 
 const props = defineProps({
   variant: {
     type: String,
-    default: 'primary',
+    default: "primary",
   },
   size: {
     type: String,
-    default: 'md',
+    default: "md",
   },
   label: {
     type: String,
-    default: '',
+    default: "",
   },
   block: {
     type: Boolean,
@@ -31,20 +30,19 @@ const props = defineProps({
 });
 
 const computedClass = computed(() => {
-  let list = ['atom-text']
+  let list = ["atom-text"];
   if (props.variant) {
-    list.push(`atom-text__variant--${props.variant}`)
+    list.push(`atom-text__variant--${props.variant}`);
   }
   if (props.size) {
-    list.push(`atom-text__size--${props.size}`)
+    list.push(`atom-text__size--${props.size}`);
   }
   if (props.block) {
-    list.push(`atom-text__block`)
+    list.push(`atom-text__block`);
   }
-  return list
+  return list;
 });
 </script>
-
 
 <style lang="scss" scoped>
 .atom-text {
@@ -56,11 +54,11 @@ const computedClass = computed(() => {
     }
 
     &--secondary {
-      color: #181D27;
+      color: #181d27;
     }
 
     &--link {
-      color: #6941C6;
+      color: #6941c6;
 
       label {
         font-size: 18px;
@@ -71,7 +69,6 @@ const computedClass = computed(() => {
       }
     }
 
-
     &--different {
       color: #414651;
 
@@ -81,9 +78,7 @@ const computedClass = computed(() => {
         line-height: 20px;
         color: #535862;
       }
-
     }
-
   }
 
   &__size {

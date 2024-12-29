@@ -1,5 +1,5 @@
 <template>
-  <div class="sticky top-0 z-50 bg-white shadow-lg h-[80px]">
+  <div class="sticky top-0 z-50 bg-white h-[72px] md:h-[80px]">
     <v-container class="flex-between gap-10 h-full">
       <NuxtLink to="/">
         <img class="max-w-md" src="/images/Logo.svg" alt="logo" />

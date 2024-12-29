@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-icon icon="mdi-menu" @click="toggleDrawer"></v-icon>
+    <AtomIcon icon="menu" @click="toggleDrawer"></AtomIcon>
     <v-navigation-drawer
       class="burger__body"
       :model-value="drawer"

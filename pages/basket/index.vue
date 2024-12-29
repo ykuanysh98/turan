@@ -31,7 +31,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-const emptyShow = ref(true);
+const emptyShow = ref(false);
 </script>
 
 <style lang="scss" scoped>

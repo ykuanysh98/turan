@@ -16,7 +16,7 @@
 
       <MoleculeList :items="itemsSearch">
         <template #prepend>
-          <v-icon size="16" icon="mdi-magnify"></v-icon>
+          <AtomIcon icon="search" variant="dark" size="xs" />
         </template>
       </MoleculeList>
     </AtomDropdown>

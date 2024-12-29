@@ -3,7 +3,7 @@
     <AtomModal variant="top">
       <template #trigger>
         <label for="search">
-          <v-icon class="mobile" icon="mdi-magnify"></v-icon>
+          <AtomIcon icon="search"></AtomIcon>
         </label>
       </template>
       <v-container>
