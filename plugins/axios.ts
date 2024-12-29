@@ -1,14 +1,13 @@
-import axios from 'axios';
-import { defineNuxtPlugin, useRuntimeConfig } from 'nuxt/app'
+import axios from "axios";
+import { defineNuxtPlugin, useRuntimeConfig } from "nuxt/app";
 
-import { useAuth } from '~/composables/useAuth'
-const { getToken } = useAuth()
+import { useAuth } from "~/composables/useAuth";
+const { getToken } = useAuth();
 
 export default defineNuxtPlugin(() => {
   const config: any = useRuntimeConfig();
-  console.log('axios', config.public.apiBase);
-  
-  
+  console.log("axios", config.public.apiBase);
+
   const axiosInstance = axios.create({
     baseURL: config.public.apiBase,
     timeout: 5000,
@@ -26,7 +25,6 @@ export default defineNuxtPlugin(() => {
   axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
-      console.error('Axios error:', error);
       return Promise.reject(error);
     }
   );

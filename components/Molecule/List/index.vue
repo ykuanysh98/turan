@@ -49,6 +49,8 @@
 
 <script lang="ts" setup>
 import { ref, computed, defineProps, watch } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 type TreeNode = {
   id: number;
@@ -99,6 +101,10 @@ const selectItem = function (item: any) {
   if (props.checkbox || props.radio) {
     return;
   }
+  if (item.link) {
+    router.push(item.link);
+    return;
+  }
   const key: any = props.valueKey;
   selected.value = item[key];
 };
@@ -122,7 +128,7 @@ const selectItem = function (item: any) {
     &--secondary {
       .atom-list__item {
         height: auto;
-        padding: 16px 0;
+        padding: 12px 0;
         cursor: pointer;
         p {
           font-size: 16px;

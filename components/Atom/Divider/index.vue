@@ -1,16 +1,28 @@
 <template>
-  <v-divider :class="`border-opacity-${opacity}`"></v-divider>
+  <div
+    class="divider"
+    :style="`background-color:${color}; height: ${height}`"
+  ></div>
 </template>
 
-
 <script lang="ts" setup>
-import { computed, defineProps } from 'vue';
+import { defineProps } from "vue";
 
 const props = defineProps({
-  opacity: {
+  color: {
     type: String,
-    default: '75', // Мысалы: '100', '75', '50', '25', '0'
+    default: "#E9EAEB", // Мысалы: '100', '75', '50', '25', '0'
+  },
+  height: {
+    type: String,
+    default: "1px", // Мысалы: '100', '75', '50', '25', '0'
   },
 });
-
 </script>
+
+<style lang="scss" scoped>
+.divider {
+  width: 100%;
+  border-radius: 5px;
+}
+</style>

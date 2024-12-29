@@ -1,62 +1,66 @@
 <template>
-  <AtomCard :class="computedClass" :text="text" :link="link" discount="35000" size="xs" :variant="variant">
-    <template #top>
-      <v-img src="https://placehold.co/200x600" alt="Өнім атауы" height="200px" class="product-image" cover></v-img>
-    </template>
+  <div :class="computedClass">
+    <AtomImg class="product__top" />
+    <div class="product__body">
+      <AtomTitle v-if="item?.title" :title="item?.title" size="sm" block />
 
-    <AtomTitle v-if="item?.title" :title="item?.title" size="sm" block />
+      <AtomText
+        v-if="item?.price"
+        class="mt-1"
+        label="300 000 ₸"
+        variant="link"
+        size="lg"
+      >
+        {{ item.price }}
+      </AtomText>
 
-    <AtomText v-if="item?.price" class="mt-1" label="300 000 ₸" variant="link" size="lg">
-      {{ item.price }}
-    </AtomText>
+      <AtomText v-if="item?.text" class="mt-4">
+        {{ item.text }}
+      </AtomText>
 
-    <AtomText v-if="item?.text" class="mt-4">
-      {{ item.text }}
-    </AtomText>
-
-    <div v-if="$slots.default" class="product__action">
-      <slot />
+      <div class="product__actions">
+        <slot />
+      </div>
     </div>
-
-  </AtomCard>
+  </div>
 </template>
 
 <script lang="ts" setup>
 interface Item {
-  id: number,
-  title: string,
-  price: string,
-  text: string,
+  id: number;
+  title: string;
+  price: string;
+  text: string;
 }
 
-import { defineProps, computed } from 'vue'
-import type { PropType } from 'vue';
+import { defineProps, computed } from "vue";
+import type { PropType } from "vue";
 
 const props = defineProps({
   text: {
     type: String,
-    default: '',
+    default: "",
   },
   item: {
     type: [Array, Object] as PropType<Item>,
-    default: () => { },
+    default: () => {},
   },
   link: {
     type: String,
-    default: '',
+    default: "",
   },
   variant: {
     type: String,
-    default: '',
+    default: "primary",
   },
-})
+});
 
 const computedClass = computed(() => {
-  let classList = ['product']
+  let classList = ["product"];
   if (props.variant) {
-    classList.push(`product__variant--${props.variant}`)
+    classList.push(`product__variant--${props.variant}`);
   }
-  return classList
+  return classList;
 });
 </script>
 
@@ -64,8 +68,7 @@ const computedClass = computed(() => {
 .product {
   width: 100%;
   text-align: left;
-
-  &__action {
+  &__actions {
     margin-top: 24px;
     display: flex;
     align-items: center;
@@ -73,8 +76,26 @@ const computedClass = computed(() => {
   }
 
   &__variant {
+    &--primary {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      grid-gap: 24px;
+
+      .product__top {
+        width: 100%;
+        height: 296px;
+      }
+    }
     &--col {
-      height: 240px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      grid-gap: 24px;
+      .product__top {
+        width: 240px;
+        height: 240px;
+      }
     }
   }
 }

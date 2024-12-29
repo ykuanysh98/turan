@@ -1,5 +1,7 @@
 <template>
-  <OrganismAuth :steper="2" />
+  <OrganismAuth onboarding>
+    <AtomAuthRegister />
+  </OrganismAuth>
 </template>
 
 <script lang="ts" setup>

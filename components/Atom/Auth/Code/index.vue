@@ -1,38 +1,61 @@
 <template>
   <div class="auth-login">
-
-    <AtomTitle title="Введите пин код"
-      subtitle="Мы отправили вам СМС с кодом из 4 цифр, на номер +7 702 473 29 49 Введите его ниже:" size="xs" />
+    <AtomTitle
+      title="Введите пин код"
+      subtitle="Мы отправили вам СМС с кодом из 4 цифр, на номер +7 702 473 29 49 Введите его ниже:"
+      size="xs"
+    />
 
     <MoleculeFormGroup class="gap-5" size="lg">
-      <BaseOTP v-model="code" label="Пин код"
-        :text="remainingTime != '00' ? `Можно отправить повторно через 00:${remainingTime}` : 'Еще раз'" placeholder="0"
-        :error="errorText">
-        <label class="auth-login__time" v-if="remainingTime === '00'" @click="otpAgain">отправить</label>
+      <BaseOTP
+        v-model="code"
+        label="Пин код"
+        :text="
+          remainingTime != '00'
+            ? `Можно отправить повторно через 00:${remainingTime}`
+            : 'Еще раз'
+        "
+        placeholder="0"
+        :error="errorText"
+      >
+        <label
+          class="auth-login__time"
+          v-if="remainingTime === '00'"
+          @click="otpAgain"
+          >отправить</label
+        >
       </BaseOTP>
 
-      <BaseButton :disabled="code.length < 4" :loading="auth.pending" @click="submit">
-        Готово
-      </BaseButton>
+      <template #bottom>
+        <BaseButton
+          :disabled="code.length < 4"
+          :loading="auth.pending"
+          @click="submit"
+          block
+        >
+          Готово
+        </BaseButton>
+      </template>
     </MoleculeFormGroup>
-
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, onMounted, defineEmits } from 'vue'
-import { useAuthStore } from '~/stores/auth';
-import { useUserStore } from '~/stores/user';
+import { ref, onMounted, defineEmits } from "vue";
+import { useAuthStore } from "~/stores/auth";
+import { useUserStore } from "~/stores/user";
 import { useCountdown } from "~/composables/useCountdown";
+import { useRouter } from "vue-router";
+const router = useRouter();
 const { remainingTime, startTimer } = useCountdown(59);
 
 const auth = useAuthStore();
 const user = useUserStore();
-const code = ref<string>('')
-const errorText = ref<string>('')
+const code = ref<string>("");
+const errorText = ref<string>("");
 const emit = defineEmits<{
-  (event: 'click'): void;
-}>()
+  (event: "click"): void;
+}>();
 
 onMounted(() => {
   startTimer();
@@ -41,8 +64,8 @@ onMounted(() => {
 const otpAgain = function () {
   auth.otp({ phone: `${auth.phone}` });
   startTimer();
-  errorText.value = '';
-}
+  errorText.value = "";
+};
 
 const submit = async function () {
   if (code.value.length < 4) {
@@ -54,15 +77,14 @@ const submit = async function () {
 
   if (auth.loginData?.success) {
     if (auth.name) {
-      user.update({ first_name: auth.name })
+      user.update({ first_name: auth.name });
     }
 
-    emit('click');
+    router.push("/");
   } else if (auth.loginData.message) {
-    errorText.value = auth.loginData.message
+    errorText.value = auth.loginData.message;
   }
-
-}
+};
 </script>
 
 <style lang="scss">

@@ -1,5 +1,7 @@
 <template>
-  <OrganismAuth />
+  <OrganismAuth>
+    <AtomAuthCode />
+  </OrganismAuth>
 </template>
 
 <script lang="ts" setup>

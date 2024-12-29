@@ -20,12 +20,17 @@
       </v-container>
       <AtomDivider />
       <v-container>
-        <MoleculeList class="pt-6" variant="secondary" :items="items" />
+        <MoleculeList class="py-6" variant="secondary" :items="items" />
       </v-container>
       <AtomDivider />
       <template v-slot:append>
         <v-container>
-          <MoleculeButtonGroup class="pt-6">
+          <MoleculeButtonGroup v-if="getAuth()" class="pt-6">
+            <BaseButton block @click="$router.push('/profile')">
+              Профиль
+            </BaseButton>
+          </MoleculeButtonGroup>
+          <MoleculeButtonGroup v-else class="pt-6">
             <BaseButton block @click="$router.push('/auth/login')">
               Войти
             </BaseButton>
@@ -46,13 +51,16 @@
 <script setup>
 // import { VListItemContent } from 'vuetify/components';
 import { ref } from "vue";
+import { useAuth } from "~/composables/useAuth";
+const { getAuth } = useAuth();
 
 const drawer = ref(false);
+
 const items = ref([
-  { title: "Конструктор мебели" },
-  { title: "Каталог" },
-  { title: "Оставить заявку" },
-  { title: "Контакты" },
+  { title: "Конструктор мебели", link: "/catalog" },
+  { title: "Каталог", link: "/catalog" },
+  { title: "Оставить заявку", link: "/catalog" },
+  { title: "Контакты", link: "/catalog" },
 ]);
 
 function toggleDrawer() {
@@ -61,10 +69,6 @@ function toggleDrawer() {
 
 function closeDrawer() {
   drawer.value = false;
-}
-
-function logout() {
-  console.log("Logout clicked");
 }
 </script>
 

@@ -1,55 +1,62 @@
 <template>
   <div class="profile">
-    <div class="profile__wrap">
-      <AtomTitle title="Профиль" size="xs" block />
-      <MoleculeTabs v-model="tab" class="mb-2" />
+    <v-container class="flex-column items-center gap-10">
+      <div class="profile__wrap">
+        <AtomTitle title="Профиль" size="xs" block />
+        <MoleculeTabs v-model="tab" class="mb-2" />
 
-      <MoleculeProfileEdit v-if="tab === 1" />
+        <MoleculeProfileEdit v-if="tab === 1" />
 
-      <MoleculeOrders v-if="tab === 2" />
-    </div>
-
-    <BaseButton variant="secondary" size="xs" @click="logoutProfile">
-      <v-icon color="red" icon="mdi-logout" start> </v-icon>
-      Выйти
-    </BaseButton>
+        <MoleculeOrders v-if="tab === 2" />
+      </div>
+      <BaseButton
+        variant="secondary"
+        size="xs"
+        @click="logoutProfile"
+        :block="isMobile"
+      >
+        <v-icon color="red" icon="mdi-logout" start> </v-icon>
+        Выйти
+      </BaseButton>
+    </v-container>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useAuth } from '~/composables/useAuth'
-const { logout } = useAuth()
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-
-// Router объектісін алу
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useAuth } from "~/composables/useAuth";
+import { useMobile } from "~/composables/useMobile";
+const { logout } = useAuth();
+const { isMobile } = useMobile();
 const router = useRouter();
 
-const definePageMeta = (meta: { layout: string, middleware: string }) => meta
+const definePageMeta = (meta: { layout: string; middleware: string }) => meta;
 definePageMeta({
-  layout: 'default',
-  middleware: 'auth',
-})
+  layout: "default",
+  middleware: "auth",
+});
 
-const tab = ref<any>('null')
+const tab = ref<any>(1);
 
 const logoutProfile = function () {
   logout();
-  router.push('/')
-}
+  router.push("/");
+};
 </script>
 
 <style lang="scss" scoped>
 .profile {
+  width: 640px;
+  margin: 0 auto 0;
   padding: 48px 0 96px 0;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  grid-gap: 40px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 
   &__wrap {
-    width: 640px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     grid-gap: 24px;

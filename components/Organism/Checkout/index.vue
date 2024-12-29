@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-column gap-8 px-[58px]">
+  <div class="checkout-organism">
     <div class="flex-column gap-2">
       <AtomTitle title="Оставьте заявку" />
       <AtomText>
@@ -8,20 +8,60 @@
     </div>
 
     <MoleculeFormGroup size="lg">
-      <BaseInput class="col-span-2 md:col-span-1" label="Имя" variant="secondary" placeholder="Имя" />
-      <BaseInput class="col-span-2 md:col-span-1" label="Фамилия" variant="secondary" placeholder="Фамилия" />
+      <BaseInput
+        class="col-span-2 md:col-span-1"
+        label="Имя"
+        variant="secondary"
+        placeholder="Имя"
+      />
+      <BaseInput
+        class="col-span-2 md:col-span-1"
+        label="Фамилия"
+        variant="secondary"
+        placeholder="Фамилия"
+      />
 
-      <BaseMask class="col-span-2" label="Номер телефона" variant="secondary" maska="+7 (###) ### ## ##" />
+      <BaseMask
+        class="col-span-2"
+        label="Номер телефона"
+        variant="secondary"
+        maska="+7 (###) ### ## ##"
+      />
 
-      <BaseInput class="col-span-2" label="Город" variant="secondary" placeholder="Город" />
+      <BaseInput
+        class="col-span-2"
+        label="Город"
+        variant="secondary"
+        placeholder="Город"
+      />
 
-      <BaseInput class="col-span-2" label="Адрес" variant="secondary" placeholder="Адрес" />
+      <BaseInput
+        class="col-span-2"
+        label="Адрес"
+        variant="secondary"
+        placeholder="Адрес"
+      />
 
-      <BaseTextarea class="col-span-2" label="Ваши пожелания или вопросы" variant="secondary"
-        text="Не обязательное поле" />
-
+      <BaseTextarea
+        class="col-span-2"
+        label="Ваши пожелания или вопросы"
+        variant="secondary"
+        text="Не обязательное поле"
+      />
     </MoleculeFormGroup>
 
     <BaseButton size="lg" @click="$emit('click')">Оставить заявку</BaseButton>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.checkout-organism {
+  padding: 0 58px;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 24px;
+  @media (max-width: 768px) {
+    padding: 0;
+  }
+}
+</style>

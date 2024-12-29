@@ -6,8 +6,14 @@
       </template>
       <v-container>
         <div class="search-top">
-          <BaseInput v-model="inputValue" @input="onInputChange" prepend-icon="mdi-magnify" @click:append="clearInput"
-            size="xs" variant="shadow">
+          <BaseInput
+            v-model="inputValue"
+            @input="onInputChange"
+            prepend-icon="mdi-magnify"
+            @click:append="clearInput"
+            size="xs"
+            variant="shadow"
+          >
           </BaseInput>
         </div>
 
@@ -17,26 +23,25 @@
           </template>
         </MoleculeList>
       </v-container>
-
     </AtomModal>
   </div>
 </template>
 
 <script lang="ts">
-import { ref, onBeforeUnmount, defineComponent } from 'vue';
+import { ref, onBeforeUnmount, defineComponent } from "vue";
 
 export default defineComponent({
   props: {
     modelValue: {
       type: String,
-      required: true
+      required: true,
     },
     placeholder: {
       type: String,
-      default: 'Пойск'
-    }
+      default: "Пойск",
+    },
   },
-  emits: ['update:modelValue'],
+  emits: ["update:modelValue"],
 
   setup(props, { emit }) {
     const inputValue = ref<string>(props.modelValue);
@@ -47,13 +52,13 @@ export default defineComponent({
 
     const onInputChange = () => {
       if (menu.value) {
-        console.log('menu', menu.value);
-        // menu.value.isActive = true; 
+        console.log("menu", menu.value);
+        // menu.value.isActive = true;
       }
       if (timeout) clearTimeout(timeout);
 
       timeout = setTimeout(async () => {
-        emit('update:modelValue', inputValue.value);
+        emit("update:modelValue", inputValue.value);
         await fetchResults(inputValue.value);
       }, 400);
     };
@@ -64,16 +69,18 @@ export default defineComponent({
     };
 
     const fetchResults = async (query: string) => {
-      if (query.trim() === '') {
+      if (query.trim() === "") {
         itemsSearch.value = [];
         return;
       }
       pending.value = true;
       try {
-        const results = await $fetch<string[]>('/api/search', { query: { q: query } });
+        const results = await $fetch<string[]>("/api/search", {
+          query: { q: query },
+        });
         itemsSearch.value = results;
       } catch (error) {
-        console.error('API сұранысы сәтсіз аяқталды:', error);
+        console.error("API сұранысы сәтсіз аяқталды:", error);
       } finally {
         pending.value = false;
       }
@@ -90,7 +97,7 @@ export default defineComponent({
       onInputChange,
       clearInput,
     };
-  }
+  },
 });
 </script>
 

@@ -5,31 +5,36 @@
     </div>
     <div class="modal__body" v-if="isOpen">
       <slot />
-      <v-btn class="modal__close" icon="mdi-close" variant="text" @click="close"></v-btn>
+      <v-btn
+        class="modal__close"
+        icon="mdi-close"
+        variant="text"
+        @click="close"
+      ></v-btn>
     </div>
-    <div class="modal__bg" v-if="isOpen" @click=close></div>
+    <div class="modal__bg" v-if="isOpen" @click="close"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
-import { useModal } from '~/composables/useModal'
+import { computed, defineProps } from "vue";
+import { useModal } from "~/composables/useModal";
 const { isOpen, open, close } = useModal();
 
 const props = defineProps({
   variant: {
     type: String,
-    default: 'primary'
-  }
-})
+    default: "primary",
+  },
+});
 
 const classWrap = computed(() => {
-  let list = ['modal'];
+  let list = ["modal"];
   if (props.variant) {
-    list.push(`modal__variant--${props.variant}`)
+    list.push(`modal__variant--${props.variant}`);
   }
   return list;
-})
+});
 </script>
 
 <style scoped>
@@ -60,6 +65,9 @@ const classWrap = computed(() => {
     z-index: 2;
     background-color: #fff;
     border-radius: 12px;
+    @media (max-width: 768px) {
+      max-width: 100%;
+    }
   }
 
   &__variant {
@@ -74,6 +82,15 @@ const classWrap = computed(() => {
         &:deep(.atom-list) {
           border-radius: 0;
         }
+      }
+    }
+    &--bottom {
+      .modal__body {
+        border: 1px solid red;
+        bottom: 0;
+        left: 0;
+        transform: translate(0, 0);
+        border-radius: 16px 16px 0 0;
       }
     }
   }

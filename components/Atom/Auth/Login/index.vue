@@ -1,37 +1,57 @@
 <template>
   <div class="auth-login">
-    <AtomTitle title="Вход" subtitle="Удобный доступ к информации о прошлых покупках и статусу текущих заказов"
-      size="xs" />
+    <AtomTitle
+      title="Вход"
+      subtitle="Удобный доступ к информации о прошлых покупках и статусу текущих заказов"
+      size="xs"
+    />
 
-    <MoleculeFormGroup class="pa-0 gap-5">
-      <BaseMask maska="### ### ## ##" v-model="form.phone" label="Номер телефона" placeholder="+7 (###) ### ## ##"
-        size="xs" :error="errorText" />
-
-      <BaseButton :disabled="!form.phone" @click="submit" :loading="auth.pending">
-        Вход
-      </BaseButton>
+    <MoleculeFormGroup size="lg">
+      <BaseMask
+        maska="### ### ## ##"
+        v-model="form.phone"
+        label="Номер телефона"
+        placeholder="+7 (###) ### ## ##"
+        size="xs"
+        :error="errorText"
+      />
+      <template #bottom>
+        <BaseButton
+          :disabled="!form.phone"
+          @click="submit"
+          :loading="auth.pending"
+          block
+        >
+          Вход
+        </BaseButton>
+      </template>
     </MoleculeFormGroup>
+
+    <div class="auth-login__control">
+      <p class="auth-login__text">У вас еще нет аккаунта?</p>
+      <p class="auth-login__link" @click="$router.push('/auth/register')">
+        Создать аккаунт
+      </p>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-
 interface Form {
   phone: string;
 }
 
-import { computed, reactive, defineEmits } from 'vue'
-import { useAuthStore } from '~/stores/auth';
-import { phone } from '~/composables/useVerify'
+import { computed, reactive } from "vue";
+import { useAuthStore } from "~/stores/auth";
+import { phone } from "~/composables/useVerify";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const { error, touch } = phone();
 const auth = useAuthStore();
 const form = reactive<Form>({
-  phone: '',
+  phone: "",
 });
-const emit = defineEmits<{
-  (event: 'click'): void;
-}>()
 
 const errorText = computed(() => {
   return error(form.phone);
@@ -44,20 +64,41 @@ const submit = async function () {
     return;
   }
 
-  const phone = form.phone.split(' ').join('');
+  const phone = form.phone.split(" ").join("");
   await auth.otp({ phone: `7${phone}` });
 
   if (auth.otpData.success) {
-    emit('click');
+    router.push("/auth/otp");
     alert(auth.otpData.data);
   }
-}
+};
 </script>
 
 <style lang="scss">
 .auth-login {
   display: flex;
   flex-direction: column;
+  align-items: center;
   grid-gap: 32px;
+
+  &__control {
+    display: flex;
+    align-items: center;
+    grid-gap: 4px;
+  }
+
+  &__text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #535862;
+  }
+
+  &__link {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #6941c6;
+  }
 }
 </style>

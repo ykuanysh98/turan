@@ -18,7 +18,7 @@
         <v-icon @click="$router.push('/basket')">mdi-cart-outline</v-icon>
         <v-avatar
           class="mobile-not"
-          v-if="isAuth"
+          v-if="getAuth()"
           @click="$router.push('/profile')"
         >
           <v-icon icon="mdi-account-circle" size="30"></v-icon>
@@ -37,75 +37,11 @@
 
 <script setup lang="ts">
 import { useAuth } from "~/composables/useAuth";
-const { isAuth, getAuth } = useAuth();
+const { getAuth } = useAuth();
 
-import { ref, onMounted } from "vue";
-
-type TreeNode = {
-  id: number;
-  title: string;
-  path?: string;
-  children?: TreeNode[];
-};
+import { ref } from "vue";
 
 const query = ref("");
-
-const items: TreeNode[] = [
-  {
-    id: 1,
-    title: "Категория 1",
-    path: "/qwwewe",
-    children: [],
-  },
-  {
-    id: 2,
-    title: "Категория 2",
-    path: "/qwwewe2",
-    children: [
-      {
-        id: 21,
-        title: "Категория 21",
-        children: [],
-      },
-      {
-        id: 22,
-        title: "Категория 22",
-        children: [],
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: "Категория 3",
-    children: [
-      {
-        id: 31,
-        title: "Категория 31",
-        children: [
-          {
-            id: 311,
-            title: "Категория 331",
-            children: [],
-          },
-          {
-            id: 312,
-            title: "Категория 312",
-            children: [],
-          },
-          {
-            id: 312,
-            title: "Категория 312",
-            children: [],
-          },
-        ],
-      },
-    ],
-  },
-];
-
-onMounted(async () => {
-  await getAuth();
-});
 </script>
 
 <style lang="scss" scoped>

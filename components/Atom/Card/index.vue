@@ -14,34 +14,32 @@
   </div>
 </template>
 
-
 <script lang="ts" setup>
-import { computed, defineProps } from 'vue';
+import { computed, defineProps } from "vue";
 
 const props = defineProps({
   variant: {
     type: String,
-    default: 'primary',
+    default: "primary",
   },
   size: {
     type: String,
-    default: 'md',
+    default: "md",
   },
 });
 
 // Динамикалық класс есептеу
 const computedClass = computed(() => {
-  let list = ['card']
+  let list = ["card"];
   if (props.variant) {
-    list.push(`card__variant--${props.variant}`)
+    list.push(`card__variant--${props.variant}`);
   }
   if (props.size) {
-    list.push(`card__size--${props.size}`)
+    list.push(`card__size--${props.size}`);
   }
-  return list
+  return list;
 });
 </script>
-
 
 <style lang="scss" scoped>
 .card {
@@ -73,20 +71,12 @@ const computedClass = computed(() => {
       grid-gap: 24px;
 
       .card__top {
-        min-width: 240px;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        background-color: #eeeeee
       }
 
       .card__body {
         width: 100%;
       }
     }
-
   }
 }
 </style>

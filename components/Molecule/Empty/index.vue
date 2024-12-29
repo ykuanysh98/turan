@@ -1,15 +1,18 @@
 <template>
   <div class="empty">
-    <img :src="`./images/${'success'}.svg`" alt="">
-    <AtomText variant="secondary" size="xl">
-      {{ title }}
-    </AtomText>
-    <AtomText>
-      {{ text }}
-      <br />
-      <br />
-      <label>{{ label }}</label>
-    </AtomText>
+    <img :src="`/Images/${img}.svg`" alt="" />
+    <div class="flex-column gap-2">
+      <AtomText variant="secondary" size="xl">
+        {{ title }}
+      </AtomText>
+      <AtomText>
+        {{ text }}
+        <div v-if="label">
+          <br />
+          <label>{{ label }}</label>
+        </div>
+      </AtomText>
+    </div>
     <div class="empty__bottom">
       <slot></slot>
     </div>
@@ -17,24 +20,28 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps } from 'vue';
+import { defineProps } from "vue";
 
 const props = defineProps({
+  img: {
+    type: String,
+    default: "success",
+  },
   variant: {
     type: String,
-    default: 'primary',
+    default: "primary",
   },
   title: {
     type: String,
-    default: 'md',
+    default: "md",
   },
   text: {
     type: String,
-    default: '',
+    default: "",
   },
   label: {
     type: String,
-    default: '',
+    default: "",
   },
 });
 </script>
@@ -50,6 +57,10 @@ const props = defineProps({
   grid-gap: 24px;
   text-align: center;
 
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+
   img {
     width: 104px;
     height: 104px;
@@ -60,6 +71,5 @@ const props = defineProps({
     display: flex;
     grid-gap: 8px;
   }
-
 }
 </style>

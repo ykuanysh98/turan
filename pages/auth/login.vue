@@ -1,5 +1,7 @@
 <template>
-  <OrganismAuth />
+  <OrganismAuth onboarding>
+    <AtomAuthLogin />
+  </OrganismAuth>
 </template>
 
 <script lang="ts" setup>
@@ -8,3 +10,5 @@ definePageMeta({
   layout: "auth",
 });
 </script>
+
+<style lang="scss" scoped></style>

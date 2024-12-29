@@ -6,18 +6,15 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import { useUseOrder } from '~/stores/order';
+import { onMounted } from "vue";
+import { useUseOrder } from "~/stores/order";
 const order = useUseOrder();
-
 
 onMounted(async () => {
   await order.fetch();
   console.log(order.orderData);
 });
-
 </script>
-
 
 <style>
 .orders {

@@ -1,16 +1,13 @@
 <template>
-  <div class="organism-auth">
-    <div
-      class="organism-auth__form"
-      :class="{ 'organism-auth__form--all': step === 3 }"
-    >
+  <div class="auth flex-between">
+    <div class="auth__left">
       <AtomLogo class="w-full" />
-
-      <MoleculeAuth @change="step = $event" :steper="steper" />
-
+      <div class="max-w-[360px]">
+        <slot />
+      </div>
       <AtomCopyright />
     </div>
-    <MoleculeOnboarding v-if="step !== 3" class="organism-auth__onboarding" />
+    <MoleculeOnboarding v-if="onboarding" />
   </div>
 </template>
 
@@ -24,32 +21,29 @@ const props = defineProps({
     type: String,
     default: 1,
   },
+  onboarding: {
+    type: Boolean,
+    default: false,
+  },
 });
 </script>
 
 <style lang="scss" scoped>
-.organism-auth {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.auth {
+  height: 100vh;
 
-  &__form {
-    width: 50%;
-    height: 100vh;
+  &__left {
+    width: 100%;
+    height: 100%;
     padding: 36px 32px 32px 32px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-
-    &--all {
-      width: 100%;
+    @media (max-width: 768px) {
+      padding: 24px 16px 32px 16px;
     }
-  }
-
-  &__onboarding {
-    height: 100vh;
-    width: 50%;
   }
 }
 </style>

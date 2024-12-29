@@ -1,5 +1,6 @@
-import { useNuxtApp } from 'nuxt/app';
-import type { AxiosInstance } from 'axios';
+import { useNuxtApp } from "nuxt/app";
+import type { AxiosInstance } from "axios";
+import { navigateTo } from "#app";
 
 export function useApi() {
   const { $axios } = useNuxtApp();
@@ -43,10 +44,31 @@ export function useApi() {
   }
 
   function handleError(error: any): Error {
-    // Мұнда қате өңдеу логикасын қосуға болады
-    console.error('API Error:', error);
-    return new Error(error.message || 'Unknown error occurred');
+    if (isNetworkError(error)) {
+      navigateTo("/error/no-connection");
+    }
+    if (isAuthorizationError(error)) {
+      navigateTo("/error/forbidden");
+    }
+    return new Error(error.message || "Unknown error occurred");
   }
 
   return { get, post, put, del };
+}
+
+function isNetworkError(error: any) {
+  if (!error || typeof error !== "object") return false;
+
+  const isAxiosTimeout = error.code === "ECONNABORTED";
+  const isTimeoutMessage = error.message?.includes("timeout");
+  const isNetworkMessage = error.message?.includes("Network Error");
+
+  return isAxiosTimeout || isTimeoutMessage || isNetworkMessage;
+}
+
+function isAuthorizationError(error: any) {
+  const isAuthorizationNot = error.response?.status === 401;
+  const isForbiddenNot = error.response?.status === 403;
+
+  return isAuthorizationNot || isForbiddenNot;
 }
