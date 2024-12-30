@@ -32,18 +32,32 @@ import {
   Navigation as CarouselNavigation,
 } from "vue3-carousel";
 
-import { defineProps } from "vue";
+import { computed, defineProps } from "vue";
 
-const carouselConfig = {
-  itemsToShow: 1.5,
-  wrapAround: true,
-  snapAlign: "start",
-  gap: 32,
-  breakpoints: {
-    768: { itemsToShow: 2 },
-    1024: { itemsToShow: 2.5 },
-  },
-};
+// const carouselConfig = {
+//   itemsToShow: 1.5,
+//   wrapAround: true,
+//   snapAlign: "start",
+//   gap: 32,
+//   breakpoints: {
+//     768: { itemsToShow: 2 },
+//     1024: { itemsToShow: 2.5 },
+//   },
+// };
+
+const carouselConfig = computed(() => {
+  let obj = {
+    itemsToShow: 1.5,
+    wrapAround: true,
+    snapAlign: "start",
+    gap: 32,
+    breakpoints: {
+      768: { itemsToShow: props.count + 0.5 },
+      1024: { itemsToShow: props.count + 1 },
+    },
+  };
+  return obj;
+});
 
 const props = defineProps({
   items: {
@@ -53,6 +67,10 @@ const props = defineProps({
   variant: {
     type: String,
     default: "primary",
+  },
+  count: {
+    type: Number,
+    default: 1.5,
   },
 });
 </script>

@@ -31,12 +31,14 @@
             label="Имя"
             class="col-span-2 md:col-span-1"
             placeholder="Как вас зовут?"
+            size="lg"
           />
           <BaseInput
             v-model="form.city"
             label="Город"
             class="col-span-2 md:col-span-1"
             placeholder="Откуда вы?"
+            size="lg"
           />
           <BaseMask
             maska="+7 (###) ### ## ##"
@@ -44,6 +46,7 @@
             label="Номер телефона"
             class="col-span-2"
             placeholder="+7 (###) ### ## ##"
+            size="lg"
           />
           <BaseTextarea
             v-model="form.description"

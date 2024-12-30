@@ -6,7 +6,7 @@
 
 <style lang="scss" scoped>
 .atom-chip {
-  height: 18px;
+  height: 22px;
   font-size: 12px;
   font-weight: 500;
   line-height: 18px;

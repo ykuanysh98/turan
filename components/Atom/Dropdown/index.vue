@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <AtomModal v-if="isMobile" variant="bottom">
+    <AtomModal v-if="isMobile && variant !== 'select'" variant="bottom">
       <template #trigger>
         <slot name="trigger" />
       </template>
@@ -11,8 +11,8 @@
 
     <div v-else :class="computedClass">
       <slot name="trigger" />
-
       <v-menu
+        v-model="isMenuOpen"
         activator="parent"
         :open-on-focus="false"
         :close-on-content-click="closeClick"
@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps } from "vue";
+import { ref, watch, computed, defineProps, defineEmits } from "vue";
 import { useMobile } from "~/composables/useMobile";
 const { isMobile } = useMobile();
 
@@ -45,6 +45,8 @@ const props = defineProps({
   },
 });
 
+const isMenuOpen = ref<boolean>(false);
+
 const computedClass = computed(() => {
   let classList = ["dropdown"];
   if (props.variant) {
@@ -54,6 +56,12 @@ const computedClass = computed(() => {
     classList.push(`dropdown__block`);
   }
   return classList;
+});
+
+const emit = defineEmits(["update:modelValue"]);
+
+watch(isMenuOpen, (newValue) => {
+  emit("update:modelValue", newValue);
 });
 </script>
 

@@ -4,7 +4,13 @@
       <slot name="trigger" />
     </div>
     <div class="modal__body" v-if="isOpen">
-      <slot />
+      <div>
+        <slot />
+      </div>
+      <div @click="clickItem">
+        <slot name="list" />
+      </div>
+
       <AtomIcon class="modal__close" icon="close" @click="close"></AtomIcon>
     </div>
     <div class="modal__bg" v-if="isOpen" @click="close"></div>
@@ -21,6 +27,10 @@ const props = defineProps({
     type: String,
     default: "primary",
   },
+  clickClose: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const classWrap = computed(() => {
@@ -30,6 +40,14 @@ const classWrap = computed(() => {
   }
   return list;
 });
+
+const clickItem = function () {
+  if (props.clickClose) {
+    console.log(11);
+
+    close();
+  }
+};
 </script>
 
 <style scoped>
@@ -86,6 +104,10 @@ const classWrap = computed(() => {
         left: 0;
         transform: translate(0, 0);
         border-radius: 16px 16px 0 0;
+      }
+
+      .modal__close {
+        top: 16px;
       }
     }
   }

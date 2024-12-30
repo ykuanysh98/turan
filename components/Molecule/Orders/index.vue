@@ -1,6 +1,6 @@
 <template>
   <div class="orders">
-    <AtomTitle title="Мои заказы" size="sm" block />
+    <AtomText size="lg" variant="secondary" block>Мои заказы</AtomText>
     <MoleculeOrder />
   </div>
 </template>

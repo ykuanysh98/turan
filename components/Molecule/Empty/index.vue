@@ -70,6 +70,9 @@ const props = defineProps({
     width: 100%;
     display: flex;
     grid-gap: 8px;
+    @media (max-width: 768px) {
+      flex-direction: column-reverse;
+    }
   }
 }
 </style>

@@ -15,7 +15,7 @@
         <BaseButton variant="outline" @click="emptyShow = false" block>
           Вход
         </BaseButton>
-        <BaseButton block>На главную</BaseButton>
+        <BaseButton @click="$router.push('/')" block>На главную</BaseButton>
       </MoleculeEmpty>
     </v-container>
   </div>

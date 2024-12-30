@@ -61,6 +61,7 @@ const computedClass = computed(() => {
       color: #6941c6;
 
       label {
+        margin-left: 16px;
         font-size: 18px;
         font-weight: 400;
         line-height: 28px;

@@ -176,14 +176,14 @@ onMounted(() => {
   }
 
   &__size {
-    &--md {
+    &--lg {
       .base-input__inner {
         height: 48px;
         padding: 12px 16px;
       }
     }
 
-    &--xs {
+    &--md {
       .base-input__inner {
         height: 44px;
         padding: 10px 14px;

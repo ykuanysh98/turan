@@ -7,14 +7,14 @@ export default defineEventHandler(async (event) => {
 
   // Мысал ретінде нәтижелер
   const data: { link: string; title: string; count: number }[] = [
-    { link: "/", title: "Apple", count: 12 },
-    { link: "/", title: "Banana", count: 12 },
-    { link: "/", title: "Banana 2", count: 12 },
-    { link: "/", title: "Cherry", count: 12 },
-    { link: "/", title: "Date", count: 12 },
-    { link: "/", title: "Elderberry", count: 12 },
-    { link: "/", title: "Fig", count: 12 },
-    { link: "/", title: "Grape", count: 12 },
+    { link: "/search", title: "Apple", count: 12 },
+    { link: "/search", title: "Banana", count: 12 },
+    { link: "/search", title: "Banana 2", count: 12 },
+    { link: "/search", title: "Cherry", count: 12 },
+    { link: "/search", title: "Date", count: 12 },
+    { link: "/search", title: "Elderberry", count: 12 },
+    { link: "/search", title: "Fig", count: 12 },
+    { link: "/search", title: "Grape", count: 12 },
   ];
 
   // Іздеу нәтижелерін сүзу

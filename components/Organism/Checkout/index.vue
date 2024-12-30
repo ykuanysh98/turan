@@ -7,27 +7,38 @@
       </AtomText>
     </div>
 
-    <MoleculeFormGroup size="lg">
+    <MoleculeFormGroup size="md" interactive>
       <BaseInput
         class="col-span-2 md:col-span-1"
         label="Имя"
         placeholder="Имя"
+        size="lg"
       />
       <BaseInput
         class="col-span-2 md:col-span-1"
         label="Фамилия"
         placeholder="Фамилия"
+        size="lg"
       />
-
       <BaseMask
         class="col-span-2"
         label="Номер телефона"
         maska="+7 (###) ### ## ##"
+        size="lg"
+      />
+      <BaseInput
+        class="col-span-2"
+        label="Город"
+        placeholder="Город"
+        size="lg"
       />
 
-      <BaseInput class="col-span-2" label="Город" placeholder="Город" />
-
-      <BaseInput class="col-span-2" label="Адрес" placeholder="Адрес" />
+      <BaseInput
+        class="col-span-2"
+        label="Адрес"
+        placeholder="Адрес"
+        size="lg"
+      />
 
       <BaseTextarea
         class="col-span-2"
@@ -45,7 +56,7 @@
   padding: 0 58px;
   display: flex;
   flex-direction: column;
-  grid-gap: 24px;
+  grid-gap: 32px;
   @media (max-width: 768px) {
     padding: 0;
   }

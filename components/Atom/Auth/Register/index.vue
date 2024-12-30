@@ -11,14 +11,12 @@
         v-model="form.name"
         label="Имя"
         placeholder="Введите ваше имя"
-        size="xs"
       />
       <BaseMask
         maska="### ### ## ##"
         v-model="form.phone"
         label="Номер телефона"
         placeholder="+7 (###) ### ## ##"
-        size="xs"
         :error="errorText"
       />
 

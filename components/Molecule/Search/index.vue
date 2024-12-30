@@ -1,10 +1,9 @@
 <template>
   <div class="search-input">
-    <AtomDropdown ref="menu" block>
+    <AtomDropdown ref="menu" closeClick block>
       <template #trigger>
         <BaseInput
           v-model="inputValue"
-          size="xs"
           prepend-icon="search"
           :placeholder="placeholder"
           variant="shadow"

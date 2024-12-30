@@ -2,7 +2,7 @@
   <v-container class="flex-column gap-[80px]">
     <div class="product">
       <div class="product__left">
-        <AtomSlider :items="[1, 2, 3, 4, 5]"> </AtomSlider>
+        <AtomSlider :items="[1, 2, 3, 4, 5]" :count="0.5"> </AtomSlider>
         <AtomDescription />
       </div>
       <div class="product__right">

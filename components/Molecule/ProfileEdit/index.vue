@@ -1,14 +1,11 @@
 <template>
   <div class="profile-edit">
-    <AtomTitle
-      title="Инфо"
-      subtitle="Заполните данные, и мы сохраним их для следующего заказа"
-      size="sm"
-    />
-    <AtomText size="lg">Инфо</AtomText>
-    <AtomText size="xs"
-      >Заполните данные, и мы сохраним их для следующего заказа</AtomText
-    >
+    <div>
+      <AtomText size="lg" variant="secondary">Инфо</AtomText>
+      <AtomText size="xs" class="mt-1"
+        >Заполните данные, и мы сохраним их для следующего заказа</AtomText
+      >
+    </div>
 
     <MoleculeFormGroup variant="secondary" size="xs" bottom-line>
       <BaseInput

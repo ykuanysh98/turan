@@ -127,7 +127,7 @@ const handleSubmit = () => {
 
       .molecule-form__bottom {
         margin: 0;
-        padding: 16px;
+        padding: 16px 24px;
       }
     }
   }

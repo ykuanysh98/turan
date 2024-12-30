@@ -7,7 +7,7 @@
       variant="col"
     >
       <AtomCounter />
-      <v-icon>mdi-delete-outline</v-icon>
+      <AtomIcon icon="trash" />
     </MoleculeProduct>
   </div>
 </template>

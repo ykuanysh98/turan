@@ -1,18 +1,18 @@
 <template>
-  <div class="basket">
-    <v-container class="flex-column gap-10">
-      <template v-if="!emptyShow">
+  <div>
+    <v-container>
+      <div v-if="!emptyShow" class="basket flex-column gap-10">
         <AtomTitle title="Корзина" />
         <div class="basket__wrap">
           <OrganismBasketList class="basket__list" />
           <MoleculeCheck>
-            <BaseButton @click="$router.push('/checkout')" block>
+            <BaseButton @click="$router.push('/checkout')" size="lg" block>
               Оставить заявку
             </BaseButton>
           </MoleculeCheck>
         </div>
         <OrganismProductSimilar title="Вместе с этим покупают" />
-      </template>
+      </div>
 
       <MoleculeEmpty
         v-else
@@ -37,9 +37,6 @@ const emptyShow = ref(false);
 <style lang="scss" scoped>
 .basket {
   padding: 40px 0;
-  @media (max-width: 768px) {
-    padding: 0;
-  }
 
   &__wrap {
     display: flex;

@@ -1,7 +1,7 @@
 <template>
   <div class="flex-column gap-6">
     <AtomTitle :title="title" size="sm" />
-    <AtomSlider :items="bannerList" />
+    <AtomSlider :items="bannerList" :count="3.5" />
   </div>
 </template>
 

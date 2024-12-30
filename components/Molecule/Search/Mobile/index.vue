@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AtomModal variant="top">
+    <AtomModal variant="top" clickClose>
       <template #trigger>
         <label for="search">
           <AtomIcon icon="search"></AtomIcon>
@@ -14,18 +14,19 @@
             @input="onInputChange"
             prepend-icon="search"
             @click:append="clearInput"
-            size="xs"
             variant="shadow-auto"
           >
           </BaseInput>
         </div>
       </v-container>
       <AtomDivider />
-      <MoleculeList :items="itemsSearch">
-        <template #prepend>
-          <v-icon size="16" icon="mdi-magnify"></v-icon>
-        </template>
-      </MoleculeList>
+      <template #list>
+        <MoleculeList :items="itemsSearch">
+          <template #prepend>
+            <v-icon size="16" icon="mdi-magnify"></v-icon>
+          </template>
+        </MoleculeList>
+      </template>
     </AtomModal>
   </div>
 </template>
