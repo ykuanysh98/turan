@@ -19,13 +19,13 @@
           >
           </BaseInput>
         </div>
-
-        <MoleculeList :items="itemsSearch">
-          <template #prepend>
-            <v-icon size="16" icon="mdi-magnify"></v-icon>
-          </template>
-        </MoleculeList>
       </v-container>
+      <AtomDivider />
+      <MoleculeList :items="itemsSearch">
+        <template #prepend>
+          <v-icon size="16" icon="mdi-magnify"></v-icon>
+        </template>
+      </MoleculeList>
     </AtomModal>
   </div>
 </template>

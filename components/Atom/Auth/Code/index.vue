@@ -6,7 +6,7 @@
       size="xs"
     />
 
-    <MoleculeFormGroup class="gap-5" size="lg">
+    <MoleculeFormGroup size="lg">
       <BaseOTP
         v-model="code"
         label="Пин код"
@@ -28,6 +28,7 @@
 
       <template #bottom>
         <BaseButton
+          class="mt-8"
           :disabled="code.length < 4"
           :loading="auth.pending"
           @click="submit"

@@ -51,6 +51,7 @@ const computedClass = computed(() => {
       width: 22px;
       height: 22px;
       padding: 2px 8px;
+      border-radius: 28px;
 
       font-size: 12px;
       font-weight: 500;

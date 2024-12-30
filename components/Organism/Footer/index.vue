@@ -1,18 +1,18 @@
 <template>
-  <div class="bg-[#FAFAFA]">
+  <div class="footer">
     <v-container>
-      <div class="footer flex-column flex-center gap-8 py-[64px]">
-        <NuxtLink to="/">
-          <img class="max-w-md" src="/images/Logo.svg" alt="logo" />
-        </NuxtLink>
-        <div class="footer__links w-full flex-between">
-          <NuxtLink class="footer__link" v-for="(item, index) in items" :key="index">
-            {{ item }}
+      <div class="footer__wrap">
+        <AtomLogo />
+        <div class="footer__links">
+          <NuxtLink :to="item.link" v-for="(item, index) in items" :key="index">
+            <AtomText>
+              {{ item.title }}
+            </AtomText>
           </NuxtLink>
         </div>
       </div>
       <AtomDivider />
-      <div class="footer__bottom flex-between gap-4 mt-8 mb-[48px]">
+      <div class="footer__bottom flex-between gap-4">
         <AtomCopyright />
         <div class="flex-between gap-2">
           <p>Документ</p>
@@ -23,51 +23,70 @@
   </div>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    items: [
-      'Home',
-      'About Us',
-      'Team',
-      'Services',
-    ],
-    icons: [
-      'mdi-facebook',
-      'mdi-twitter',
-      'mdi-instagram',
-    ],
-  }),
-}
+<script lang="ts" setup>
+const items = [
+  {
+    title: "Каталог",
+    link: "/catalog",
+  },
+  {
+    title: "Конструктор мебели",
+    link: "/",
+  },
+  {
+    title: "Оставить заявку",
+    link: "/",
+  },
+  {
+    title: "Как работает конструктор",
+    link: "/",
+  },
+  {
+    title: "Контакты",
+    link: "/",
+  },
+  {
+    title: "Вопросы и ответы",
+    link: "/",
+  },
+];
 </script>
 
 <style lang="scss" scoped>
 .footer {
+  padding: 0 0 48px 0;
+  background-color: #fafafa;
+  &__wrap {
+    padding: 64px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-gap: 32px;
+  }
   &__links {
     height: 24px;
+    display: flex;
+    justify-content: center;
     flex-wrap: wrap;
-    grid-gap: 24px;
+    grid-gap: 32px;
   }
-
-  &__link {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 24px;
-    color: #535862;
+  &__bottom {
+    padding-top: 32px;
   }
 }
 
 @media (max-width: 768px) {
-
   .footer {
-    padding: 48px 0;
-    align-items: flex-start;
+    &__wrap {
+      padding: 48px 0;
+      align-items: flex-start;
+    }
 
     &__links {
       height: auto;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      grid-gap: 32px 12px;
+      grid-gap: 12px 32px;
       // flex-direction: column;
       // align-items: center;
     }

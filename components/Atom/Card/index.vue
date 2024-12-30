@@ -4,9 +4,7 @@
       <slot name="top"></slot>
     </div>
 
-    <div class="card__body">
-      <slot></slot>
-    </div>
+    <slot></slot>
 
     <div v-if="$slots.bottom" class="card__bottom">
       <slot name="bottom"></slot>
@@ -44,38 +42,16 @@ const computedClass = computed(() => {
 <style lang="scss" scoped>
 .card {
   border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
-  &__variant {
-    &--primary {
-      .card__top {
-        margin: 0 0 24px 0;
-      }
+  &__size {
+    &--md {
+      grid-gap: 16px;
     }
-
-    &--secondary {
-      .card__top {
-        margin: 0 0 20px 0;
-      }
-    }
-
-    &--social {
-      .card__top {
-        margin: 0 0 16px 0;
-      }
-    }
-
-    &--col {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      grid-gap: 24px;
-
-      .card__top {
-      }
-
-      .card__body {
-        width: 100%;
-      }
+    &--lg {
+      grid-gap: 20px;
     }
   }
 }

@@ -15,20 +15,20 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, computed } from 'vue';
+import { defineProps, computed } from "vue";
 
 const props = defineProps({
   title: {
     type: String,
-    default: '',
+    default: "",
   },
   subtitle: {
     type: String,
-    default: '',
+    default: "",
   },
   discount: {
     type: String,
-    default: '',
+    default: "",
   },
   main: {
     type: Boolean,
@@ -36,33 +36,32 @@ const props = defineProps({
   },
   variant: {
     type: String,
-    default: '',
+    default: "",
   },
   size: {
     type: String,
-    default: 'md',
+    default: "md",
   },
   block: {
     type: Boolean,
     default: false,
   },
-})
+});
 
 const wrapClass = computed(() => {
-  let list = ['atom-title']
+  let list = ["atom-title"];
   if (props.variant) {
-    list.push(`atom-title__variant--${props.variant}`)
+    list.push(`atom-title__variant--${props.variant}`);
   }
   if (props.size) {
-    list.push(`atom-title__size--${props.size}`)
+    list.push(`atom-title__size--${props.size}`);
   }
   if (props.block) {
-    list.push(`atom-title__block`)
+    list.push(`atom-title__block`);
   }
   return list;
-})
+});
 </script>
-
 
 <style lang="scss" scoped>
 .atom-title {
@@ -71,7 +70,6 @@ const wrapClass = computed(() => {
   flex-direction: column;
 
   &__size {
-
     &--lg {
       grid-gap: 16px;
 
@@ -81,8 +79,12 @@ const wrapClass = computed(() => {
         font-weight: 600;
         line-height: 60px;
         letter-spacing: -0.02em;
-        color: #181D27;
+        color: #181d27;
 
+        @media (max-width: 768px) {
+          font-size: 30px;
+          line-height: 38px;
+        }
       }
 
       h3 {
@@ -90,6 +92,11 @@ const wrapClass = computed(() => {
         font-weight: 400;
         line-height: 30px;
         color: #535862;
+
+        @media (max-width: 768px) {
+          font-size: 16px;
+          line-height: 24px;
+        }
       }
     }
 
@@ -102,7 +109,12 @@ const wrapClass = computed(() => {
         font-weight: 600;
         line-height: 44px;
         letter-spacing: -0.02em;
-        color: #181D27;
+        color: #181d27;
+
+        @media (max-width: 768px) {
+          font-size: 30px;
+          line-height: 38px;
+        }
       }
 
       h3 {
@@ -120,14 +132,14 @@ const wrapClass = computed(() => {
         font-size: 24px;
         font-weight: 600;
         line-height: 32px;
-        color: #181D27;
+        color: #181d27;
       }
 
       h2 {
         font-size: 30px;
         font-weight: 600;
         line-height: 38px;
-        color: #181D27;
+        color: #181d27;
       }
 
       h3 {
@@ -146,8 +158,7 @@ const wrapClass = computed(() => {
         font-size: 20px;
         font-weight: 600;
         line-height: 30px;
-        color: #181D27;
-
+        color: #181d27;
       }
 
       h3 {
@@ -155,19 +166,17 @@ const wrapClass = computed(() => {
         font-size: 16px;
         font-weight: 400;
         line-height: 24px;
-
       }
     }
   }
 
   &__variant {
     &--secondary {
-
       h1,
       h2,
       h3 {
-        color: #FFF;
-        box-shadow: 0px 1px 2px 0px #0A0D120D;
+        color: #fff;
+        box-shadow: 0px 1px 2px 0px #0a0d120d;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         overflow: hidden;

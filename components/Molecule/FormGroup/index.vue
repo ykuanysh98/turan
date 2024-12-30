@@ -6,7 +6,7 @@
 
     <AtomDivider v-if="bottomLine" class="col-span-2" />
 
-    <div class="molecule-form__bottom">
+    <div v-if="$slots.bottom" class="molecule-form__bottom">
       <slot name="bottom" />
     </div>
   </form>
@@ -61,6 +61,7 @@ const handleSubmit = () => {
   width: 100%;
   &__wrap {
     display: grid;
+    column-gap: 32px;
   }
 
   &__bottom {
@@ -97,12 +98,20 @@ const handleSubmit = () => {
         padding: 0;
         grid-gap: 20px;
       }
+      .molecule-form__bottom {
+      }
     }
 
     &--md {
       .molecule-form__wrap {
-        padding: 40px 32px 40px 32px;
-        grid-gap: 16px;
+        padding: 40px 48px;
+        row-gap: 24px;
+
+        @media (max-width: 768px) {
+          padding: 24px 16px;
+        }
+      }
+      .molecule-form__bottom {
       }
     }
 
@@ -111,7 +120,7 @@ const handleSubmit = () => {
         padding: 24px;
         grid-gap: 24px;
 
-        @media (min-width: 768px) {
+        @media (max-width: 768px) {
           padding: 24px 16px;
         }
       }

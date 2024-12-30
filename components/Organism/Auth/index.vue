@@ -2,7 +2,7 @@
   <div class="auth flex-between">
     <div class="auth__left">
       <AtomLogo class="w-full" />
-      <div class="max-w-[360px]">
+      <div class="w-full md:max-w-[360px]">
         <slot />
       </div>
       <AtomCopyright />
@@ -35,7 +35,7 @@ const props = defineProps({
   &__left {
     width: 100%;
     height: 100%;
-    padding: 36px 32px 32px 32px;
+    padding: 32px;
 
     display: flex;
     flex-direction: column;

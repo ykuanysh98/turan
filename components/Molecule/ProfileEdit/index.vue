@@ -5,6 +5,10 @@
       subtitle="Заполните данные, и мы сохраним их для следующего заказа"
       size="sm"
     />
+    <AtomText size="lg">Инфо</AtomText>
+    <AtomText size="xs"
+      >Заполните данные, и мы сохраним их для следующего заказа</AtomText
+    >
 
     <MoleculeFormGroup variant="secondary" size="xs" bottom-line>
       <BaseInput

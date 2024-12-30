@@ -9,9 +9,11 @@
     >
       <!-- Close button (X) in the top-right corner -->
       <template v-slot:prepend>
-        <v-icon @click="closeDrawer" color="#717680" class="close-btn"
-          >mdi-close</v-icon
-        >
+        <AtomIcon
+          class="close-btn"
+          icon="close"
+          @click="closeDrawer"
+        ></AtomIcon>
       </template>
       <v-container>
         <div class="h-[72px] flex-between">

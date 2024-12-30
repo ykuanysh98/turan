@@ -11,41 +11,27 @@
       <BaseInput
         class="col-span-2 md:col-span-1"
         label="Имя"
-        variant="secondary"
         placeholder="Имя"
       />
       <BaseInput
         class="col-span-2 md:col-span-1"
         label="Фамилия"
-        variant="secondary"
         placeholder="Фамилия"
       />
 
       <BaseMask
         class="col-span-2"
         label="Номер телефона"
-        variant="secondary"
         maska="+7 (###) ### ## ##"
       />
 
-      <BaseInput
-        class="col-span-2"
-        label="Город"
-        variant="secondary"
-        placeholder="Город"
-      />
+      <BaseInput class="col-span-2" label="Город" placeholder="Город" />
 
-      <BaseInput
-        class="col-span-2"
-        label="Адрес"
-        variant="secondary"
-        placeholder="Адрес"
-      />
+      <BaseInput class="col-span-2" label="Адрес" placeholder="Адрес" />
 
       <BaseTextarea
         class="col-span-2"
         label="Ваши пожелания или вопросы"
-        variant="secondary"
         text="Не обязательное поле"
       />
     </MoleculeFormGroup>

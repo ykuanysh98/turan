@@ -128,6 +128,7 @@ const updateValue = (value: string) => {
     padding: 10px 12px 10px 14px;
     border-radius: 8px 0 0 8px;
     border: 1px solid #d5d7da;
+    background-color: #fff;
     border-right: none;
 
     font-size: 16px;
@@ -141,6 +142,7 @@ const updateValue = (value: string) => {
       padding: 10px 14px;
       border-radius: 0 8px 8px 0;
       border: 1px solid #d5d7da;
+      background-color: #fff;
     }
   }
 
@@ -153,12 +155,12 @@ const updateValue = (value: string) => {
       .base-input__inner {
         border-radius: 8px;
         border: 1px solid #d5d7da;
+        background-color: #fff;
       }
     }
 
     &--secondary {
       .base-input__mask-inner {
-        background-color: #fff;
       }
     }
   }

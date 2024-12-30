@@ -5,12 +5,7 @@
     </div>
     <div class="modal__body" v-if="isOpen">
       <slot />
-      <v-btn
-        class="modal__close"
-        icon="mdi-close"
-        variant="text"
-        @click="close"
-      ></v-btn>
+      <AtomIcon class="modal__close" icon="close" @click="close"></AtomIcon>
     </div>
     <div class="modal__bg" v-if="isOpen" @click="close"></div>
   </div>
@@ -51,8 +46,8 @@ const classWrap = computed(() => {
 
   &__close {
     position: absolute;
-    right: 5px;
-    top: 18px;
+    right: 20px;
+    top: 24px;
   }
 
   &__body {

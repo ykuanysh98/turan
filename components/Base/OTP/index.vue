@@ -2,7 +2,12 @@
   <div :class="wrapClass">
     <label :for="id" class="base-input__label">{{ label }} </label>
 
-    <v-otp-input v-model="code" class="base-input__otp" :length="4" :placeholder="placeholder"></v-otp-input>
+    <v-otp-input
+      v-model="code"
+      class="base-input__otp"
+      :length="4"
+      :placeholder="placeholder"
+    ></v-otp-input>
 
     <span v-if="text" class="base-input__label">
       {{ text }}
@@ -14,75 +19,74 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, defineProps, defineEmits } from 'vue';
+import { ref, watch, computed, defineProps, defineEmits } from "vue";
 
 const props = defineProps({
   id: {
     type: String,
-    default: '',
+    default: "",
   },
   modelValue: {
     type: [String, Number],
-    default: '',
+    default: "",
   },
   type: {
     type: String,
-    default: 'text',
+    default: "text",
   },
   label: {
     type: String,
-    default: '',
+    default: "",
   },
   variant: {
     type: String,
-    default: 'primary',
+    default: "primary",
   },
   size: {
     type: String,
-    default: 'md',
+    default: "md",
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   prependIcon: {
     type: String,
-    default: '',
+    default: "",
   },
   maska: {
     type: String,
-    default: '',
+    default: "",
   },
   text: {
     type: String,
-    default: '',
+    default: "",
   },
   error: {
     type: String,
-    default: '',
+    default: "",
   },
 });
 
-const code = ref<string>('')
+const code = ref<string>("");
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(["update:modelValue"]);
 
 const wrapClass = computed(() => {
-  let classList = ['base-input']
+  let classList = ["base-input"];
   if (props.variant) {
-    classList.push(`base-input__variant--${props.variant}`)
+    classList.push(`base-input__variant--${props.variant}`);
   }
   if (props.size) {
-    classList.push(`base-input__size--${props.size}`)
+    classList.push(`base-input__size--${props.size}`);
   }
 
-  return classList
+  return classList;
 });
 
 watch(code, (newValue, oldValue) => {
-  emit('update:modelValue', newValue);
+  emit("update:modelValue", newValue);
 });
-
 </script>
 
 <style scoped lang="scss">
@@ -90,6 +94,10 @@ watch(code, (newValue, oldValue) => {
   display: flex;
   flex-direction: column;
   grid-gap: 6px;
+  @media (max-width: 768px) {
+    width: fit-content;
+    margin: auto;
+  }
 
   &__otp {
     padding: 0;
@@ -99,14 +107,14 @@ watch(code, (newValue, oldValue) => {
       font-size: 48px;
       font-weight: 500;
       line-height: 60px;
-      color: #7F56D9;
+      color: #7f56d9;
 
       &::placeholder {
-        color: #D5D7DA;
+        color: #d5d7da;
       }
 
       &:focus {
-        box-shadow: 0px 1px 2px 0px #0A0D120D;
+        box-shadow: 0px 1px 2px 0px #0a0d120d;
         border: none;
       }
     }
@@ -118,7 +126,7 @@ watch(code, (newValue, oldValue) => {
 
     &:deep(.v-field__outline) {
       border-radius: 8px;
-      border: 1px solid #D6BBFB;
+      border: 1px solid #d6bbfb;
     }
   }
 
@@ -143,7 +151,7 @@ watch(code, (newValue, oldValue) => {
     &--primary {
       .base-input__inner {
         border-radius: 8px;
-        border: 1px solid #D5D7DA;
+        border: 1px solid #d5d7da;
       }
     }
   }

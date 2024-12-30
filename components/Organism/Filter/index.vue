@@ -32,7 +32,7 @@
       <template #trigger>
         <BaseButton variant="secondary" size="xs">
           Сортировать
-          <v-icon icon="mdi-sort" end> </v-icon>
+          <AtomIcon icon="sort"></AtomIcon>
         </BaseButton>
       </template>
 

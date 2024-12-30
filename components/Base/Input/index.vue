@@ -1,6 +1,6 @@
 <template>
   <div :class="wrapClass">
-    <label :for="id" class="base-input__label">{{ label }}</label>
+    <label v-if="label" :for="id" class="base-input__label">{{ label }}</label>
 
     <div class="base-input__inner flex-start">
       <AtomIcon v-if="prependIcon" :icon="prependIcon" />
@@ -12,12 +12,11 @@
         @input="updateValue($event.target.value)"
       />
 
-      <v-icon
+      <AtomIcon
         v-if="modelValue.length > 0"
-        color="#717680"
+        icon="close"
         @click="updateValue('')"
-        >{{ "mdi-close" }}</v-icon
-      >
+      ></AtomIcon>
     </div>
 
     <span v-if="error" class="base-input__error">{{ error }}</span>
@@ -147,15 +146,13 @@ onMounted(() => {
       .base-input__inner {
         border-radius: 8px;
         border: 1px solid #d5d7da;
+        background-color: #fff;
         box-shadow: 0px 1px 2px 0px #0a0d120d;
       }
     }
 
     &--secondary {
       .base-input__inner {
-        border-radius: 8px;
-        border: 1px solid #d5d7da;
-        background-color: #fff;
       }
     }
 

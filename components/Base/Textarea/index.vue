@@ -80,7 +80,6 @@ const updateValue = (value: string) => {
   grid-gap: 6px;
 
   &__label,
-  &__mask,
   &__span {
     font-size: 14px;
     font-weight: 500;
@@ -104,26 +103,11 @@ const updateValue = (value: string) => {
     border-radius: 8px;
 
     border: 1px solid #d5d7da;
+    background-color: #fff;
   }
 
   &__span {
     color: red;
-  }
-
-  &__mask {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 16px;
-    border-radius: 8px 0 0 8px;
-    border: 1px solid #d5d7da;
-    border-right: none;
-  }
-
-  &--secondary {
-    textarea {
-      background-color: #fff;
-    }
   }
 }
 </style>

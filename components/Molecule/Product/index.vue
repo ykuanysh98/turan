@@ -66,8 +66,8 @@ const computedClass = computed(() => {
 
 <style lang="scss" scoped>
 .product {
-  width: 100%;
-  text-align: left;
+  // width: 100%;
+  // text-align: left;
   &__actions {
     margin-top: 24px;
     display: flex;
@@ -87,11 +87,29 @@ const computedClass = computed(() => {
         height: 296px;
       }
     }
+    &--secondary {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      grid-gap: 16px;
+
+      .product__top {
+        width: 240px;
+        height: 136px;
+      }
+
+      &:deep(h2) {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+      }
+    }
     &--col {
       display: flex;
       flex-direction: row;
       align-items: center;
       grid-gap: 24px;
+
       .product__top {
         width: 240px;
         height: 240px;

@@ -1,9 +1,8 @@
 <template>
   <div class="carousel">
-
     <Carousel v-bind="carouselConfig">
       <Slide v-for="slide in items" :key="slide">
-        <MoleculeProduct :item="slide" />
+        <MoleculeProduct :item="slide" :variant="variant" />
       </Slide>
 
       <template #addons>
@@ -21,36 +20,41 @@
         </CarouselNavigation>
       </template>
     </Carousel>
-    <div class="carousel__curtain">
-
-    </div>
+    <div class="carousel__curtain"></div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import "vue3-carousel/carousel.css";
+import {
+  Carousel,
+  Slide,
+  Navigation as CarouselNavigation,
+} from "vue3-carousel";
 
-import 'vue3-carousel/carousel.css'
-import { Carousel, Slide, Navigation as CarouselNavigation } from 'vue3-carousel'
-
-import { defineProps } from 'vue'
+import { defineProps } from "vue";
 
 const carouselConfig = {
   itemsToShow: 1.5,
   wrapAround: true,
-  snapAlign: 'start',
+  snapAlign: "start",
   gap: 32,
   breakpoints: {
     768: { itemsToShow: 2 },
     1024: { itemsToShow: 2.5 },
-  }
-}
+  },
+};
 
 const props = defineProps({
   items: {
     type: Array,
-    default: () => []
-  }
-})
+    default: () => [],
+  },
+  variant: {
+    type: String,
+    default: "primary",
+  },
+});
 </script>
 
 <style scoped>
@@ -64,7 +68,7 @@ const props = defineProps({
     width: 50px;
     height: 100%;
     background-color: aqua;
-    background: linear-gradient(90deg, rgba(250, 250, 250, 0) 0%, #FAFAFA 100%);
+    background: linear-gradient(90deg, rgba(250, 250, 250, 0) 0%, #fafafa 100%);
   }
 
   &:deep(.carousel__prev) {

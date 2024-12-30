@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app style="background-color: #FAFAFA;">
+    <v-app class="main-app">
       <OrganismHeader />
       <NuxtPage />
       <OrganismFooter v-if="$route.path === '/'" />
@@ -10,6 +10,17 @@
 
 <script>
 export default {
-  name: 'default'
-}
+  name: "default",
+};
 </script>
+
+<style lang="scss" scoped>
+.main-app {
+  // padding-top: 80px;
+  // overflow: visible;
+  background-color: #fafafa;
+  @media (max-width: 768px) {
+    // padding-top: 72px;
+  }
+}
+</style>
