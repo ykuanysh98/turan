@@ -46,8 +46,6 @@ const computedClass = computed(() => {
 
 <style lang="scss" scoped>
 .atom-text {
-  border: 1px solid blue;
-
   &__variant {
     &--primary {
       color: #535862;

@@ -41,7 +41,6 @@ const computedClass = computed(() => {
 
 <style lang="scss" scoped>
 .card {
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

@@ -65,7 +65,6 @@ const wrapClass = computed(() => {
 
 <style lang="scss" scoped>
 .atom-title {
-  border: 1px solid green;
   display: flex;
   flex-direction: column;
 

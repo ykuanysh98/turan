@@ -86,7 +86,6 @@ const clickItem = function () {
   &__variant {
     &--top {
       .modal__body {
-        border: 1px solid red;
         top: 0;
         left: 0;
         transform: translate(0, 0);
@@ -99,7 +98,6 @@ const clickItem = function () {
     }
     &--bottom {
       .modal__body {
-        border: 1px solid red;
         bottom: 0;
         left: 0;
         transform: translate(0, 0);

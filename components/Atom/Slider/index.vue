@@ -77,8 +77,6 @@ const props = defineProps({
 
 <style scoped>
 .carousel {
-  border: 1px solid red;
-
   &__curtain {
     position: absolute;
     right: 0;
