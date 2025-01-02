@@ -1,11 +1,11 @@
 import { defineStore } from "pinia";
 import { useApi } from "~/composables/useApi";
 
-export const useUseOrder = defineStore("order", {
+export const useBasketStore = defineStore("basket", {
   state: () => ({
-    data: null as any, // Немесе нақты типті көрсетіңіз
-    orderData: null as any, // Немесе нақты типті көрсетіңіз
-    orderAdd: null as any, // Немесе нақты типті көрсетіңіз
+    basketList: null as any,
+    basketData: null as any,
+
     pending: false,
     error: null as string | null,
   }),
@@ -15,21 +15,23 @@ export const useUseOrder = defineStore("order", {
       this.pending = true;
       this.error = null;
       try {
-        const response = await get("/order");
-        this.orderData = response;
+        const response = await get("/basket", payload);
+
+        this.basketList = response;
       } catch (error: any) {
         this.error = error.message;
       } finally {
         this.pending = false;
       }
     },
-    async add(payload: any) {
+    async add(payload: Record<string, any>) {
       const { post } = useApi();
       this.pending = true;
       this.error = null;
       try {
-        const response = await post("/order", payload);
-        this.orderAdd = response;
+        const response = await post("/basket", payload);
+
+        this.basketData = response;
       } catch (error: any) {
         this.error = error.message;
       } finally {

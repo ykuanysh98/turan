@@ -12,15 +12,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, defineProps } from "vue";
-
-const step = ref<any>(1);
+import { defineProps } from "vue";
 
 const props = defineProps({
-  steper: {
-    type: String,
-    default: 1,
-  },
   onboarding: {
     type: Boolean,
     default: false,

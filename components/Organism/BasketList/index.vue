@@ -13,7 +13,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
+import { useBasketStore } from "~/stores/basket";
+const order = useBasketStore();
 
 const basketList = computed(() => {
   let list = [];
@@ -25,7 +27,13 @@ const basketList = computed(() => {
       text: "Небольшое описание про товар или категория",
     });
   }
+  if (order.basketList) {
+    list = order.basketList;
+  }
   return list;
+});
+onMounted(() => {
+  order.fetch();
 });
 </script>
 

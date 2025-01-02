@@ -9,7 +9,7 @@
         <BaseButton
           size="sm"
           variant="secondary"
-          @click="$emit('prevPage')"
+          @click="prevPage"
           :disabled="page === 1"
         >
           <AtomIcon icon="arrow-left"></AtomIcon>
@@ -19,7 +19,7 @@
         <BaseButton
           size="sm"
           variant="secondary"
-          @click="$emit('nextPage')"
+          @click="nextPage"
           :disabled="page >= pageCount"
         >
           {{ isMobile ? "" : "Вперед" }}
@@ -31,12 +31,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, computed } from "vue";
+import { defineProps } from "vue";
 import { useMobile } from "~/composables/useMobile";
 const { isMobile } = useMobile();
-
-// const pageCount = ref(15);
-// const page = ref(1);
 
 const props = defineProps({
   variant: {
@@ -51,7 +48,27 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  modelValue: {
+    type: Number,
+    required: true,
+  },
 });
+
+const emit = defineEmits(["update:modelValue", "nextPage", "prevPage"]);
+
+const nextPage = () => {
+  emit("nextPage");
+  if (props.modelValue < props.pageCount) {
+    emit("update:modelValue", props.modelValue + 1);
+  }
+};
+
+const prevPage = () => {
+  emit("prevPage");
+  if (props.modelValue > 1) {
+    emit("update:modelValue", props.modelValue - 1);
+  }
+};
 </script>
 
 <style lang="scss">

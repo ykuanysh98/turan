@@ -14,6 +14,15 @@
   </v-container>
 </template>
 
+<script lang="ts" setup>
+import { onMounted } from "vue";
+import { useProductsStore } from "~/stores/products";
+const products = useProductsStore();
+
+onMounted(async () => {
+  await products.fetchItem(1);
+});
+</script>
 <style lang="scss" scoped>
 .product {
   padding: 40px 0;

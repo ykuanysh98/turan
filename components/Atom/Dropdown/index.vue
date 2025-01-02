@@ -1,13 +1,13 @@
 <template>
   <div class="relative">
-    <AtomModal v-if="isMobile && variant !== 'select'" variant="bottom">
+    <MoleculeModal v-if="isMobile && variant !== 'select'" variant="bottom">
       <template #trigger>
         <slot name="trigger" />
       </template>
       <div class="dropdown__list--mobile">
         <slot />
       </div>
-    </AtomModal>
+    </MoleculeModal>
 
     <div v-else :class="computedClass">
       <slot name="trigger" />

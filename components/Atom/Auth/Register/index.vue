@@ -47,19 +47,18 @@ interface Form {
   phone: string;
 }
 
-import { reactive, defineEmits, computed } from "vue";
-import { useAuthStore } from "~/stores/auth";
+import { reactive, computed } from "vue";
 import { phone } from "~/composables/useVerify";
+import { useAuthStore } from "~/stores/auth";
 import { useRouter } from "vue-router";
-const router = useRouter();
-
-const { error, touch } = phone();
-const auth = useAuthStore();
 
 const form = reactive<Form>({
   name: "",
   phone: "",
 });
+const { error, touch } = phone();
+const auth = useAuthStore();
+const router = useRouter();
 
 const errorText = computed(() => {
   return error(form.phone);

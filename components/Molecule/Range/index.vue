@@ -1,17 +1,57 @@
 <template>
   <div class="range">
-    <BaseInput v-model="range[0]" label="От" />
-    <BaseInput v-model="range[1]" label="До" />
+    <!-- От -->
+    <BaseInput v-model="localRange[0]" label="От" @input="updateRange" />
+
+    <!-- До -->
+    <BaseInput v-model="localRange[1]" label="До" @input="updateRange" />
+
     <AtomDivider />
-    <v-range-slider v-model="range" step="1" thumb-label="always">
-    </v-range-slider>
+    {{ range }}
+    <!-- Слайдер -->
+    <v-range-slider v-model="range" :max="1000" step="1" thumb-label="always" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, watch, computed, defineProps, defineEmits } from "vue";
 
-const range = ref([20, 40]);
+// Props және emit анықтау
+const props = defineProps({
+  modelValue: {
+    type: Array,
+    required: true,
+  },
+});
+
+const emit = defineEmits(["update:modelValue"]);
+
+// Жергілікті state (қолданушының енгізуін сақтау үшін)
+const range = ref<any>([...props.modelValue]);
+const localRange = ref([...props.modelValue]);
+
+// Ата-аналық компонентке өзгерісті жіберу
+const updateRange = () => {
+  range.value = [...localRange.value];
+  emit("update:modelValue", localRange.value);
+};
+
+watch(
+  () => range.value,
+  (newRange) => {
+    localRange.value = [...newRange];
+    console.log(newRange, "new");
+
+    emit("update:modelValue", newRange);
+  }
+);
+
+// watch(
+//   () => props.modelValue,
+//   (newValue) => {
+//     localRange.value = [...newValue];
+//   }
+// );
 </script>
 
 <style lang="scss" scoped>

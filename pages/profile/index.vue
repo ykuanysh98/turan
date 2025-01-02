@@ -5,9 +5,9 @@
         <AtomTitle title="Профиль" size="xs" block />
         <MoleculeTabs v-model="tab" class="mb-2" />
 
-        <MoleculeProfileEdit v-if="tab === 1" />
+        <OrganismProfile v-if="tab === 1" />
 
-        <MoleculeOrders v-if="tab === 2" />
+        <OrganismOrders v-if="tab === 2" />
       </div>
       <BaseButton
         variant="secondary"
@@ -24,9 +24,10 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { useRouter } from "vue-router";
 import { useAuth } from "~/composables/useAuth";
 import { useMobile } from "~/composables/useMobile";
+import { useRouter } from "vue-router";
+
 const { logout } = useAuth();
 const { isMobile } = useMobile();
 const router = useRouter();

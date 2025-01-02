@@ -1,6 +1,10 @@
 <template>
   <div class="booking">
-    <AtomTitle title="Шкаф 3-дверный, белый ЛДСП, 180см-260см-60см" main size="xs" />
+    <AtomTitle
+      title="Шкаф 3-дверный, белый ЛДСП, 180см-260см-60см"
+      main
+      size="xs"
+    />
     <div class="booking__price">
       <AtomText label="150 000 ₸" variant="different" size="xll">
         132 000 ₸
@@ -12,17 +16,31 @@
 
     <AtomChip class="h-[30px]" color="deep-purple-accent-4">
       Вы можете настроить под себя этот товар
-      <AtomChip class="ml-2 bg-white" variant="outlined" color="primary" append-icon="mdi-arrow-right">
+      <AtomChip
+        class="ml-2 bg-white"
+        variant="outlined"
+        color="primary"
+        append-icon="mdi-arrow-right"
+      >
         Создать уникальный дизайн
       </AtomChip>
     </AtomChip>
 
     <MoleculeButtonGroup>
       <AtomCounter />
-      <BaseButton size="lg" @click="$router.push('/basket')">Добавить в корзину</BaseButton>
+      <BaseButton size="lg" @click="submit">Добавить в корзину</BaseButton>
     </MoleculeButtonGroup>
   </div>
 </template>
+
+<script lang="ts" setup>
+import { useBasketStore } from "~/stores/basket";
+const order = useBasketStore();
+
+const submit = function () {
+  order.add({ basket: 1 });
+};
+</script>
 
 <style lang="scss" scoped>
 .booking {

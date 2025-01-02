@@ -9,10 +9,10 @@
         <NuxtLink to="/"> <AtomText> Оставить заявку </AtomText> </NuxtLink>
       </div>
 
-      <MoleculeSearch v-model="query" class="w-full max-w-[400px] mobile-not" />
+      <OrganismSearch class="w-full max-w-[400px] mobile-not" />
 
       <div class="flex-between gap-4">
-        <MoleculeSearchMobile v-model="query" class="mobile-only" />
+        <OrganismSearchMobile class="mobile-only" />
         <OrganismHeaderRight />
         <OrganismBurgerMenu class="mobile-only" />
       </div>
@@ -20,10 +20,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from "vue";
-const query = ref("");
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss" scoped>
 .header {

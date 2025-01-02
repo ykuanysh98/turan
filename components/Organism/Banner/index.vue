@@ -19,25 +19,16 @@
       class="w-full md:w-[640px]"
       :items="bannerList"
       variant="secondary"
-    >
-    </AtomSlider>
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, defineProps } from "vue";
-import type { PropType } from "vue";
-
-interface Item {
-  id: string;
-  img: string;
-}
+import { useBannerStore } from "~/stores/banner";
+const banner = useBannerStore();
 
 const props = defineProps({
-  items: {
-    type: Array as PropType<Item[]>,
-    default: () => [],
-  },
   title: {
     type: String,
     default: "",
@@ -46,38 +37,27 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  variant: {
-    type: String,
-    default: "primary",
-  },
 });
 
 const computedClass = computed(() => {
   let classList = ["banner"];
-  classList.push(`banner--variant--${props.variant}`);
   return classList;
 });
 
 const bannerList = computed(() => {
   let list = [];
-  list.push(
-    {
-      id: 1,
+
+  if (banner.bannerData) {
+    list = banner.bannerData;
+  }
+
+  for (let i = 1; i < 5; i++) {
+    list.push({
+      id: i,
       title: "Өнім атауы",
-    },
-    {
-      id: 2,
-      title: "Өнім атауы",
-    },
-    {
-      id: 3,
-      title: "Өнім атауы",
-    },
-    {
-      id: 4,
-      title: "Өнім атауы",
-    }
-  );
+    });
+  }
+
   return list;
 });
 </script>
@@ -87,7 +67,8 @@ const bannerList = computed(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  grid-gap: 12px;
+  grid-gap: 24px;
+  flex-wrap: wrap;
   &--variant {
     &--secondary {
       display: flex;

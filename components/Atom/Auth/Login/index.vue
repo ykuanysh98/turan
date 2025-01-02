@@ -42,16 +42,16 @@ interface Form {
 }
 
 import { computed, reactive } from "vue";
-import { useAuthStore } from "~/stores/auth";
 import { phone } from "~/composables/useVerify";
+import { useAuthStore } from "~/stores/auth";
 import { useRouter } from "vue-router";
-const router = useRouter();
 
-const { error, touch } = phone();
-const auth = useAuthStore();
 const form = reactive<Form>({
   phone: "",
 });
+const { error, touch } = phone();
+const auth = useAuthStore();
+const router = useRouter();
 
 const errorText = computed(() => {
   return error(form.phone);

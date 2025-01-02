@@ -55,7 +55,7 @@
             placeholder=""
           />
           <!-- <template #bottom> -->
-          <BaseButton class="mt-2 col-span-2" size="lg">
+          <BaseButton class="mt-2 col-span-2" size="lg" @click="submit()">
             Получить консультацию
           </BaseButton>
           <!-- </template> -->
@@ -67,6 +67,8 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
+import { useUseOrder } from "~/stores/order";
+const order = useUseOrder();
 
 const items = [
   {
@@ -101,6 +103,10 @@ const form = ref<any>({
   phone: "",
   description: "",
 });
+
+const submit = function () {
+  order.add(form);
+};
 </script>
 
 <style lang="scss" scoped>

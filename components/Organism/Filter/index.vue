@@ -25,7 +25,7 @@
         </div>
         <AtomDivider />
       </div>
-      <MoleculeRange />
+      <MoleculeRange v-model="range" />
     </AtomDropdown>
 
     <AtomDropdown>
@@ -48,14 +48,17 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, onMounted } from "vue";
-import { useCategoryStore } from "~/stores/category";
+import { ref, watch, computed, onMounted } from "vue";
 import { useMobile } from "~/composables/useMobile";
-const { isMobile } = useMobile();
-const category = useCategoryStore();
+import { useProductsStore } from "~/stores/products";
+import { useCategoryStore } from "~/stores/category";
 
-const catalogId = ref(null);
-const sortId = ref(null);
+const catalogId = ref([]);
+const range = ref([10, 500]);
+const sortId = ref("id desc");
+const { isMobile } = useMobile();
+const products = useProductsStore();
+const category = useCategoryStore();
 
 const categories = computed(() => {
   let list: any = [];
@@ -89,6 +92,13 @@ const itemsCatalog = [
 
 onMounted(async () => {
   await category.fetch();
+});
+
+watch([catalogId, range, sortId], ([newCatalogId, newRange, newSortId]) => {
+  products.updateFilter("categories", newCatalogId);
+  products.updateFilter("price_max", newRange[1]);
+  products.updateFilter("price_min", newRange[0]);
+  products.updateFilter("sort", newSortId);
 });
 </script>
 

@@ -42,21 +42,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, defineEmits } from "vue";
+import { ref, onMounted } from "vue";
+import { useCountdown } from "~/composables/useCountdown";
 import { useAuthStore } from "~/stores/auth";
 import { useUserStore } from "~/stores/user";
-import { useCountdown } from "~/composables/useCountdown";
 import { useRouter } from "vue-router";
-const router = useRouter();
-const { remainingTime, startTimer } = useCountdown(59);
 
-const auth = useAuthStore();
-const user = useUserStore();
 const code = ref<string>("");
 const errorText = ref<string>("");
-const emit = defineEmits<{
-  (event: "click"): void;
-}>();
+const { remainingTime, startTimer } = useCountdown(59);
+const auth = useAuthStore();
+const user = useUserStore();
+const router = useRouter();
 
 onMounted(() => {
   startTimer();
@@ -74,13 +71,11 @@ const submit = async function () {
   }
 
   await auth.login({ code: code.value });
-  console.log(auth.loginData);
 
   if (auth.loginData?.success) {
     if (auth.name) {
       user.update({ first_name: auth.name });
     }
-
     router.push("/");
   } else if (auth.loginData.message) {
     errorText.value = auth.loginData.message;
