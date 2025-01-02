@@ -60,7 +60,6 @@ type TreeNode = {
   count: string;
 };
 
-// Props типі
 const props = defineProps<{
   items: TreeNode[];
   checkbox: {

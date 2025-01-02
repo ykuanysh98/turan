@@ -13,19 +13,18 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-// ref<number> пайдаланылады
 const count = ref<number>(0);
 const max = ref<number>(10);
 
 const plus = () => {
   if (count.value < max.value) {
-    count.value += 1; // .value арқылы өзгерту
+    count.value += 1;
   }
 };
 
 const minus = () => {
   if (count.value > 0) {
-    count.value -= 1; // .value арқылы өзгерту
+    count.value -= 1;
   }
 };
 </script>

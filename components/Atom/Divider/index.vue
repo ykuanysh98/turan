@@ -11,11 +11,11 @@ import { defineProps } from "vue";
 const props = defineProps({
   color: {
     type: String,
-    default: "#E9EAEB", // Мысалы: '100', '75', '50', '25', '0'
+    default: "#E9EAEB",
   },
   height: {
     type: String,
-    default: "1px", // Мысалы: '100', '75', '50', '25', '0'
+    default: "1px",
   },
 });
 </script>

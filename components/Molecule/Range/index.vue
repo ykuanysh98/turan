@@ -46,12 +46,12 @@ watch(
   }
 );
 
-// watch(
-//   () => props.modelValue,
-//   (newValue) => {
-//     localRange.value = [...newValue];
-//   }
-// );
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    localRange.value = [...newValue];
+  }
+);
 </script>
 
 <style lang="scss" scoped>

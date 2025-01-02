@@ -59,11 +59,11 @@ export function useApi() {
 function isNetworkError(error: any) {
   if (!error || typeof error !== "object") return false;
 
-  const isAxiosTimeout = error.code === "ECONNABORTED";
-  const isTimeoutMessage = error.message?.includes("timeout");
+  // const isAxiosTimeout = error.code === "ECONNABORTED";
+  // const isTimeoutMessage = error.message?.includes("timeout");
   const isNetworkMessage = error.message?.includes("Network Error");
 
-  return isAxiosTimeout || isTimeoutMessage || isNetworkMessage;
+  return isNetworkMessage;
 }
 
 function isAuthorizationError(error: any) {

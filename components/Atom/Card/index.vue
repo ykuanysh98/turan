@@ -26,7 +26,6 @@ const props = defineProps({
   },
 });
 
-// Динамикалық класс есептеу
 const computedClass = computed(() => {
   let list = ["card"];
   if (props.variant) {

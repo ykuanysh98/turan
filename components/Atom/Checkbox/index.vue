@@ -1,9 +1,14 @@
 <template>
   <div class="checkbox">
-    <input :id="`id-${id}`" :checked="isChecked" class="checkbox__input" :value="value" type="checkbox"
-      @change="toggleSelection" />
-    <label class="checkbox__label" :for="`id-${id}`">
-    </label>
+    <input
+      :id="`id-${id}`"
+      :checked="isChecked"
+      class="checkbox__input"
+      :value="value"
+      type="checkbox"
+      @change="toggleSelection"
+    />
+    <label class="checkbox__label" :for="`id-${id}`"> </label>
     <label v-if="label" :for="`id-${id}`" class="checkbox__text">
       {{ label }}
     </label>
@@ -11,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps, defineEmits } from 'vue';
+import { computed, defineProps, defineEmits } from "vue";
 
 const props = defineProps({
   modelValue: {
@@ -20,7 +25,7 @@ const props = defineProps({
   },
   value: {
     type: String,
-    default: '',
+    default: "",
   },
   id: {
     type: Number,
@@ -28,25 +33,21 @@ const props = defineProps({
   },
   label: {
     type: String,
-    default: '',
+    default: "",
   },
 });
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(["update:modelValue"]);
 
-
-// Таңдалғанын тексеру
 const isChecked = computed(() => props.modelValue.includes(props.value));
 
-// Таңдау өзгергенде өңдеу
 const toggleSelection = () => {
   const updatedValue = isChecked.value
-    ? props.modelValue.filter((item) => item !== props.value) // Егер таңдалса, алып тастау
-    : [...props.modelValue, props.value]; // Егер таңдалмаса, қосу
+    ? props.modelValue.filter((item) => item !== props.value)
+    : [...props.modelValue, props.value];
 
-  emit('update:modelValue', updatedValue);
+  emit("update:modelValue", updatedValue);
 };
-
 </script>
 
 <style scoped lang="scss">
@@ -57,11 +58,11 @@ const toggleSelection = () => {
   &__input {
     display: none;
 
-    &:checked+.checkbox__label {
+    &:checked + .checkbox__label {
       // background: #098609;
     }
 
-    &:checked+.checkbox__label::before {
+    &:checked + .checkbox__label::before {
       opacity: 1;
     }
   }
@@ -71,8 +72,8 @@ const toggleSelection = () => {
     height: 21px;
     border-radius: 5px;
     display: block;
-    background: #F9F5FF;
-    border: 2px solid #7F56D9;
+    background: #f9f5ff;
+    border: 2px solid #7f56d9;
     position: relative;
     cursor: pointer;
 
@@ -85,12 +86,10 @@ const toggleSelection = () => {
       left: 4px;
       display: block;
       transform: rotate(310deg);
-      border: 2px solid #7F56D9;
+      border: 2px solid #7f56d9;
       border-top: none;
       border-right: none;
       opacity: 0;
-
-
     }
   }
 

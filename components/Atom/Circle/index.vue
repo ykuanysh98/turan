@@ -18,7 +18,6 @@ const props = defineProps({
   },
 });
 
-// Динамикалық класс есептеу
 const computedClass = computed(() => {
   let list = ["circle"];
   if (props.variant) {

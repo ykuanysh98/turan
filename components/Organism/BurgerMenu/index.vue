@@ -7,7 +7,6 @@
       location="top"
       v-model="drawer"
     >
-      <!-- Close button (X) in the top-right corner -->
       <template v-slot:prepend>
         <AtomIcon
           class="close-btn"
@@ -51,7 +50,6 @@
 </template>
 
 <script setup>
-// import { VListItemContent } from 'vuetify/components';
 import { ref } from "vue";
 import { useAuth } from "~/composables/useAuth";
 const { getAuth } = useAuth();
