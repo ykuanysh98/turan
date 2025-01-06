@@ -1,0 +1,1 @@
+import{c as t,a as n,o as a}from"./DVShB6SZ.js";const s={__name:"index",setup(l){return(o,e)=>(a(),t("div",null,e[0]||(e[0]=[n("h1",null,"Біз туралы",-1),n("p",null,"Бұл бет біздің жоба туралы ақпарат береді.",-1)])))}};export{s as default};

@@ -1,0 +1,1 @@
+import{p as n,k as s,o as c,h as a,w as r,l as _}from"./DVShB6SZ.js";const l={};function p(e,o){const t=s("v-chip");return c(),a(t,{class:"atom-chip","onClick:close":o[0]||(o[0]=i=>e.$emit("close"))},{default:r(()=>[_(e.$slots,"default",{},void 0,!0)]),_:3})}const f=n(l,[["render",p],["__scopeId","data-v-9090caab"]]);export{f as _};
